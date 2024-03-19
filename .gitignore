@@ -74,3 +74,5 @@ crashlytics-build.properties
 # User Specified
 Assets/URP/TutorialInfo
 *.pdf
+*.pdf.meta
+*.unitypackage.meta
