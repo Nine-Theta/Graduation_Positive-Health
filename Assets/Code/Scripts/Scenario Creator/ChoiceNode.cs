@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ namespace ScenarioEditor
     enum ChoiceAvailability { ALWAYS, CONDITIONAL }
     public class ChoiceNode : AbstractNode
     {
+        [SerializeField, ReadOnly]
         private ChoiceGroupNode _choiceGroup;
 
         private string _choiceDialogue;
@@ -16,8 +18,8 @@ namespace ScenarioEditor
         private int _conditionTreshold = 1;
 
         private int _conditionModifier = 1;
-
-        private List<NPCResponseNode> _linkedResponses;
+        [SerializeField, ReadOnly]
+        private List<NPCResponseNode> _linkedResponses = new List<NPCResponseNode>();
 
 
 
@@ -52,7 +54,11 @@ namespace ScenarioEditor
 
         public void SetChoiceGroup(ChoiceGroupNode pChoiceGroup)
         {
-            _choiceGroup.RemoveChoice(this);
+            if (_choiceGroup != null)
+            {
+                _choiceGroup.RemoveChoice(this);
+            }
+
             _choiceGroup = pChoiceGroup;
             pChoiceGroup.AddChoice(this);
         }

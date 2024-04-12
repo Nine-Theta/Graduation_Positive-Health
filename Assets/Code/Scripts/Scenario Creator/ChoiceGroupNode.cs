@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +7,11 @@ namespace ScenarioEditor
 {
     public class ChoiceGroupNode : AbstractNode
     {
-        private List<NPCResponseNode> _linkingResponses;
+        [SerializeField, ReadOnly]
+        private List<NPCResponseNode> _linkingResponses = new List<NPCResponseNode>();
 
-        private List<ChoiceNode> _choicesNodes;
+        [SerializeField, ReadOnly]
+        private List<ChoiceNode> _choicesNodes = new List<ChoiceNode>();
 
         public List<NPCResponseNode> GetLinkingResponses()
         {

@@ -6,32 +6,32 @@ namespace ScenarioEditor
 {
     public abstract class AbstractNode : MonoBehaviour
     {
-        protected NodeConnection _parent; //What lead to this node
-        protected List<NodeConnection> _connections; //All possible Nodes that this one can flow to
+       // protected AbstractNode _parent; //What lead to this node
+       // protected List<AbstractNode> _connections; //All possible Nodes that this one can flow to
 
-        public virtual NodeConnection GetParentNode()
+        public virtual AbstractNode GetParentNode()
         {
-            return _parent;
+            return null;// _parent;
         }
 
-        public virtual void SetParentNode(NodeConnection pConnection)
+        public virtual void SetParentNode(AbstractNode pConnection)
         {
-            _parent = pConnection;
+            //_parent = null;// pConnection;
         }
 
-        public virtual void AddConnection(NodeConnection pConnection)
-        {
-            //TODO
-            throw new NotImplementedException();
-        }
-
-        public virtual void RemoveConnection(NodeConnection pConnection)
+        public virtual void AddConnection(AbstractNode pConnection)
         {
             //TODO
             throw new NotImplementedException();
         }
 
-        public virtual List<NodeConnection> GetConnections()
+        public virtual void RemoveConnection(AbstractNode pConnection)
+        {
+            //TODO
+            throw new NotImplementedException();
+        }
+
+        public virtual List<AbstractNode> GetConnections()
         {
             //TODO
             throw new NotImplementedException();

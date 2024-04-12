@@ -1,4 +1,4 @@
-using System.Collections;
+using NaughtyAttributes;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +8,9 @@ namespace ScenarioEditor
     {
         private string _responseDialogue;
 
-        private List<ChoiceNode> _linkingChoices;
+        [SerializeField, ReadOnly]
+        private List<ChoiceNode> _linkingChoices = new List<ChoiceNode>();
+        [SerializeField, ReadOnly]
         private ChoiceGroupNode _linkedChoiceGroup;
 
 
@@ -24,7 +26,10 @@ namespace ScenarioEditor
 
         public void SetChoiceGroup(ChoiceGroupNode pChoiceGroup)
         {
-            _linkedChoiceGroup.UnlinkResponse(this);
+            if (_linkedChoiceGroup != null)
+            {
+                _linkedChoiceGroup.UnlinkResponse(this);
+            }
             _linkedChoiceGroup = pChoiceGroup;
             pChoiceGroup.LinkResponse(this);
         }
