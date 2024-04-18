@@ -13,6 +13,7 @@ namespace ScenarioEditor
         [SerializeField, ReadOnly]
         private List<ChoiceNode> _choicesNodes = new List<ChoiceNode>();
 
+        #region Node linking
         public List<NPCResponseNode> GetLinkingResponses()
         {
             return _linkingResponses;
@@ -59,7 +60,7 @@ namespace ScenarioEditor
             _choicesNodes.Remove(pChoice);
             pChoice.SetChoiceGroup(null);
         }
-
+        #endregion
 
     }
 }

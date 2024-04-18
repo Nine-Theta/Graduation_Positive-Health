@@ -1,14 +1,37 @@
 using System;
 using System.Collections.Generic;
+using System.Xml.XPath;
 using UnityEngine;
 
 namespace ScenarioEditor
 {
+    public struct NodeID
+    {
+        public readonly char NodeType;
+        public readonly uint NodeNumber;
+
+        public NodeID(char pNodeType, uint pNodeNumber)
+        {
+            NodeType = pNodeType;
+            NodeNumber = pNodeNumber;
+        }
+
+        public string GetIDString()
+        {
+            return NodeType + NodeNumber.ToString();
+        }
+    }
+
     public abstract class AbstractNode : MonoBehaviour
     {
-       // protected AbstractNode _parent; //What lead to this node
-       // protected List<AbstractNode> _connections; //All possible Nodes that this one can flow to
+        // protected AbstractNode _parent; //What lead to this node
+        // protected List<AbstractNode> _connections; //All possible Nodes that this one can flow to
 
+        protected NodeID NodeID;
+
+        public virtual NodeID GetNodeID() { return  NodeID; }
+
+        /*
         public virtual AbstractNode GetParentNode()
         {
             return null;// _parent;
@@ -35,6 +58,6 @@ namespace ScenarioEditor
         {
             //TODO
             throw new NotImplementedException();
-        }
+        }*/
     }
 }

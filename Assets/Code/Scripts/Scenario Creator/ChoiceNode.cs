@@ -22,7 +22,7 @@ namespace ScenarioEditor
         private List<NPCResponseNode> _linkedResponses = new List<NPCResponseNode>();
 
 
-
+        #region Node linking
         public List<NPCResponseNode> GetResponses()
         {
             return _linkedResponses;
@@ -62,5 +62,6 @@ namespace ScenarioEditor
             _choiceGroup = pChoiceGroup;
             pChoiceGroup.AddChoice(this);
         }
+        #endregion
     }
 }
