@@ -1,14 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace ScenarioEditor
 {
+    [Serializable]
     public class ScenarioDescription : MonoBehaviour
     {
+        [SerializeField]
         private string _targetAudience;
-        private string _description;
 
+        [SerializeField]
+        private string _description = "f";
+
+        [SerializeField]
         private ChoiceGroupNode _startingNode;
 
         public string TargetAudience

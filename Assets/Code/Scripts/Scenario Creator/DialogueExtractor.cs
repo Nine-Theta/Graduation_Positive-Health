@@ -1,21 +1,28 @@
 using NaughtyAttributes;
+using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace ScenarioEditor
 {
+    [Serializable]
     public class DialogueExtractor : MonoBehaviour
     {
-        [SerializeField, ReadOnly]
+        [SerializeField]
         private ScenarioDescription _description;
 
-        private List<NodeID> _nodeIDs = new List<NodeID>();
+        [SerializeField] private List<NodeID> _nodeIDs = new List<NodeID>();
 
         private Dictionary<ChoiceGroupNode, ChoiceNode[]> _groupChoices = new Dictionary<ChoiceGroupNode, ChoiceNode[]>();
         private Dictionary<ChoiceNode, NPCResponseNode[]> _choiceResponses = new Dictionary<ChoiceNode, NPCResponseNode[]>();
         private Dictionary<NPCResponseNode, ChoiceGroupNode> _responseGroups = new Dictionary<NPCResponseNode, ChoiceGroupNode>();
 
+        [SerializeField]
+        private ScriptableExtractedDialogue extract; 
+
+        [Button]
         public void GetDialogue()
         {
             if (_description == null) return;
@@ -31,12 +38,16 @@ namespace ScenarioEditor
 
             _groupChoices.Add(_description.StartingNode, choices);
 
+            extract.groups.Add(new SerializedChoiceGroup('A',1,_description.StartingNode.GetChoices()));
+
             foreach (ChoiceNode choice in choices)
             {
+                extract.choices.Add(choice);
                 AddResponsesRecursive(choice);
             }
 
             Debug.Log("All Nodes Processed!");
+            ExportAsJSON();
         }
 
         private void AddChoicesRecursive(ChoiceGroupNode pGroup)
@@ -48,9 +59,9 @@ namespace ScenarioEditor
 
             _groupChoices.Add(pGroup, choices);
 
-
             foreach (ChoiceNode choice in choices)
             {
+                extract.choices.Add(choice);
                 AddResponsesRecursive(choice);
             }
         }
@@ -85,5 +96,16 @@ namespace ScenarioEditor
             }
         }
 
+
+        private void ExportAsJSON()
+        {
+            FileStream fileStream = new FileStream(Application.dataPath + "/JsonExportTest/Test.json", FileMode.Create);
+
+            using (StreamWriter writer = new StreamWriter(fileStream))
+            {
+                writer.Write(JsonUtility.ToJson(extract, true));
+            }
+            
+        }
     }
 }

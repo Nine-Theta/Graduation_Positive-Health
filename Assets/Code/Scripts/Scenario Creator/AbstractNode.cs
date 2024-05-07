@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace ScenarioEditor
 {
+    [Serializable]
     public struct NodeID
     {
         public readonly char NodeType;
@@ -21,15 +22,26 @@ namespace ScenarioEditor
             return NodeType + NodeNumber.ToString();
         }
     }
-
+    [Serializable]
     public abstract class AbstractNode : MonoBehaviour
     {
         // protected AbstractNode _parent; //What lead to this node
         // protected List<AbstractNode> _connections; //All possible Nodes that this one can flow to
 
+
+       // protected NodeType Type;
+
+        //protected string Dialogue;
+
+       // protected AbstractNode ConnectedNodes;
+
+
+
         protected NodeID NodeID;
 
         public virtual NodeID GetNodeID() { return  NodeID; }
+
+
 
         /*
         public virtual AbstractNode GetParentNode()

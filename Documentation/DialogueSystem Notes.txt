@@ -1,0 +1,29 @@
+branching dialogue
+certain dialogue options unlock *extra* dialogue later (lock/key, flags)
+Patient stat increase based on dialogue (persona-bonds)
+Info screen describing scenario
+Patient responds differently depending on previous options chosen. (branch changing, related to patient stats)
+
+strategy pattern? for Dialogue import.
+
+Are connection nodes neccesary? For designer sides, yes. Import side?
+
+player node -> mainly dialogue/options.
+options (node?) -> link to npc dialogue.
+npc dialogue -> basically just text -> link to player node.
+
+Some kind of processor between nodes which determines which node is next
+
+Choice:
+ - Availabilty: Always/Conditional
+  > Unlock condition: Flag / Variable check
+ - Modify variable
+ - Link to possible responses
+ - Contained in Group
+
+NPC Response:
+ - Priority (rimworld enum?)
+  > related to variable determined by previous choices
+ - Link to Choice Group
+
+Ability to duplicate existing nodes.
