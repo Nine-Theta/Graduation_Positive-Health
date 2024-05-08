@@ -6,23 +6,6 @@ using UnityEngine;
 namespace ScenarioEditor
 {
     [Serializable]
-    public struct NodeID
-    {
-        public readonly char NodeType;
-        public readonly uint NodeNumber;
-
-        public NodeID(char pNodeType, uint pNodeNumber)
-        {
-            NodeType = pNodeType;
-            NodeNumber = pNodeNumber;
-        }
-
-        public string GetIDString()
-        {
-            return NodeType + NodeNumber.ToString();
-        }
-    }
-    [Serializable]
     public abstract class AbstractNode : MonoBehaviour
     {
         // protected AbstractNode _parent; //What lead to this node

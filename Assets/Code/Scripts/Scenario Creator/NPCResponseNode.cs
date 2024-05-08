@@ -13,6 +13,11 @@ namespace ScenarioEditor
         [SerializeField, ReadOnly]
         private ChoiceGroupNode _linkedChoiceGroup;
 
+        public string GetDialogue()
+        {
+            return _responseDialogue;
+        }
+
         #region Node linking
         public void SetDialogue(string pDialogue)
         {
@@ -57,5 +62,7 @@ namespace ScenarioEditor
             pChoice.UnlinkResponse(this);
         }
         #endregion
+
+       
     }
 }

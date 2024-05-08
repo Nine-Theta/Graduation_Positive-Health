@@ -10,13 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a136e33251b012e4a882c4c01cb5ba27, type: 3}
-  m_Name: dsds
+  m_Name: textdiag
   m_EditorClassIdentifier: 
-  groups:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  choices:
-  - {fileID: 0}
-  responses:
-  - {fileID: 0}
+  groups: []
+  choices: []
+  responses: []

@@ -7,10 +7,10 @@ namespace ScenarioEditor
 {
     public class ChoiceGroupNode : AbstractNode
     {
-        [SerializeField, ReadOnly]
+        [SerializeField]
         private List<NPCResponseNode> _linkingResponses = new List<NPCResponseNode>();
 
-        [SerializeField, ReadOnly]
+        [SerializeField]
         private List<ChoiceNode> _choicesNodes = new List<ChoiceNode>();
 
         #region Node linking

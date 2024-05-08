@@ -2,82 +2,85 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 [Serializable]
-public struct SerializedChoiceGroup
+public struct NodeID
 {
+    public static NodeID Empty;
+
     public char NodeType;
     public uint NodeNumber;
-    public SerializedChoice[] Choices;
 
-    public SerializedChoiceGroup(char pNodeType, uint pNodeNumber, SerializedChoice[] pChoices)
+    public NodeID(char pNodeType, uint pNodeNumber)
     {
         NodeType = pNodeType;
         NodeNumber = pNodeNumber;
-        Choices = pChoices;
     }
 
     public string GetIDString()
     {
         return NodeType + NodeNumber.ToString();
     }
+}
 
-    public SerializedChoice[] GetChoices()
+    [Serializable]
+public struct SerializedChoiceGroup
+{
+    public NodeID ID;
+
+    public NodeID[] ChoiceIDs;
+
+    public SerializedChoiceGroup(char pNodeType, uint pNodeNumber, NodeID[] pChoices)
     {
-        return Choices;
+        ID = new NodeID(pNodeType, pNodeNumber);
+        ChoiceIDs = pChoices;
+    }
+
+    public NodeID[] GetChoiceIDs()
+    {
+        return ChoiceIDs;
     }
 }
 
 [Serializable]
 public struct SerializedChoice
 {
-    public char NodeType;
-    public uint NodeNumber;
+    public NodeID ID;
+
     public string Dialogue;
-    public SerializedResponse[] Responses;
+    public NodeID[] ResponseIDs;
 
-    public SerializedChoice(char pNodeType, uint pNodeNumber, string pDialogue, SerializedResponse[] pResponses)
+    public SerializedChoice(char pNodeType, uint pNodeNumber, string pDialogue, NodeID[] pResponses)
     {
-        NodeType = pNodeType;
-        NodeNumber = pNodeNumber;
+        ID = new NodeID(pNodeType, pNodeNumber);
         Dialogue = pDialogue;
-        Responses = pResponses;
+        ResponseIDs = pResponses;
     }
-
-    public string GetIDString()
+    public NodeID[] GetResponses()
     {
-        return NodeType + NodeNumber.ToString();
-    }
-
-    public SerializedResponse[] GetResponses()
-    {
-        return Responses;
+        return ResponseIDs;
     }
 }
 
 [Serializable]
 public struct SerializedResponse
 {
-    public char NodeType;
-    public uint NodeNumber;
+    public NodeID ID;
+
     public string Dialogue;
-    public SerializedChoiceGroup Group;
+    public NodeID GroupID;
 
-    public SerializedResponse(char pNodeType, uint pNodeNumber, string pDialogue, SerializedChoiceGroup pGroup)
+    public bool IsEnd;
+
+    public SerializedResponse(char pNodeType, uint pNodeNumber, string pDialogue, NodeID pGroup, bool pIsEnd = false)
     {
-        NodeType = pNodeType;
-        NodeNumber = pNodeNumber;
+        ID = new NodeID(pNodeType, pNodeNumber);
         Dialogue = pDialogue;
-        Group = pGroup;
+        GroupID = pGroup;
+        IsEnd = pIsEnd;
     }
 
-    public string GetIDString()
+    public NodeID GetGroup()
     {
-        return NodeType + NodeNumber.ToString();
-    }
-
-    public SerializedChoiceGroup GetGroup()
-    {
-        return Group;
+        return GroupID;
     }
 }

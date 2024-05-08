@@ -8,7 +8,7 @@ namespace ScenarioEditor
     enum ChoiceAvailability { ALWAYS, CONDITIONAL }
     public class ChoiceNode : AbstractNode
     {
-        [SerializeField, ReadOnly]
+        [SerializeField]
         private ChoiceGroupNode _choiceGroup;
 
         private string _choiceDialogue;
@@ -18,9 +18,13 @@ namespace ScenarioEditor
         private int _conditionTreshold = 1;
 
         private int _conditionModifier = 1;
-        [SerializeField, ReadOnly]
+        [SerializeField]
         private List<NPCResponseNode> _linkedResponses = new List<NPCResponseNode>();
 
+        public string GetDialogue()
+        {
+            return _choiceDialogue;
+        }
 
         #region Node linking
         public List<NPCResponseNode> GetResponses()

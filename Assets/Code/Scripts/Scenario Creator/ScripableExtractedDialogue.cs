@@ -12,7 +12,5 @@ namespace ScenarioEditor
         public List<SerializedChoice> choices = new List<SerializedChoice>();
         public List<SerializedResponse> responses = new List<SerializedResponse>();
 
-
-
     }
 }

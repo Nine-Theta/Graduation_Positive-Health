@@ -4,6 +4,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace ScenarioEditor
 {
@@ -20,7 +21,7 @@ namespace ScenarioEditor
         private Dictionary<NPCResponseNode, ChoiceGroupNode> _responseGroups = new Dictionary<NPCResponseNode, ChoiceGroupNode>();
 
         [SerializeField]
-        private ScriptableExtractedDialogue extract; 
+        private ScriptableExtractedDialogue extract;
 
         [Button]
         public void GetDialogue()
@@ -38,12 +39,12 @@ namespace ScenarioEditor
 
             _groupChoices.Add(_description.StartingNode, choices);
 
-            extract.groups.Add(new SerializedChoiceGroup('A',1,_description.StartingNode.GetChoices()));
+           AddSerializedChoiceGroupRecursive(_description.StartingNode);
 
             foreach (ChoiceNode choice in choices)
             {
-                extract.choices.Add(choice);
-                AddResponsesRecursive(choice);
+                //extract.choices.Add(choice);
+                //AddResponsesRecursive(choice);
             }
 
             Debug.Log("All Nodes Processed!");
@@ -61,7 +62,7 @@ namespace ScenarioEditor
 
             foreach (ChoiceNode choice in choices)
             {
-                extract.choices.Add(choice);
+                //extract.choices.Add(choice);
                 AddResponsesRecursive(choice);
             }
         }
@@ -70,7 +71,7 @@ namespace ScenarioEditor
         {
             NPCResponseNode[] responses = pChoice.GetResponses().ToArray();
 
-            if(_choiceResponses.ContainsKey(pChoice))
+            if (_choiceResponses.ContainsKey(pChoice))
                 Debug.LogError("Duplicate Choice Detected!");
 
             _choiceResponses.Add(pChoice, responses);
@@ -96,6 +97,50 @@ namespace ScenarioEditor
             }
         }
 
+        private NodeID AddSerializedChoiceGroupRecursive(ChoiceGroupNode pGroup)
+        {
+            extract.groups.Add(new SerializedChoiceGroup('G', (uint)extract.groups.Count, AddSerializedChoicesRecursive(pGroup.GetChoices().ToArray())));
+            return extract.groups.Last().ID;
+        }
+
+        private NodeID[] AddSerializedChoicesRecursive(ChoiceNode[] pChoices)
+        {
+            NodeID[] serializedChoices = new NodeID[pChoices.Length];
+
+            for (int i = 0; i < pChoices.Length; i++)
+            {
+                extract.choices.Add(new SerializedChoice('C', (uint)extract.choices.Count, pChoices[i].GetDialogue(), AddSerializedResponsesRecursive(pChoices[i].GetResponses().ToArray())));
+
+                serializedChoices[i] = extract.choices.Last().ID;
+            }
+
+            return serializedChoices;
+        }
+
+        private NodeID[] AddSerializedResponsesRecursive(NPCResponseNode[] pResponses)
+        {
+            NodeID[] serializedResponses = new NodeID[pResponses.Length];
+
+            for (int i = 0; i < pResponses.Length; i++)
+            {
+                ChoiceGroupNode group = pResponses[i].GetChoiceGroup();
+
+                if (group != null)
+                {
+                    extract.responses.Add(new SerializedResponse('R', (uint)extract.responses.Count, pResponses[i].GetDialogue(), AddSerializedChoiceGroupRecursive(group)));
+                    
+                }
+                else
+                {
+                    extract.responses.Add(new SerializedResponse('R', (uint)extract.responses.Count, pResponses[i].GetDialogue(), NodeID.Empty, true));
+                }
+
+                serializedResponses[i] = extract.responses.Last().ID;
+            }
+
+            return serializedResponses;            
+        }
+
 
         private void ExportAsJSON()
         {
@@ -105,7 +150,7 @@ namespace ScenarioEditor
             {
                 writer.Write(JsonUtility.ToJson(extract, true));
             }
-            
+
         }
     }
 }
