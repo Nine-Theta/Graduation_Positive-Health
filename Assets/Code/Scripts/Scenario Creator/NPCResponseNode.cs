@@ -6,11 +6,15 @@ namespace ScenarioEditor
 {
     public class NPCResponseNode : AbstractNode
     {
+
+        [SerializeField]
         private string _responseDialogue;
+
+        private NPCEmotionState _emotionState;
 
         [SerializeField, ReadOnly]
         private List<ChoiceNode> _linkingChoices = new List<ChoiceNode>();
-        [SerializeField, ReadOnly]
+        [SerializeField]
         private ChoiceGroupNode _linkedChoiceGroup;
 
         public string GetDialogue()

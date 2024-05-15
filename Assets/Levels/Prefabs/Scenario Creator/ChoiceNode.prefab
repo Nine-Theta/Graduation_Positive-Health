@@ -407,9 +407,9 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ScenarioEditor.DialogueNode, Assembly-CSharp
-        m_MethodName: SetText
+      - m_Target: {fileID: 2293854132590878470}
+        m_TargetAssemblyTypeName: ScenarioEditor.ChoiceNode, Assembly-CSharp
+        m_MethodName: SetDialogue
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -853,6 +853,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8cc752652193c340ab046675f26d683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _choiceGroup: {fileID: 0}
+  _choiceDialogue: 
+  _availability: 0
+  _unlockIndex: -1
+  _unlockTreshold: 0
+  _conditionIndex: -1
+  _conditionModifier: 0
+  _linkedResponses: []
 --- !u!1 &7823680380571200932
 GameObject:
   m_ObjectHideFlags: 0

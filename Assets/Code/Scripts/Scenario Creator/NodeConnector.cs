@@ -9,47 +9,47 @@ namespace ScenarioEditor
         public ChoiceNode heldChoice = null;
         public NPCResponseNode heldResponse = null;
 
-        public bool _hasStart = false;
+        public bool HasStart = false;
 
         public void ChoiceGroupClicked(ChoiceGroupNode pChoiceGroup)
         {
-            if (_hasStart)
+            if (HasStart)
             {
                 TryLinkGroup(pChoiceGroup);
-                _hasStart = false;
+                HasStart = false;
             }
             else
             {
                 heldGroup = pChoiceGroup;
-                _hasStart = true;
+                HasStart = true;
             }
         }
 
         public void ChoiceClicked(ChoiceNode pChoice)
         {
-            if (_hasStart)
+            if (HasStart)
             {
                 TryLinkChoice(pChoice);
-                _hasStart = false;
+                HasStart = false;
             }
             else
             {
                 heldChoice = pChoice;
-                _hasStart = true;
+                HasStart = true;
             }
         }
 
         public void NPCResponseClicked(NPCResponseNode pResponse)
         {
-            if (_hasStart)
+            if (HasStart)
             {
                 TryLinkNPCResponse(pResponse);
-                _hasStart = false;
+                HasStart = false;
             }
             else
             {
                 heldResponse = pResponse;
-                _hasStart = true;
+                HasStart = true;
             }
         }
 
@@ -97,8 +97,8 @@ namespace ScenarioEditor
             }
         }
 
-
-        //The connected nodes
+        /*
+        The connected nodes
         protected AbstractNode _previousNode;
         protected AbstractNode _nextNode;
 
@@ -116,6 +116,6 @@ namespace ScenarioEditor
         public void SetChildConnection(AbstractNode pNode)
         {
             _nextNode = pNode;
-        }
+        }*/
     }
 }

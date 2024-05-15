@@ -18,14 +18,6 @@ namespace ScenarioEditor
 
        // protected AbstractNode ConnectedNodes;
 
-
-
-        protected NodeID NodeID;
-
-        public virtual NodeID GetNodeID() { return  NodeID; }
-
-
-
         /*
         public virtual AbstractNode GetParentNode()
         {
