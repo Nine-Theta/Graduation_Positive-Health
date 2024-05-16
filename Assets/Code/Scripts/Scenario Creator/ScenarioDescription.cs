@@ -12,6 +12,9 @@ namespace ScenarioEditor
         private string _targetAudience;
 
         [SerializeField]
+        private string _name = "Test Scenario";
+
+        [SerializeField]
         private string _description = "f";
 
         [SerializeField]
@@ -21,6 +24,12 @@ namespace ScenarioEditor
         {
             get { return _targetAudience; }
             set { _targetAudience = value; }
+        }
+
+        public string ScenarioName
+        {
+            get { return _name; }
+            set { _name = value; }
         }
 
         public string Description

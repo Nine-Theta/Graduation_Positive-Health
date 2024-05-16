@@ -43,6 +43,10 @@ namespace ScenarioEditor
             extract.choices.Clear();
             extract.responses.Clear();
 
+            extract.ScenarioName = _description.ScenarioName;
+            extract.ScenarioDescription = _description.Description;
+            extract.TargetAudience = _description.TargetAudience;
+
             SerializeNodesRecursively(_description.StartingNode);
             
             /*foreach (ChoiceNode choice in choices)

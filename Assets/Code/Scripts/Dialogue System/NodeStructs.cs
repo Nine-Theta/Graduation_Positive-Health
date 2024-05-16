@@ -57,11 +57,6 @@ public struct SerializedChoiceGroup
         ID = new NodeID(pNodeType, pNodeNumber);
         ChoiceIDs = pChoices;
     }
-
-    public NodeID[] GetChoiceIDs()
-    {
-        return ChoiceIDs;
-    }
 }
 
 [Serializable]
@@ -81,10 +76,6 @@ public struct SerializedChoice
         Dialogue = pDialogue;
         ResponseIDs = pResponses;
         Conditions = pConditions;
-    }
-    public NodeID[] GetResponseIDs()
-    {
-        return ResponseIDs;
     }
 
     public ChoiceAvailability GetChoiceAvailability()
@@ -116,10 +107,5 @@ public struct SerializedResponse
         EmotionState = pEmotion;
         GroupID = pGroup;
         IsEnd = pIsEnd;
-    }
-
-    public NodeID GetGroupID()
-    {
-        return GroupID;
     }
 }
