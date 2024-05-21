@@ -12,6 +12,85 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a136e33251b012e4a882c4c01cb5ba27, type: 3}
   m_Name: textdiag
   m_EditorClassIdentifier: 
-  groups: []
-  choices: []
-  responses: []
+  ChoiceVariables: 
+  groups:
+  - ID:
+      Type: 0
+      NodeNumber: 0
+    ChoiceIDs:
+    - Type: 1
+      NodeNumber: 0
+    - Type: 1
+      NodeNumber: 1
+  choices:
+  - ID:
+      Type: 1
+      NodeNumber: 0
+    Dialogue: 
+    ResponseIDs:
+    - Type: 2
+      NodeNumber: 0
+    - Type: 2
+      NodeNumber: 1
+    - Type: 2
+      NodeNumber: 2
+  - ID:
+      Type: 1
+      NodeNumber: 1
+    Dialogue: 
+    ResponseIDs:
+    - Type: 2
+      NodeNumber: 3
+    - Type: 2
+      NodeNumber: 4
+    - Type: 2
+      NodeNumber: 5
+  responses:
+  - ID:
+      Type: 2
+      NodeNumber: 0
+    Dialogue: 
+    GroupID:
+      Type: 0
+      NodeNumber: 0
+    IsEnd: 1
+  - ID:
+      Type: 2
+      NodeNumber: 1
+    Dialogue: 
+    GroupID:
+      Type: 0
+      NodeNumber: 0
+    IsEnd: 1
+  - ID:
+      Type: 2
+      NodeNumber: 2
+    Dialogue: 
+    GroupID:
+      Type: 0
+      NodeNumber: 0
+    IsEnd: 1
+  - ID:
+      Type: 2
+      NodeNumber: 3
+    Dialogue: 
+    GroupID:
+      Type: 0
+      NodeNumber: 0
+    IsEnd: 1
+  - ID:
+      Type: 2
+      NodeNumber: 4
+    Dialogue: 
+    GroupID:
+      Type: 0
+      NodeNumber: 0
+    IsEnd: 1
+  - ID:
+      Type: 2
+      NodeNumber: 5
+    Dialogue: 
+    GroupID:
+      Type: 0
+      NodeNumber: 0
+    IsEnd: 1

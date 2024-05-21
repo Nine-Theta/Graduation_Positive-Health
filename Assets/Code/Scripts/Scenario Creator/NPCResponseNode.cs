@@ -34,12 +34,19 @@ namespace ScenarioEditor
         }
 
         public void SetChoiceGroup(ChoiceGroupNode pChoiceGroup)
-        {
+        {     
+            if (pChoiceGroup == _linkedChoiceGroup) return;
+
             if (_linkedChoiceGroup != null)
             {
                 _linkedChoiceGroup.UnlinkResponse(this);
             }
+
             _linkedChoiceGroup = pChoiceGroup;
+
+            if (pChoiceGroup == null)
+                return;
+
             pChoiceGroup.LinkResponse(this);
         }
 

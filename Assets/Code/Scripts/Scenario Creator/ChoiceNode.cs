@@ -100,12 +100,8 @@ namespace ScenarioEditor
         }
 
         public void SetChoiceGroup(ChoiceGroupNode pChoiceGroup)
-        {
-            if (pChoiceGroup == null)
-            {
-                _choiceGroup = null;
-                return;
-            }
+        { 
+            if (_choiceGroup == pChoiceGroup) return;
 
             Debug.Log("is GC null? " + (_choiceGroup == null).ToString());
             Debug.Log("is pGC null? " + (pChoiceGroup == null).ToString());
@@ -117,7 +113,11 @@ namespace ScenarioEditor
             }
 
             _choiceGroup = pChoiceGroup;
-            pChoiceGroup.AddChoice(this);
+
+            if (pChoiceGroup == null)
+                return;
+
+            _choiceGroup.AddChoice(this);
 
         }
         #endregion

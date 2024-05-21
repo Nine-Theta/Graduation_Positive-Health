@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace ScenarioEditor
 {
-    public class DialogueExtractor : MonoBehaviour
+    public class ScenarioExtractor : MonoBehaviour
     {
         [SerializeField]
         private ScenarioDescription _description;
@@ -107,12 +107,12 @@ namespace ScenarioEditor
 
         private void SerializeNodesRecursively(ChoiceGroupNode pGroup)
         {
-            extract.StarterGroup = new SerializedChoiceGroup(NodeType.GROUP, (uint)extract.groups.Count, AddSerializedChoicesRecursive(pGroup.GetChoices().ToArray()));
+            extract.StarterGroup = new SerializedChoiceGroup(NodeType.GROUP, extract.groups.Count, AddSerializedChoicesRecursive(pGroup.GetChoices().ToArray()));
         }
 
         private NodeID AddSerializedChoiceGroupRecursive(ChoiceGroupNode pGroup)
         {
-            extract.groups.Add(new SerializedChoiceGroup(NodeType.GROUP, (uint)extract.groups.Count, AddSerializedChoicesRecursive(pGroup.GetChoices().ToArray())));
+            extract.groups.Add(new SerializedChoiceGroup(NodeType.GROUP, extract.groups.Count, AddSerializedChoicesRecursive(pGroup.GetChoices().ToArray())));
             return extract.groups.Last().ID;
         }
 
@@ -122,7 +122,7 @@ namespace ScenarioEditor
 
             for (int i = 0; i < pChoices.Length; i++)
             {
-                extract.choices.Add(new SerializedChoice(NodeType.CHOICE, (uint)extract.choices.Count, pChoices[i].GetDialogue(), AddSerializedResponsesRecursive(pChoices[i].GetResponses().ToArray()),ChoiceConditions.Empty));
+                extract.choices.Add(new SerializedChoice(NodeType.CHOICE, extract.choices.Count, pChoices[i].GetDialogue(), AddSerializedResponsesRecursive(pChoices[i].GetResponses().ToArray()),ChoiceConditions.Empty));
 
                 serializedChoices[i] = extract.choices.Last().ID;
             }
@@ -140,12 +140,12 @@ namespace ScenarioEditor
 
                 if (group != null)
                 {
-                    extract.responses.Add(new SerializedResponse(NodeType.RESPONSE, (uint)extract.responses.Count, pResponses[i].GetDialogue(), NPCEmotionState.NEUTRAL, AddSerializedChoiceGroupRecursive(group)));
+                    extract.responses.Add(new SerializedResponse(NodeType.RESPONSE, extract.responses.Count, pResponses[i].GetDialogue(), NPCEmotionState.NEUTRAL, AddSerializedChoiceGroupRecursive(group)));
                     
                 }
                 else
                 {
-                    extract.responses.Add(new SerializedResponse(NodeType.RESPONSE, (uint)extract.responses.Count, pResponses[i].GetDialogue(), NPCEmotionState.NEUTRAL, NodeID.Empty, true));
+                    extract.responses.Add(new SerializedResponse(NodeType.RESPONSE, extract.responses.Count, pResponses[i].GetDialogue(), NPCEmotionState.NEUTRAL, NodeID.Empty, true));
                 }
 
                 serializedResponses[i] = extract.responses.Last().ID;

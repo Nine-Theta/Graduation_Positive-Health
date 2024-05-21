@@ -12,9 +12,9 @@ public struct NodeID
     public static NodeID Empty;
 
     public NodeType Type;
-    public uint NodeNumber;
+    public int NodeNumber;
 
-    public NodeID(NodeType pNodeType, uint pNodeNumber)
+    public NodeID(NodeType pNodeType, int pNodeNumber)
     {
         Type = pNodeType;
         NodeNumber = pNodeNumber;
@@ -52,7 +52,7 @@ public struct SerializedChoiceGroup
 
     public NodeID[] ChoiceIDs;
 
-    public SerializedChoiceGroup(NodeType pNodeType, uint pNodeNumber, NodeID[] pChoices)
+    public SerializedChoiceGroup(NodeType pNodeType, int pNodeNumber, NodeID[] pChoices)
     {
         ID = new NodeID(pNodeType, pNodeNumber);
         ChoiceIDs = pChoices;
@@ -70,7 +70,7 @@ public struct SerializedChoice
     public ChoiceConditions Conditions;
 
 
-    public SerializedChoice(NodeType pNodeType, uint pNodeNumber, string pDialogue, NodeID[] pResponses, ChoiceConditions pConditions)
+    public SerializedChoice(NodeType pNodeType, int pNodeNumber, string pDialogue, NodeID[] pResponses, ChoiceConditions pConditions)
     {
         ID = new NodeID(pNodeType, pNodeNumber);
         Dialogue = pDialogue;
@@ -100,7 +100,7 @@ public struct SerializedResponse
 
     public bool IsEnd;
 
-    public SerializedResponse(NodeType pNodeType, uint pNodeNumber, string pDialogue, NPCEmotionState pEmotion, NodeID pGroup, bool pIsEnd = false)
+    public SerializedResponse(NodeType pNodeType, int pNodeNumber, string pDialogue, NPCEmotionState pEmotion, NodeID pGroup, bool pIsEnd = false)
     {
         ID = new NodeID(pNodeType, pNodeNumber);
         Dialogue = pDialogue;
