@@ -1,121 +1,135 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ScenarioEditor
 {
+    [RequireComponent(typeof(LineRenderer))]
     public class NodeConnector : MonoBehaviour
     {
-        //prototype code, should be changed
-        public ChoiceGroupNode heldGroup = null;
-        public ChoiceNode heldChoice = null;
-        public NPCResponseNode heldResponse = null;
+        [SerializeField]
+        private ChoiceGroupNode _heldGroup = null;
+        [SerializeField]
+        private ChoiceNode _heldChoice = null;
+        [SerializeField]
+        private NPCResponseNode _heldResponse = null;
 
-        public bool HasStart = false;
+        [SerializeField]
+        private bool _hasStart = false;
 
-        public void ChoiceGroupClicked(ChoiceGroupNode pChoiceGroup)
+        [SerializeField]
+        private ConnectionPoint _heldConnectionA = null;
+        [SerializeField]
+        private ConnectionPoint _heldConnectionB = null;
+
+        [SerializeField]
+        private List<NodeConnection> _nodeConnections = new List<NodeConnection>();
+
+        private LineRenderer _lineRenderer;
+
+        public void Start()
         {
-            if (HasStart)
-            {
-                TryLinkGroup(pChoiceGroup);
-                HasStart = false;
-            }
-            else
-            {
-                heldGroup = pChoiceGroup;
-                HasStart = true;
-            }
+            _lineRenderer = GetComponent<LineRenderer>();
         }
 
-        public void ChoiceClicked(ChoiceNode pChoice)
+        public void StartGroupLink(ChoiceGroupNode pChoiceGroup)
         {
-            if (HasStart)
-            {
-                TryLinkChoice(pChoice);
-                HasStart = false;
-            }
-            else
-            {
-                heldChoice = pChoice;
-                HasStart = true;
-            }
+            _heldGroup = pChoiceGroup;
+            _heldChoice = null;
+            _heldResponse = null;
+
+            _hasStart = true;
         }
 
-        public void NPCResponseClicked(NPCResponseNode pResponse)
+        public void StartChoiceLink(ChoiceNode pChoice)
         {
-            if (HasStart)
-            {
-                TryLinkNPCResponse(pResponse);
-                HasStart = false;
-            }
-            else
-            {
-                heldResponse = pResponse;
-                HasStart = true;
-            }
+            _heldGroup = null;
+            _heldChoice = pChoice;
+            _heldResponse = null;
+
+            _hasStart = true;
         }
 
-        public void TryLinkNPCResponse(NPCResponseNode pResponse)
+        public void StartResponseLink(NPCResponseNode pResponse)
         {
-            if (heldGroup != null) {
-                pResponse.SetChoiceGroup(heldGroup);
-                heldGroup = null;
+            _heldGroup = null;
+            _heldChoice = null;
+            _heldResponse = pResponse;
+
+            _hasStart = true;
+        }
+
+        public void ClearSelections()
+        {
+            _heldGroup = null;
+            _heldChoice = null;
+            _heldResponse = null;
+
+            _hasStart = false;
+        }
+
+        public void OnClick()
+        {
+            Debug.Log("clicked");
+        }
+
+        public void TryLinkResponse(NPCResponseNode pResponse)
+        {
+            if (!_hasStart) return;
+
+            if (_heldGroup != null) {
+                pResponse.SetChoiceGroup(_heldGroup);
+                _heldGroup = null;
             }
 
-            if (heldChoice != null)
+            if (_heldChoice != null)
             {
-                pResponse.LinkChoice(heldChoice);
-                heldChoice = null;
+                pResponse.LinkChoice(_heldChoice);
+                _heldChoice = null;
             }
+
+            _hasStart = false;
         }
 
         public void TryLinkChoice(ChoiceNode pChoice)
         {
-            if (heldGroup != null)
+            if (_heldGroup != null)
             {
-                pChoice.SetChoiceGroup(heldGroup);
-                heldGroup = null;
+                pChoice.SetChoiceGroup(_heldGroup);
+                _heldGroup = null;
             }
 
-            if (heldResponse != null)
+            if (_heldResponse != null)
             {
-                pChoice.LinkResponse(heldResponse);
-                heldResponse = null;
+                pChoice.LinkResponse(_heldResponse);
+                _heldResponse = null;
             }
         }
 
         public void TryLinkGroup(ChoiceGroupNode pChoiceGroup)
         {
-            if (heldChoice != null)
+            if (_heldChoice != null)
             {
-                pChoiceGroup.AddChoice(heldChoice);
-                heldChoice = null;
+                pChoiceGroup.AddChoice(_heldChoice);
+                _heldChoice = null;
             }
 
-            if (heldResponse != null)
+            if (_heldResponse != null)
             {
-                pChoiceGroup.LinkResponse(heldResponse);
-                heldResponse = null;
+                pChoiceGroup.LinkResponse(_heldResponse);
+                _heldResponse = null;
             }
         }
 
-        /*
-        The connected nodes
-        protected AbstractNode _previousNode;
-        protected AbstractNode _nextNode;
-
-        public ChoiceNode f;
-
-        private bool _traversable = true; //Determines if the next node can be accessed
-
-        public bool traversable { get { return _traversable; } set { _traversable = value; } }
-
-        public void SetParentConnection(AbstractNode pNode)
+        public void SetConnectionPoint(ConnectionPoint pConnectionPoint)
         {
-            _previousNode = pNode;
+            if (_heldConnectionA == null)
+            {
+                _heldConnectionA = pConnectionPoint;
+            }
+            else if (_heldConnectionB == null)
+            {
+                _heldConnectionB = pConnectionPoint;
+            }
         }
-
-        public void SetChildConnection(AbstractNode pNode)
-        {
-            _nextNode = pNode;
-        }*/
     }
 }

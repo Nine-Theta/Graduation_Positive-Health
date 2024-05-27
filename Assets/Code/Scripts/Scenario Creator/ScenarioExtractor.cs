@@ -141,7 +141,6 @@ namespace ScenarioEditor
                 if (group != null)
                 {
                     extract.responses.Add(new SerializedResponse(NodeType.RESPONSE, extract.responses.Count, pResponses[i].GetDialogue(), NPCEmotionState.NEUTRAL, AddSerializedChoiceGroupRecursive(group)));
-                    
                 }
                 else
                 {
