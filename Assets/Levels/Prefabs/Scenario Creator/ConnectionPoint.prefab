@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5536047458962505849}
   - component: {fileID: 2588714898987814269}
   m_Layer: 0
-  m_Name: ConnectionPointStart
+  m_Name: ConnectionPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -134,7 +134,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 188e5fcb8ab05a84a9a374d798cfa391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _instanceOffset: {x: 0, y: -20, z: 0}
+  _ownerNode: {fileID: 0}
+  _instanceOffset: {x: 0, y: -5, z: 0}
+  _isStartPoint: 0
 --- !u!120 &2588714898987814269
 LineRenderer:
   serializedVersion: 2
@@ -156,7 +158,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

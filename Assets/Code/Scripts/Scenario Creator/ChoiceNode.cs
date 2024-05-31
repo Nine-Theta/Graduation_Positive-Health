@@ -7,6 +7,8 @@ namespace ScenarioEditor
 {
     public class ChoiceNode : AbstractNode
     {
+        [HorizontalLine(color: EColor.Yellow)]
+
         [SerializeField]
         private ChoiceGroupNode _choiceGroup;
 
@@ -17,17 +19,17 @@ namespace ScenarioEditor
         private ChoiceAvailability _availability = ChoiceAvailability.ALWAYS;
 
         [SerializeField]
+        private List<NPCResponseNode> _linkedResponses = new List<NPCResponseNode>();
+
+        [SerializeField, Foldout("Modifiable Variables")]
         private int _unlockIndex = -1;
-        [SerializeField]
+        [SerializeField, Foldout("Modifiable Variables")]
         private int _unlockTreshold = 0;
 
-        [SerializeField]
+        [SerializeField, Foldout("Modifiable Variables")]
         private int _conditionIndex = -1;
-        [SerializeField]
+        [SerializeField, Foldout("Modifiable Variables")]
         private int _conditionModifier = 0;
-
-        [SerializeField]
-        private List<NPCResponseNode> _linkedResponses = new List<NPCResponseNode>();
 
         public string GetDialogue()
         {

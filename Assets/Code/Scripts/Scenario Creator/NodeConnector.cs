@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace ScenarioEditor
 {
-    [RequireComponent(typeof(LineRenderer))]
     public class NodeConnector : MonoBehaviour
     {
         [SerializeField]
@@ -15,47 +14,55 @@ namespace ScenarioEditor
 
         [SerializeField]
         private bool _hasStart = false;
-
         [SerializeField]
-        private ConnectionPoint _heldConnectionA = null;
-        [SerializeField]
-        private ConnectionPoint _heldConnectionB = null;
+        private bool _hasEnd = false;
 
-        [SerializeField]
-        private List<NodeConnection> _nodeConnections = new List<NodeConnection>();
-
-        private LineRenderer _lineRenderer;
-
-        public void Start()
+        public void SetStartGroup(ChoiceGroupNode pChoiceGroup)
         {
-            _lineRenderer = GetComponent<LineRenderer>();
+            if (_hasEnd && _heldChoice != null)
+            {
+                pChoiceGroup.AddChoice(_heldChoice);
+                pChoiceGroup.GetLastStartPoint().MakeConnection(_heldChoice.GetEndPoint());
+                ClearSelections();
+            }
+            else
+            {
+                ClearSelections();
+                _heldGroup = pChoiceGroup;
+                _hasStart = true;
+            }
         }
 
-        public void StartGroupLink(ChoiceGroupNode pChoiceGroup)
+        public void SetStartChoice(ChoiceNode pChoice)
         {
-            _heldGroup = pChoiceGroup;
-            _heldChoice = null;
-            _heldResponse = null;
-
-            _hasStart = true;
+            if (_hasEnd && _heldResponse != null)
+            {
+                pChoice.LinkResponse(_heldResponse);
+                pChoice.GetLastStartPoint().MakeConnection(_heldResponse.GetEndPoint());
+                ClearSelections();
+            }
+            else
+            {
+                ClearSelections();
+                _heldChoice = pChoice;
+                _hasStart = true;
+            }
         }
 
-        public void StartChoiceLink(ChoiceNode pChoice)
+        public void SetStartResponse(NPCResponseNode pResponse)
         {
-            _heldGroup = null;
-            _heldChoice = pChoice;
-            _heldResponse = null;
-
-            _hasStart = true;
-        }
-
-        public void StartResponseLink(NPCResponseNode pResponse)
-        {
-            _heldGroup = null;
-            _heldChoice = null;
-            _heldResponse = pResponse;
-
-            _hasStart = true;
+            if (_hasEnd && _heldGroup != null)
+            {
+                pResponse.SetChoiceGroup(_heldGroup);
+                pResponse.GetLastStartPoint().MakeConnection(_heldGroup.GetEndPoint());
+                ClearSelections();
+            }
+            else
+            {
+                ClearSelections();
+                _heldResponse = pResponse;
+                _hasStart = true;
+            }
         }
 
         public void ClearSelections()
@@ -65,6 +72,7 @@ namespace ScenarioEditor
             _heldResponse = null;
 
             _hasStart = false;
+            _hasEnd = false;
         }
 
         public void OnClick()
@@ -72,64 +80,59 @@ namespace ScenarioEditor
             Debug.Log("clicked");
         }
 
-        public void TryLinkResponse(NPCResponseNode pResponse)
+        public void SetEndGroup(ChoiceGroupNode pChoiceGroup)
         {
-            if (!_hasStart) return;
-
-            if (_heldGroup != null) {
-                pResponse.SetChoiceGroup(_heldGroup);
-                _heldGroup = null;
-            }
-
-            if (_heldChoice != null)
-            {
-                pResponse.LinkChoice(_heldChoice);
-                _heldChoice = null;
-            }
-
-            _hasStart = false;
-        }
-
-        public void TryLinkChoice(ChoiceNode pChoice)
-        {
-            if (_heldGroup != null)
-            {
-                pChoice.SetChoiceGroup(_heldGroup);
-                _heldGroup = null;
-            }
-
-            if (_heldResponse != null)
-            {
-                pChoice.LinkResponse(_heldResponse);
-                _heldResponse = null;
-            }
-        }
-
-        public void TryLinkGroup(ChoiceGroupNode pChoiceGroup)
-        {
-            if (_heldChoice != null)
-            {
-                pChoiceGroup.AddChoice(_heldChoice);
-                _heldChoice = null;
-            }
-
-            if (_heldResponse != null)
+            if (_hasStart && _heldResponse != null)
             {
                 pChoiceGroup.LinkResponse(_heldResponse);
-                _heldResponse = null;
+                _heldResponse.GetLastStartPoint().MakeConnection(pChoiceGroup.GetEndPoint());
+                ClearSelections();
+            }
+            else
+            {
+                ClearSelections();
+                _heldGroup = pChoiceGroup;
+                _hasEnd = true;
             }
         }
 
-        public void SetConnectionPoint(ConnectionPoint pConnectionPoint)
+        public void SetEndChoice(ChoiceNode pChoice)
         {
-            if (_heldConnectionA == null)
+            if (_hasStart && _heldGroup != null)
             {
-                _heldConnectionA = pConnectionPoint;
+                pChoice.SetChoiceGroup(_heldGroup);
+                _heldGroup.GetLastStartPoint().MakeConnection(pChoice.GetEndPoint());
+                ClearSelections();
             }
-            else if (_heldConnectionB == null)
+            else
             {
-                _heldConnectionB = pConnectionPoint;
+                ClearSelections();
+                _heldChoice = pChoice;
+                _hasEnd = true;
+            }           
+        }
+
+        public void SetEndResponse(NPCResponseNode pResponse)
+        {
+            if (_hasStart && _heldChoice != null)
+            {
+                pResponse.LinkChoice(_heldChoice);
+                _heldChoice.GetLastStartPoint().MakeConnection(pResponse.GetEndPoint());
+                ClearSelections();
             }
+            else
+            {
+                ClearSelections();
+                _heldResponse = pResponse;
+                _hasEnd = true;
+            }
+        }
+
+
+        public void ClearConnection()
+        {
+            //TODO
+            Debug.LogWarning("Clearing Connections is not implemented yet");
         }
     }
 }
