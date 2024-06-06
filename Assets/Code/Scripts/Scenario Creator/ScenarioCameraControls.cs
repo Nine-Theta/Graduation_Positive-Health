@@ -12,6 +12,8 @@ namespace ScenarioEditor
         private Camera _mainCamera;
         [SerializeField]
         private float _camMovementMult = 0.1f;
+        [SerializeField]
+        private float _camZoomMult = 1f;
 
         [SerializeField, MinMaxSlider(1f, 500f)]
         private Vector2 _camSizeLimit = new Vector2(1f, 200f);
@@ -25,8 +27,6 @@ namespace ScenarioEditor
 
         public void OnMove(InputAction.CallbackContext pContext)
         {
-            Debug.Log("called Move");
-
             Vector3 movement = -pContext.ReadValue<Vector2>() * _camMovementMult * Time.deltaTime * _mainCamera.orthographicSize;
 
             _mainCamera.transform.position += movement;
@@ -34,11 +34,9 @@ namespace ScenarioEditor
 
         public void OnZoom(InputAction.CallbackContext pContext)
         {
-            float zoom = pContext.ReadValue<float>() * Time.deltaTime;
-
-            Debug.Log("called Zoom: " + zoom);
-
-            if (_mainCamera.orthographicSize - zoom < _camSizeLimit.x)
+            float zoom = pContext.ReadValue<float>() * Time.deltaTime * _camZoomMult;
+                        
+            if (_mainCamera.orthographicSize - zoom < _camSizeLimit.x) //ugly if-else chain
                 _mainCamera.orthographicSize = _camSizeLimit.x;
             else if (_mainCamera.orthographicSize - zoom > _camSizeLimit.y)
                 _mainCamera.orthographicSize = _camSizeLimit.y;
@@ -54,7 +52,6 @@ namespace ScenarioEditor
 
         public void OnResetView()
         {
-            Debug.Log("called Reset");
             _mainCamera.transform.position = new Vector3(0, 0, _cameraStartingDepth);
         }
     }

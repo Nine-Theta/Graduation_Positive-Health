@@ -19,16 +19,16 @@ namespace ScenarioEditor
 
 
         [SerializeField]
-        protected ConnectionPoint _endPoint = null;
+        protected EndConnectionPoint _endPoint = null;
         [SerializeField]
-        protected List<ConnectionPoint> _startPoints = new List<ConnectionPoint>();
+        protected List<StartConnectionPoint> _startPoints = new List<StartConnectionPoint>();
 
         public bool HasMaxConnections()
         {
             return (_startPoints.Count >= _maxOutgoingConnections);
         }
 
-        public void AddStartPoint(ConnectionPoint pPoint)
+        public void AddStartPoint(StartConnectionPoint pPoint)
         {
             if (_startPoints.Contains(pPoint))
             {
@@ -47,7 +47,7 @@ namespace ScenarioEditor
             ReorderStartPoints();
         }
 
-        public void RemoveStartPoint(ConnectionPoint pPoint)
+        public void RemoveStartPoint(StartConnectionPoint pPoint)
         {
             if (!_startPoints.Contains(pPoint))
             {
@@ -60,17 +60,17 @@ namespace ScenarioEditor
             ReorderStartPoints();
         }
 
-        public List<ConnectionPoint> GetStartPoints()
+        public List<StartConnectionPoint> GetStartPoints()
         {
             return _startPoints;
         }
 
-        public ConnectionPoint GetLastStartPoint()
+        public StartConnectionPoint GetLastStartPoint()
         {
             return _startPoints.Last();
         }
 
-        public ConnectionPoint GetEndPoint()
+        public EndConnectionPoint GetEndPoint()
         {
             return _endPoint;
         }
@@ -90,7 +90,7 @@ namespace ScenarioEditor
 
             for (int i = 0; i < _startPoints.Count; i++)
             {
-                ConnectionPoint p = _startPoints[i];
+                StartConnectionPoint p = _startPoints[i];
                 if (hasUnconnected)
                 {
                     Debug.Log("Empty connection found, Removing next point index["+i+"] which is connected? : " + p.IsConnected());
@@ -107,6 +107,16 @@ namespace ScenarioEditor
             }
 
             for (int i = 0; i < _startPoints.Count; i++)
+            {
+                _startPoints[i].RecalculateConnection();
+            }
+        }
+
+        public void RecalculateAllPoints()
+        {
+            _endPoint.RecalculateConnection();
+
+            for(int i = 0; i < _startPoints.Count; i++)
             {
                 _startPoints[i].RecalculateConnection();
             }

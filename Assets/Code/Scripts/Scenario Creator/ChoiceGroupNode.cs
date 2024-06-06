@@ -7,7 +7,7 @@ namespace ScenarioEditor
 {
     public class ChoiceGroupNode : AbstractNode
     {
-        [HorizontalLine(color: EColor.Orange)]
+        [HorizontalLine(color: EColor.Green)]
 
         [SerializeField]
         private List<NPCResponseNode> _linkingResponses = new List<NPCResponseNode>();
