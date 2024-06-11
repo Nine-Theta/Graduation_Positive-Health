@@ -10,6 +10,9 @@ namespace ScenarioEditor
 {
     public class ScenarioExtractor : MonoBehaviour
     {
+        [ShowNonSerializedField]
+        private string _savePath = "/JsonScenarios/";
+
         [SerializeField]
         private ScenarioDescription _description;
 
@@ -156,7 +159,7 @@ namespace ScenarioEditor
 
         private void ExportAsJSON()
         {
-            FileStream fileStream = new FileStream(Application.dataPath + "/JsonExportTest/Test.json", FileMode.Create);
+            FileStream fileStream = new FileStream(Application.persistentDataPath + _savePath + extract.ScenarioName + ".json", FileMode.Create);
 
             using (StreamWriter writer = new StreamWriter(fileStream))
             {
