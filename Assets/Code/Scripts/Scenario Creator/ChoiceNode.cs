@@ -105,10 +105,6 @@ namespace ScenarioEditor
         { 
             if (_choiceGroup == pChoiceGroup) return;
 
-            Debug.Log("is GC null? " + (_choiceGroup == null).ToString());
-            Debug.Log("is pGC null? " + (pChoiceGroup == null).ToString());
-            Debug.Log("is C null? " + (this == null).ToString());
-
             if (_choiceGroup != null)
             {
                 _choiceGroup.RemoveChoice(this);

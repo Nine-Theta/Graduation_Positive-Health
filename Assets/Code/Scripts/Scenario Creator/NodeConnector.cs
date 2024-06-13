@@ -75,11 +75,6 @@ namespace ScenarioEditor
             _hasEnd = false;
         }
 
-        public void OnClick()
-        {
-            Debug.Log("clicked");
-        }
-
         public void SetEndGroup(ChoiceGroupNode pChoiceGroup)
         {
             if (_hasStart && _heldResponse != null)

@@ -30,18 +30,6 @@ namespace ScenarioEditor
         {
             if (_description == null) return;
 
-            /*
-            _nodeIDs.Clear();
-            _groupChoices.Clear();
-            _choiceResponses.Clear();
-            _responseGroups.Clear();
-
-            _nodeIDs.Add(_description.StartingNode.GetNodeID());
-
-            //ChoiceNode[] choices = _description.StartingNode.GetChoices().ToArray();
-
-            _groupChoices.Add(_description.StartingNode, choices);*/
-
             extract.groups.Clear();
             extract.choices.Clear();
             extract.responses.Clear();
@@ -51,12 +39,6 @@ namespace ScenarioEditor
             extract.TargetAudience = _description.TargetAudience;
 
             SerializeNodesRecursively(_description.StartingNode);
-            
-            /*foreach (ChoiceNode choice in choices)
-            {
-                extract.choices.Add(choice);
-                AddResponsesRecursive(choice);
-            }*/
 
             Debug.Log("All Nodes Processed!");
             ExportAsJSON();
@@ -73,7 +55,6 @@ namespace ScenarioEditor
 
             foreach (ChoiceNode choice in choices)
             {
-                //extract.choices.Add(choice);
                 AddResponsesRecursive(choice);
             }
         }
@@ -165,7 +146,6 @@ namespace ScenarioEditor
             {
                 writer.Write(JsonUtility.ToJson(extract, true));
             }
-
         }
     }
 }
