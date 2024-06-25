@@ -1,0 +1,12 @@
+Critical:
+Import back into scenario editor
+Import into game
+Import support for AI Generated
+Import support for Fin Generated
+
+Important:
+Unlink linked nodes
+
+Preferred:
+Sprite Changes
+Variables

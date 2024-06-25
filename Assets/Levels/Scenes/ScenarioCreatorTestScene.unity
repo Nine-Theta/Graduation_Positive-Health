@@ -146,6 +146,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPCResponseNode
       objectReference: {fileID: 0}
+    - target: {fileID: 7858362256294905195, guid: de9a03fdd23245d49ac5707a2c5d0093,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858362256294905195, guid: de9a03fdd23245d49ac5707a2c5d0093,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858362256294905195, guid: de9a03fdd23245d49ac5707a2c5d0093,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858362256294905195, guid: de9a03fdd23245d49ac5707a2c5d0093,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8217519266858363386, guid: de9a03fdd23245d49ac5707a2c5d0093,
         type: 3}
       propertyPath: m_Pivot.x
@@ -758,6 +778,26 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2102804396}
+    - target: {fileID: 5808400807788806164, guid: 4ba7c721d5910b94da9c0ddec2bdb491,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808400807788806164, guid: 4ba7c721d5910b94da9c0ddec2bdb491,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808400807788806164, guid: 4ba7c721d5910b94da9c0ddec2bdb491,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808400807788806164, guid: 4ba7c721d5910b94da9c0ddec2bdb491,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7469554909848645319, guid: 4ba7c721d5910b94da9c0ddec2bdb491,
         type: 3}
       propertyPath: m_Name
@@ -898,6 +938,7 @@ GameObject:
   - component: {fileID: 853780065}
   - component: {fileID: 853780064}
   - component: {fileID: 853780063}
+  - component: {fileID: 853780066}
   m_Layer: 5
   m_Name: Create Choice
   m_TagString: Untagged
@@ -969,9 +1010,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2102804400}
-        m_TargetAssemblyTypeName: ScenarioEditor.NodeCreator, Assembly-CSharp
-        m_MethodName: createNewChoiceNode
+      - m_Target: {fileID: 853780066}
+        m_TargetAssemblyTypeName: ScenarioEditor.AbstractNodeCreator, Assembly-CSharp
+        m_MethodName: CreateNewNodeAtCameraView
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1019,6 +1060,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 853780061}
   m_CullTransparentMesh: 1
+--- !u!114 &853780066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 853780061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e2adfb26f6e19942bdc67cadd7e89b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainCamera: {fileID: 690313101}
+  MainCanvas: {fileID: 1301729634}
+  _nodeTemplate: {fileID: 2092818134}
 --- !u!1 &1002151154
 GameObject:
   m_ObjectHideFlags: 0
@@ -1031,6 +1087,7 @@ GameObject:
   - component: {fileID: 1002151158}
   - component: {fileID: 1002151157}
   - component: {fileID: 1002151156}
+  - component: {fileID: 1002151159}
   m_Layer: 5
   m_Name: Create ChoiceGroup
   m_TagString: Untagged
@@ -1102,9 +1159,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2102804400}
-        m_TargetAssemblyTypeName: ScenarioEditor.NodeCreator, Assembly-CSharp
-        m_MethodName: createNewGroupNode
+      - m_Target: {fileID: 1002151159}
+        m_TargetAssemblyTypeName: ScenarioEditor.AbstractNodeCreator, Assembly-CSharp
+        m_MethodName: CreateNewNodeAtCameraView
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1152,6 +1209,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1002151154}
   m_CullTransparentMesh: 1
+--- !u!114 &1002151159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002151154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af36a93daf87c1b4e976c10e6aed1d3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainCamera: {fileID: 690313101}
+  MainCanvas: {fileID: 1301729634}
+  _nodeTemplate: {fileID: 726868689}
 --- !u!1 &1167470408
 GameObject:
   m_ObjectHideFlags: 0
@@ -1301,6 +1373,26 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2102804396}
+    - target: {fileID: 3702332135942343938, guid: a3b7521e8c0015c41a374f7b95719cb3,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3702332135942343938, guid: a3b7521e8c0015c41a374f7b95719cb3,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3702332135942343938, guid: a3b7521e8c0015c41a374f7b95719cb3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3702332135942343938, guid: a3b7521e8c0015c41a374f7b95719cb3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7469554909848645319, guid: a3b7521e8c0015c41a374f7b95719cb3,
         type: 3}
       propertyPath: m_Name
@@ -2438,6 +2530,7 @@ GameObject:
   - component: {fileID: 2031155316}
   - component: {fileID: 2031155315}
   - component: {fileID: 2031155314}
+  - component: {fileID: 2031155317}
   m_Layer: 5
   m_Name: Create Response
   m_TagString: Untagged
@@ -2509,9 +2602,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2102804400}
-        m_TargetAssemblyTypeName: ScenarioEditor.NodeCreator, Assembly-CSharp
-        m_MethodName: createNewResponseNode
+      - m_Target: {fileID: 2031155317}
+        m_TargetAssemblyTypeName: ScenarioEditor.AbstractNodeCreator, Assembly-CSharp
+        m_MethodName: CreateNewNodeAtCameraView
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2559,6 +2652,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2031155312}
   m_CullTransparentMesh: 1
+--- !u!114 &2031155317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031155312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f04f852784b30334a8c814d312176824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainCamera: {fileID: 690313101}
+  MainCanvas: {fileID: 1301729634}
+  _nodeTemplate: {fileID: 1650614912}
 --- !u!114 &2092818134 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2293854132590878470, guid: a3b7521e8c0015c41a374f7b95719cb3,
@@ -2583,7 +2691,6 @@ GameObject:
   - component: {fileID: 2102804397}
   - component: {fileID: 2102804396}
   - component: {fileID: 2102804399}
-  - component: {fileID: 2102804400}
   - component: {fileID: 2102804401}
   m_Layer: 0
   m_Name: PlayerInput
@@ -2787,22 +2894,6 @@ MonoBehaviour:
   _camMovementMult: 0.06
   _camZoomMult: 1.25
   _camSizeLimit: {x: 20, y: 400}
---- !u!114 &2102804400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2102804395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bddcfd1f1ebd5948a699a8662801803, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mainCamera: {fileID: 690313101}
-  _groupNodeTemplate: {fileID: 726868689}
-  _choiceNodeTemplate: {fileID: 2092818134}
-  _responseNodeTemplate: {fileID: 1650614912}
 --- !u!114 &2102804401
 MonoBehaviour:
   m_ObjectHideFlags: 0

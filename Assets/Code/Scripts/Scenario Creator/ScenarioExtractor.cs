@@ -140,6 +140,8 @@ namespace ScenarioEditor
 
         private void ExportAsJSON()
         {
+
+            System.IO.Directory.CreateDirectory(Application.persistentDataPath + _savePath);
             FileStream fileStream = new FileStream(Application.persistentDataPath + _savePath + extract.ScenarioName + ".json", FileMode.Create);
 
             using (StreamWriter writer = new StreamWriter(fileStream))
