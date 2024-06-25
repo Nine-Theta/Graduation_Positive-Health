@@ -19,7 +19,7 @@ namespace ScenarioEditor
 
         protected GameObject NodeObject;
 
-
+        //z position will be off due to parenting to canvas, needs a fix
         public virtual GameObject CreateNewNodeAtPosition(Vector3 pPosition)
         {
             return Instantiate(NodeObject, pPosition, NodeObject.transform.rotation, MainCanvas.transform);
@@ -27,7 +27,8 @@ namespace ScenarioEditor
 
         public virtual void CreateNewNodeAtCameraView()
         {
-            CreateNewNodeAtPosition(new Vector3(MainCamera.transform.position.x, MainCamera.transform.position.y, 0));
+            GameObject newNode = CreateNewNodeAtPosition(new Vector3(MainCamera.transform.position.x, MainCamera.transform.position.y, 0));
+            newNode.transform.position = new Vector3(MainCamera.transform.position.x, MainCamera.transform.position.y, 0);
         }
 
     }

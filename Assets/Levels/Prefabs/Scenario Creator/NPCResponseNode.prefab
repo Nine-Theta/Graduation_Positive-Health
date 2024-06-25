@@ -1396,9 +1396,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 192383234959841782, guid: 9a89c9ec1bf0a074fb5c6ec95af83396,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetStartResponse
+      objectReference: {fileID: 0}
+    - target: {fileID: 192383234959841782, guid: 9a89c9ec1bf0a074fb5c6ec95af83396,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 3473297212158807017}
+    - target: {fileID: 192383234959841782, guid: 9a89c9ec1bf0a074fb5c6ec95af83396,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: ScenarioEditor.NPCResponseNode, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 1887485790894483759, guid: 9a89c9ec1bf0a074fb5c6ec95af83396,
         type: 3}
       propertyPath: m_Name

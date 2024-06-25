@@ -14,5 +14,15 @@ namespace ScenarioEditor
         {
             NodeObject = _nodeTemplate.gameObject;
         }
+
+        public GameObject CreateChoiceNode(Vector3 pPosition, SerializedChoice pChoiceData)
+        {
+            GameObject newNode = CreateNewNodeAtPosition(pPosition);
+
+            ChoiceNode choice = newNode.GetComponent<ChoiceNode>();
+            choice.SetDialogue(pChoiceData.Dialogue);
+
+            return newNode;
+        }
     }
 }

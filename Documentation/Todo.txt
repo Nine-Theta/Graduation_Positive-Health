@@ -6,7 +6,13 @@ Import support for Fin Generated
 
 Important:
 Unlink linked nodes
+ensure unlinking of deleted nodes
+fix that weird bug where line between response and group doesn't render initially
 
 Preferred:
 Sprite Changes
 Variables
+rework choice conditions
+
+Would be nice:
+Have nodes snap to grid
