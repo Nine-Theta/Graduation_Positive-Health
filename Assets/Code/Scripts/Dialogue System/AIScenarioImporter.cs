@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIDialogueManager : AbstractDialogueManager
+public class AIScenarioImporter : AbstractScenarioImporter
 {
-    public void ImportAIDialogue()
+    public override ScriptableExtractedDialogue ImportScenarioFromFile(string pPath)
     {
         throw new System.NotImplementedException();
     }

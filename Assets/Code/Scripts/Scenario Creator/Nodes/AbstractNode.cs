@@ -90,20 +90,22 @@ namespace ScenarioEditor
 
             for (int i = 0; i < _startPoints.Count; i++)
             {
+                Debug.Log("Do we already have unconnected points? " + hasUnconnected);
+
                 StartConnectionPoint p = _startPoints[i];
                 if (hasUnconnected)
                 {
-                    Debug.Log("Empty connection found, Removing next point index["+i+"] which is connected? : " + p.IsConnected());
+                    Debug.Log("Previous point was unconnected, Removing next point index["+i+"] which is connected? : " + p.IsConnected());
                     _startPoints.Remove(p);
                     Destroy(p.gameObject);
                     continue;
                 }
 
-                Debug.Log("No connecton found");
-                hasUnconnected = !p.IsConnected();
 
-                if (hasUnconnected)
-                    Debug.Log("Unconnected Point found at index: "+i);
+                if (!p.IsConnected())
+                    Debug.Log("Current point is Unconnected, found at index: " + i);
+
+                hasUnconnected = !p.IsConnected();
             }
 
             for (int i = 0; i < _startPoints.Count; i++)

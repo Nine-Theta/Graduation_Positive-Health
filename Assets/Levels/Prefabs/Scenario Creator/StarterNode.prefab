@@ -1720,7 +1720,7 @@ GameObject:
   - component: {fileID: 2239457048430581178}
   - component: {fileID: 4244984754823352905}
   m_Layer: 0
-  m_Name: Scenario Description Input (1)
+  m_Name: Scenario Description Input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2392,9 +2392,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c7bb9b0e190dcd4b9b01e399410c3f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetAudience: yeee
   _name: Test Scenario
+  _nameField: {fileID: 4149656165491703225}
+  _targetAudience: Anyone
+  _targetAudienceField: {fileID: 9012319126744087859}
   _description: test desc
+  _descriptionField: {fileID: 4244984754823352905}
   _startingNode: {fileID: 8252689639686558958}
 --- !u!114 &8252689639686558958
 MonoBehaviour:

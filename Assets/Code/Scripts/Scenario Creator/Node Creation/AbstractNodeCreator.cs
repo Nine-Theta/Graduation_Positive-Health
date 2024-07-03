@@ -7,7 +7,6 @@ using UnityEngine.ResourceManagement.ResourceProviders.Simulation;
 
 namespace ScenarioEditor
 {
-
     public abstract class AbstractNodeCreator : MonoBehaviour
     {
         [SerializeField]

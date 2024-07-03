@@ -18,7 +18,7 @@ namespace ScenarioEditor
 
         private LineRenderer _lineRender;
 
-        public void Start()
+        public void OnEnable()
         {
             if (_startNodeVerticalLayout != null)
                 _startNodeVerticalLayout.OnSetLayoutVertical.AddListener(RecalculateConnection);
@@ -47,6 +47,8 @@ namespace ScenarioEditor
 
         public override void RecalculateConnection()
         {
+            Debug.Log("is linerenderer null? "+ (_lineRender == null));
+
             if (_connectedEndPoint != null)
             {
                 _lineRender.positionCount = 2;
@@ -59,8 +61,11 @@ namespace ScenarioEditor
         {
             if (_ownerNode.HasMaxConnections()) return;
 
-            GameObject newPoint = Instantiate(gameObject, (transform.position + _instanceOffset), transform.rotation, transform.parent);
-            _ownerNode.AddStartPoint(newPoint.GetComponent<StartConnectionPoint>());
+            GameObject newPointObj = Instantiate(gameObject, (transform.position + _instanceOffset), transform.rotation, transform.parent);
+            StartConnectionPoint startPoint = newPointObj.GetComponent<StartConnectionPoint>();
+
+            startPoint.ClearConnection();
+            _ownerNode.AddStartPoint(startPoint);
         }
 
         public void ClearConnection()

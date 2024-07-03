@@ -14,5 +14,14 @@ namespace ScenarioEditor
         {
             NodeObject = _nodeTemplate.gameObject;
         }
+
+        public GameObject CreateGroupNode(Vector3 pPosition, SerializedChoiceGroup pGroupData)
+        {
+            GameObject newNode = CreateNewNodeAtPosition(pPosition);
+
+            ChoiceGroupNode group = newNode.GetComponent<ChoiceGroupNode>();
+
+            return newNode;
+        }
     }
 }

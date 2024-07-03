@@ -15,7 +15,6 @@ public abstract class AbstractDialogueManager : MonoBehaviour
 
     protected int _currentChoiceCount;
 
-
     public virtual string GetScenarioName()
     {
         return _scenario.ScenarioName;
