@@ -3836,7 +3836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainCamera: {fileID: 690313101}
-  _camMovementMult: 0.06
+  _camMovementMult: 0.07
   _camZoomMult: 1.25
   _camSizeLimit: {x: 20, y: 400}
 --- !u!114 &2102804401

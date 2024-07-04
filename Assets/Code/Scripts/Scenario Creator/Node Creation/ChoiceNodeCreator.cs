@@ -19,8 +19,7 @@ namespace ScenarioEditor
         {
             GameObject newNode = CreateNewNodeAtPosition(pPosition);
 
-            ChoiceNode choice = newNode.GetComponent<ChoiceNode>();
-            choice.SetDialogue(pChoiceData.Dialogue);
+            newNode.GetComponent<ChoiceNode>().QuickSetValues(pChoiceData);
 
             return newNode;
         }

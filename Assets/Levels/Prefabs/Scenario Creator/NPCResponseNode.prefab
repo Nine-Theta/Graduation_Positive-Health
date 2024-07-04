@@ -872,6 +872,7 @@ MonoBehaviour:
   _startPoints:
   - {fileID: 4225227931458827259}
   _responseDialogue: test
+  _dialogueField: {fileID: 7283059086208360122}
   _emotionState: 0
   _linkingChoices: []
   _linkedChoiceGroup: {fileID: 0}

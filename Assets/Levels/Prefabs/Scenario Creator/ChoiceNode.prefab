@@ -1717,6 +1717,7 @@ MonoBehaviour:
   - {fileID: 7263417565185686418}
   _choiceGroup: {fileID: 0}
   _choiceDialogue: 
+  _dialogueField: {fileID: 7283059086208360122}
   _availability: 0
   _linkedResponses: []
   _unlockIndex: -1

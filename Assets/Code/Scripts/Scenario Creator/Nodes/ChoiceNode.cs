@@ -1,6 +1,7 @@
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace ScenarioEditor
@@ -14,6 +15,8 @@ namespace ScenarioEditor
 
         [SerializeField]
         private string _choiceDialogue;
+        [SerializeField]
+        private TMP_InputField _dialogueField;
 
         [SerializeField]
         private ChoiceAvailability _availability = ChoiceAvailability.ALWAYS;
@@ -39,17 +42,12 @@ namespace ScenarioEditor
         public void SetDialogue(string pDialogue)
         {
             _choiceDialogue = pDialogue;
+            _dialogueField.text = pDialogue;
         }
 
         public bool IsChoiceConditional
         {
-            get
-            {
-                if (_availability == ChoiceAvailability.ALWAYS)
-                    return false;
-                else
-                    return true;
-            }
+            get { return _availability != ChoiceAvailability.ALWAYS; }
 
             set { _availability = value ? ChoiceAvailability.CONDITIONAL : ChoiceAvailability.ALWAYS; }
         }
@@ -69,6 +67,11 @@ namespace ScenarioEditor
         {
             get { return _conditionModifier; }
             set { _conditionModifier = value; }
+        }
+
+        public void QuickSetValues(SerializedChoice pSerializedData)
+        {
+            SetDialogue(pSerializedData.Dialogue);
         }
 
         #region Node linking
@@ -102,7 +105,7 @@ namespace ScenarioEditor
         }
 
         public void SetChoiceGroup(ChoiceGroupNode pChoiceGroup)
-        { 
+        {
             if (_choiceGroup == pChoiceGroup) return;
 
             if (_choiceGroup != null)

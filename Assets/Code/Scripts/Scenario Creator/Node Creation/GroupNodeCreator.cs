@@ -19,7 +19,7 @@ namespace ScenarioEditor
         {
             GameObject newNode = CreateNewNodeAtPosition(pPosition);
 
-            ChoiceGroupNode group = newNode.GetComponent<ChoiceGroupNode>();
+            //newNode.GetComponent<ChoiceGroupNode>();
 
             return newNode;
         }

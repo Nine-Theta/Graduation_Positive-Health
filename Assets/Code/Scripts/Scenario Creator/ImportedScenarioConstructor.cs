@@ -57,17 +57,17 @@ namespace ScenarioEditor
         {
             for (int i = 0; i < _scenario.groups.Count; i++)
             {
-                _nodeDictionary.Add(_scenario.groups[i].ID, _groupCreator.CreateGroupNode(Vector3.zero, _scenario.groups[i]));
+                _nodeDictionary.Add(_scenario.groups[i].ID, _groupCreator.CreateGroupNode(new Vector3(300,i*100,0), _scenario.groups[i]));
             }
 
             for (int i = 0; i < _scenario.choices.Count; i++)
             {
-                _nodeDictionary.Add(_scenario.choices[i].ID, _choiceCreator.CreateChoiceNode(Vector3.zero, _scenario.choices[i]));
+                _nodeDictionary.Add(_scenario.choices[i].ID, _choiceCreator.CreateChoiceNode(new Vector3(100, i * 100, 0), _scenario.choices[i]));
             }
 
             for (int i = 0; i < _scenario.responses.Count; i++)
             {
-                _nodeDictionary.Add(_scenario.responses[i].ID, _responseCreator.CreateResponseNode(Vector3.zero, _scenario.responses[i]));
+                _nodeDictionary.Add(_scenario.responses[i].ID, _responseCreator.CreateResponseNode(new Vector3(200, i * 100, 0), _scenario.responses[i]));
             }
         }
 

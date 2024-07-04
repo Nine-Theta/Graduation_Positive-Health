@@ -1,5 +1,6 @@
 using NaughtyAttributes;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace ScenarioEditor
@@ -10,6 +11,8 @@ namespace ScenarioEditor
 
         [SerializeField]
         private string _responseDialogue;
+        [SerializeField]
+        private TMP_InputField _dialogueField;
 
         [SerializeField]
         private NPCEmotionState _emotionState;
@@ -23,12 +26,29 @@ namespace ScenarioEditor
         {
             return _responseDialogue;
         }
-
-        #region Node linking
         public void SetDialogue(string pDialogue)
         {
             _responseDialogue = pDialogue;
+            _dialogueField.text = _responseDialogue;
         }
+
+        public NPCEmotionState GetEmotionState()
+        {
+            return _emotionState;
+        }
+
+        public void SetEmotionState(NPCEmotionState pEmotionState)
+        {
+            _emotionState = pEmotionState;
+        }
+
+        public void QuickSetValues(SerializedResponse pSerializedData)
+        {
+            SetDialogue(pSerializedData.Dialogue);
+            SetEmotionState(pSerializedData.EmotionState);
+        }
+
+        #region Node linking
 
         public ChoiceGroupNode GetChoiceGroup()
         {
@@ -36,7 +56,7 @@ namespace ScenarioEditor
         }
 
         public void SetChoiceGroup(ChoiceGroupNode pChoiceGroup)
-        {     
+        {
             if (pChoiceGroup == _linkedChoiceGroup) return;
 
             if (_linkedChoiceGroup != null)
@@ -76,6 +96,6 @@ namespace ScenarioEditor
         }
         #endregion
 
-       
+
     }
 }

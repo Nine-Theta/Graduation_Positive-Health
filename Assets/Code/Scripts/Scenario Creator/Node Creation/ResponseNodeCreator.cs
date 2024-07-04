@@ -19,8 +19,7 @@ namespace ScenarioEditor
         {
             GameObject newNode = CreateNewNodeAtPosition(pPosition);
 
-            NPCResponseNode response = newNode.GetComponent<NPCResponseNode>();
-            response.SetDialogue(pResponseData.Dialogue);
+            newNode.GetComponent<NPCResponseNode>().QuickSetValues(pResponseData);
 
             return newNode;
         }
