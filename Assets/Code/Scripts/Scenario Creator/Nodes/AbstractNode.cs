@@ -2,9 +2,7 @@ using NaughtyAttributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.XPath;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace ScenarioEditor
 {
@@ -14,9 +12,11 @@ namespace ScenarioEditor
         //TODO: keep track of available connections, probably limit connections as well
         [Header("Base Class"), Space(5)]
 
-        [SerializeField]
-        private int _maxOutgoingConnections = 5;
+        [SerializeField, Min(-1), Tooltip("-1 will be treated as limitless")]
+        protected int _maxParentNodes = -1;
 
+        [SerializeField, Min(-1), Tooltip("-1 will be treated as limitless")]
+        protected int _maxChildNodes = 5;
 
         [SerializeField]
         protected EndConnectionPoint _endPoint = null;
@@ -25,8 +25,10 @@ namespace ScenarioEditor
 
         public bool HasMaxConnections()
         {
-            return (_startPoints.Count >= _maxOutgoingConnections);
+            return (_startPoints.Count >= _maxChildNodes);
         }
+
+        #region ConnectionPoint Management
 
         public void AddStartPoint(StartConnectionPoint pPoint)
         {
@@ -36,7 +38,7 @@ namespace ScenarioEditor
                 return;
             }
 
-            if(_startPoints.Count >= _maxOutgoingConnections)
+            if (_startPoints.Count >= _maxChildNodes)
             {
                 Debug.Log("Maximum amount of connections Reached, Destorying new Point");
                 Destroy(pPoint.gameObject);
@@ -86,7 +88,7 @@ namespace ScenarioEditor
             _startPoints.Sort();
             bool hasUnconnected = false;
 
-            Debug.Log("total points: "+_startPoints.Count);
+            Debug.Log("total points: " + _startPoints.Count);
 
             for (int i = 0; i < _startPoints.Count; i++)
             {
@@ -95,7 +97,7 @@ namespace ScenarioEditor
                 StartConnectionPoint p = _startPoints[i];
                 if (hasUnconnected)
                 {
-                    Debug.Log("Previous point was unconnected, Removing next point index["+i+"] which is connected? : " + p.IsConnected());
+                    Debug.Log("Previous point was unconnected, Removing next point index[" + i + "] which is connected? : " + p.IsConnected());
                     _startPoints.Remove(p);
                     Destroy(p.gameObject);
                     continue;
@@ -118,11 +120,13 @@ namespace ScenarioEditor
         {
             _endPoint.RecalculateConnection();
 
-            for(int i = 0; i < _startPoints.Count; i++)
+            for (int i = 0; i < _startPoints.Count; i++)
             {
                 _startPoints[i].RecalculateConnection();
             }
         }
+
+        #endregion ConnectionPoint Management
 
         public void DestroyNode()
         {

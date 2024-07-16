@@ -46,7 +46,7 @@ namespace ScenarioEditor
 
         private void AddChoicesRecursive(ChoiceGroupNode pGroup)
         {
-            ChoiceNode[] choices = pGroup.GetChoices().ToArray();
+            ChoiceNode[] choices = pGroup.GetChildNodes();
 
             if (_groupChoices.ContainsKey(pGroup))
                 Debug.LogError("Duplicate Group Detected!");
@@ -61,7 +61,7 @@ namespace ScenarioEditor
 
         private void AddResponsesRecursive(ChoiceNode pChoice)
         {
-            NPCResponseNode[] responses = pChoice.GetResponses().ToArray();
+            NPCResponseNode[] responses = pChoice.GetChildNodes();
 
             if (_choiceResponses.ContainsKey(pChoice))
                 Debug.LogError("Duplicate Choice Detected!");
@@ -76,7 +76,7 @@ namespace ScenarioEditor
 
         private void AddChoiceGroupRecursive(NPCResponseNode pResponse)
         {
-            ChoiceGroupNode group = pResponse.GetChoiceGroup();
+            ChoiceGroupNode group = pResponse.GetChildNodes()[0];
 
             if (_responseGroups.ContainsKey(pResponse))
                 Debug.LogError("Duplicate Response Detected!");
@@ -91,12 +91,12 @@ namespace ScenarioEditor
 
         private void SerializeNodesRecursively(ChoiceGroupNode pGroup)
         {
-            extract.StarterGroup = new SerializedChoiceGroup(NodeType.GROUP, extract.groups.Count, AddSerializedChoicesRecursive(pGroup.GetChoices().ToArray()));
+            extract.StarterGroup = new SerializedChoiceGroup(NodeType.GROUP, extract.groups.Count, AddSerializedChoicesRecursive(pGroup.GetChildNodes()));
         }
 
         private NodeID AddSerializedChoiceGroupRecursive(ChoiceGroupNode pGroup)
         {
-            extract.groups.Add(new SerializedChoiceGroup(NodeType.GROUP, extract.groups.Count, AddSerializedChoicesRecursive(pGroup.GetChoices().ToArray())));
+            extract.groups.Add(new SerializedChoiceGroup(NodeType.GROUP, extract.groups.Count, AddSerializedChoicesRecursive(pGroup.GetChildNodes())));
             return extract.groups.Last().ID;
         }
 
@@ -106,7 +106,7 @@ namespace ScenarioEditor
 
             for (int i = 0; i < pChoices.Length; i++)
             {
-                extract.choices.Add(new SerializedChoice(NodeType.CHOICE, extract.choices.Count, pChoices[i].GetDialogue(), AddSerializedResponsesRecursive(pChoices[i].GetResponses().ToArray()),ChoiceConditions.Empty));
+                extract.choices.Add(new SerializedChoice(NodeType.CHOICE, extract.choices.Count, pChoices[i].GetDialogue(), AddSerializedResponsesRecursive(pChoices[i].GetChildNodes()),ChoiceConditions.Empty));
 
                 serializedChoices[i] = extract.choices.Last().ID;
             }
@@ -120,7 +120,7 @@ namespace ScenarioEditor
 
             for (int i = 0; i < pResponses.Length; i++)
             {
-                ChoiceGroupNode group = pResponses[i].GetChoiceGroup();
+                ChoiceGroupNode group = pResponses[i].GetChildNodes()[0];
 
                 if (group != null)
                 {

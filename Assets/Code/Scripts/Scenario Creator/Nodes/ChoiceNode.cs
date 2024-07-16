@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace ScenarioEditor
 {
-    public class ChoiceNode : AbstractNode
+    public class ChoiceNode : GenericNode<ChoiceGroupNode, NPCResponseNode>
     {
         [HorizontalLine(color: EColor.Yellow)]
 
@@ -74,10 +74,16 @@ namespace ScenarioEditor
             SetDialogue(pSerializedData.Dialogue);
         }
 
+        /*
         #region Node linking
         public List<NPCResponseNode> GetResponses()
         {
             return _linkedResponses;
+        }
+
+        public void LinkChildNode(NPCResponseNode pResponse)
+        {
+            base.LinkChildNode(pResponse);
         }
 
         public void LinkResponse(NPCResponseNode pResponse)
@@ -122,5 +128,6 @@ namespace ScenarioEditor
 
         }
         #endregion
+        */
     }
 }

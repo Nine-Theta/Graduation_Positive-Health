@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ScenarioEditor
 {
-    public class NPCResponseNode : AbstractNode
+    public class NPCResponseNode : GenericNode<ChoiceNode, ChoiceGroupNode>
     {
         [HorizontalLine(color: EColor.Violet)]
 
@@ -48,6 +48,7 @@ namespace ScenarioEditor
             SetEmotionState(pSerializedData.EmotionState);
         }
 
+        /*
         #region Node linking
 
         public ChoiceGroupNode GetChoiceGroup()
@@ -95,7 +96,7 @@ namespace ScenarioEditor
             pChoice.UnlinkResponse(this);
         }
         #endregion
-
+        */
 
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ScenarioEditor
 {
-    public class ChoiceGroupNode : AbstractNode
+    public class ChoiceGroupNode : GenericNode<NPCResponseNode,ChoiceNode>
     {
         [HorizontalLine(color: EColor.Green)]
 
@@ -15,7 +15,11 @@ namespace ScenarioEditor
         [SerializeField]
         private List<ChoiceNode> _choicesNodes = new List<ChoiceNode>();
 
+        
         #region Node linking
+
+
+        /**
         public List<NPCResponseNode> GetLinkingResponses()
         {
             return _linkingResponses;
@@ -62,8 +66,9 @@ namespace ScenarioEditor
             _choicesNodes.Remove(pChoice);
             pChoice.SetChoiceGroup(null);
         }
+        /**/
         #endregion
-
+        
     }
 }
 
