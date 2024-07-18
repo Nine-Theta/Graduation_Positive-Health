@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace ScenarioEditor
 {
-    public class EndConnectionPoint : ConnectionPoint
+    public class IncomingConnectionPoint : ConnectionPoint
     {
         private int _maxConnectionPoints = 5;
 
-        private List<StartConnectionPoint> _connectedStartPoints = new List<StartConnectionPoint>();
+        private List<OutgoingConnectionPoint> _connectedStartPoints = new List<OutgoingConnectionPoint>();
 
-        public void AddConnection(StartConnectionPoint pPoint)
+        public void AddConnection(OutgoingConnectionPoint pPoint)
         {
             if (_connectedStartPoints.Count >= _maxConnectionPoints || _connectedStartPoints.Contains(pPoint))
                 return;
@@ -19,7 +19,7 @@ namespace ScenarioEditor
             _isConnected = true;
         }
 
-        public void RemoveConnection(StartConnectionPoint pPoint)
+        public void RemoveConnection(OutgoingConnectionPoint pPoint)
         {
             _connectedStartPoints.Remove(pPoint);
 

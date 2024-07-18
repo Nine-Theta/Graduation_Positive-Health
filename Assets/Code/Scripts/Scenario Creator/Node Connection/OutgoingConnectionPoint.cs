@@ -6,7 +6,7 @@ using UnityEngine;
 namespace ScenarioEditor
 {
     [RequireComponent(typeof(LineRenderer))]
-    public class StartConnectionPoint : ConnectionPoint
+    public class OutgoingConnectionPoint : ConnectionPoint
     {
         [SerializeField]
         private CustomVerticalLayoutGroup _startNodeVerticalLayout;
@@ -14,7 +14,7 @@ namespace ScenarioEditor
         [SerializeField]
         protected Vector3 _instanceOffset;
 
-        private EndConnectionPoint _connectedEndPoint;
+        private IncomingConnectionPoint _connectedEndPoint;
 
         private LineRenderer _lineRender;
 
@@ -27,7 +27,7 @@ namespace ScenarioEditor
             _lineRender.positionCount = 0;
         }
 
-        public void MakeConnection(EndConnectionPoint pPoint)
+        public void MakeConnection(IncomingConnectionPoint pPoint)
         {
             Debug.Log("Attempting to Connected: " + this + " to: " + pPoint);
 
@@ -62,7 +62,7 @@ namespace ScenarioEditor
             if (_ownerNode.HasMaxConnections()) return;
 
             GameObject newPointObj = Instantiate(gameObject, (transform.position + _instanceOffset), transform.rotation, transform.parent);
-            StartConnectionPoint startPoint = newPointObj.GetComponent<StartConnectionPoint>();
+            OutgoingConnectionPoint startPoint = newPointObj.GetComponent<OutgoingConnectionPoint>();
 
             startPoint.ClearConnection();
             _ownerNode.AddStartPoint(startPoint);

@@ -9,9 +9,6 @@ namespace ScenarioEditor
     [Serializable]
     public abstract class AbstractNode : MonoBehaviour
     {
-        //TODO: keep track of available connections, probably limit connections as well
-        [Header("Base Class"), Space(5)]
-
         [SerializeField, Min(-1), Tooltip("-1 will be treated as limitless")]
         protected int _maxParentNodes = -1;
 
@@ -19,9 +16,9 @@ namespace ScenarioEditor
         protected int _maxChildNodes = 5;
 
         [SerializeField]
-        protected EndConnectionPoint _endPoint = null;
+        protected IncomingConnectionPoint _endPoint = null;
         [SerializeField]
-        protected List<StartConnectionPoint> _startPoints = new List<StartConnectionPoint>();
+        protected List<OutgoingConnectionPoint> _startPoints = new List<OutgoingConnectionPoint>();
 
         public bool HasMaxConnections()
         {
@@ -30,7 +27,7 @@ namespace ScenarioEditor
 
         #region ConnectionPoint Management
 
-        public void AddStartPoint(StartConnectionPoint pPoint)
+        public void AddStartPoint(OutgoingConnectionPoint pPoint)
         {
             if (_startPoints.Contains(pPoint))
             {
@@ -49,7 +46,7 @@ namespace ScenarioEditor
             ReorderStartPoints();
         }
 
-        public void RemoveStartPoint(StartConnectionPoint pPoint)
+        public void RemoveStartPoint(OutgoingConnectionPoint pPoint)
         {
             if (!_startPoints.Contains(pPoint))
             {
@@ -62,17 +59,17 @@ namespace ScenarioEditor
             ReorderStartPoints();
         }
 
-        public List<StartConnectionPoint> GetStartPoints()
+        public List<OutgoingConnectionPoint> GetStartPoints()
         {
             return _startPoints;
         }
 
-        public StartConnectionPoint GetLastStartPoint()
+        public OutgoingConnectionPoint GetLastStartPoint()
         {
             return _startPoints.Last();
         }
 
-        public EndConnectionPoint GetEndPoint()
+        public IncomingConnectionPoint GetEndPoint()
         {
             return _endPoint;
         }
@@ -94,7 +91,7 @@ namespace ScenarioEditor
             {
                 Debug.Log("Do we already have unconnected points? " + hasUnconnected);
 
-                StartConnectionPoint p = _startPoints[i];
+                OutgoingConnectionPoint p = _startPoints[i];
                 if (hasUnconnected)
                 {
                     Debug.Log("Previous point was unconnected, Removing next point index[" + i + "] which is connected? : " + p.IsConnected());
@@ -128,7 +125,7 @@ namespace ScenarioEditor
 
         #endregion ConnectionPoint Management
 
-        public void DestroyNode()
+        public virtual void DestroyNode()
         {
             Destroy(gameObject);
         }

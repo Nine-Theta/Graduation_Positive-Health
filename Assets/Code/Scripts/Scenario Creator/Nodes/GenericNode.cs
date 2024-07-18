@@ -11,9 +11,7 @@ namespace ScenarioEditor
     [Serializable]
     public class GenericNode<PARENT, CHILD> : AbstractNode where PARENT : AbstractNode where CHILD : AbstractNode
     {
-        //TODO: keep track of available connections, probably limit connections as well
         [Header("Base Class"), Space(5)]
-
 
         [SerializeField, ReadOnly]
         protected List<PARENT> _parentNodes = new List<PARENT>();
@@ -30,6 +28,7 @@ namespace ScenarioEditor
             }
 
             _parentNodes.Add(pParent);
+            //AddStartPoint(pParent.get)
         }
 
         public virtual void LinkChildNode(CHILD pChild)
@@ -69,15 +68,6 @@ namespace ScenarioEditor
         public CHILD[] GetChildNodes()
         {
             return _childNodes.ToArray();
-        }
-
-
-
-        
-
-        public void DestroyNode()
-        {
-            Destroy(gameObject);
         }
     }
 }
