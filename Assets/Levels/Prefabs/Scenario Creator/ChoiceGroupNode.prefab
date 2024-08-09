@@ -598,10 +598,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f77679d453ea7f4d92c59bbbc5a45bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxOutgoingConnections: 5
-  _endPoint: {fileID: 395728514872493956}
-  _startPoints:
+  _maxParentNodes: -1
+  _maxChildNodes: 5
+  _inPoint: {fileID: 395728514872493956}
+  _outPoints:
   - {fileID: 519622040982582916}
+  _parentNodes: []
+  _childNodes: []
   _linkingResponses: []
   _choicesNodes: []
 --- !u!1001 &1887068935659841992
@@ -730,7 +733,7 @@ PrefabInstance:
     - target: {fileID: 1887485790894483759, guid: 9a89c9ec1bf0a074fb5c6ec95af83396,
         type: 3}
       propertyPath: m_Name
-      value: StartConnectionPoints
+      value: OutConnectionPoints
       objectReference: {fileID: 0}
     - target: {fileID: 1967275548893678939, guid: 9a89c9ec1bf0a074fb5c6ec95af83396,
         type: 3}
@@ -757,6 +760,11 @@ PrefabInstance:
       propertyPath: _ownerNode
       value: 
       objectReference: {fileID: 3134648109529355886}
+    - target: {fileID: 6847983066426453729, guid: 9a89c9ec1bf0a074fb5c6ec95af83396,
+        type: 3}
+      propertyPath: m_Name
+      value: OutConnectionPoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -906,7 +914,7 @@ PrefabInstance:
     - target: {fileID: 8291766107536684361, guid: 118daa9ffd599564fb2dabd008f3130b,
         type: 3}
       propertyPath: m_Name
-      value: EndConnectionPoint
+      value: InConnectionPoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

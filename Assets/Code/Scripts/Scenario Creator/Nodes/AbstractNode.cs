@@ -16,86 +16,86 @@ namespace ScenarioEditor
         protected int _maxChildNodes = 5;
 
         [SerializeField]
-        protected IncomingConnectionPoint _endPoint = null;
+        protected IncomingConnectionPoint _inPoint = null; //Our point for incoming connections
         [SerializeField]
-        protected List<OutgoingConnectionPoint> _startPoints = new List<OutgoingConnectionPoint>();
+        protected List<OutgoingConnectionPoint> _outPoints = new List<OutgoingConnectionPoint>(); //Our points for outgoing connections
 
         public bool HasMaxConnections()
         {
-            return (_startPoints.Count >= _maxChildNodes);
+            return (_outPoints.Count >= _maxChildNodes);
         }
 
         #region ConnectionPoint Management
 
-        public void AddStartPoint(OutgoingConnectionPoint pPoint)
+        public void AddOutgoingPoint(OutgoingConnectionPoint pPoint)
         {
-            if (_startPoints.Contains(pPoint))
+            if (_outPoints.Contains(pPoint))
             {
-                Debug.LogError("_startPoints already contains this Point, returning");
+                Debug.LogError("_outPoints already contains this Point, returning");
                 return;
             }
 
-            if (_startPoints.Count >= _maxChildNodes)
+            if (_outPoints.Count >= _maxChildNodes)
             {
                 Debug.Log("Maximum amount of connections Reached, Destorying new Point");
                 Destroy(pPoint.gameObject);
                 return;
             }
 
-            _startPoints.Add(pPoint);
-            ReorderStartPoints();
+            _outPoints.Add(pPoint);
+            ReorderOutgoingPoints();
         }
 
-        public void RemoveStartPoint(OutgoingConnectionPoint pPoint)
+        public void RemoveOutgoingPoint(OutgoingConnectionPoint pPoint)
         {
-            if (!_startPoints.Contains(pPoint))
+            if (!_outPoints.Contains(pPoint))
             {
-                Debug.LogError("_startPoints does not contain this Point, returning");
+                Debug.LogError("_outPoints does not contain this Point, returning");
                 return;
             }
 
-            _startPoints.Remove(pPoint);
+            _outPoints.Remove(pPoint);
             Destroy(pPoint.gameObject);
-            ReorderStartPoints();
+            ReorderOutgoingPoints();
         }
 
-        public List<OutgoingConnectionPoint> GetStartPoints()
+        public List<OutgoingConnectionPoint> GetOutgoingPoints()
         {
-            return _startPoints;
+            return _outPoints;
         }
 
-        public OutgoingConnectionPoint GetLastStartPoint()
+        public OutgoingConnectionPoint GetLastOutgoingPoint()
         {
-            return _startPoints.Last();
+            return _outPoints.Last();
         }
 
-        public IncomingConnectionPoint GetEndPoint()
+        public IncomingConnectionPoint GetIncomingPoint()
         {
-            return _endPoint;
+            return _inPoint;
         }
 
-        private void ReorderStartPoints()
+        private void ReorderOutgoingPoints()
         {
-            if (_startPoints.Count == 1)
+            if (_outPoints.Count == 1)
             {
-                _startPoints.Last().RecalculateConnection();
+                _outPoints.Last().RecalculateConnection();
                 return;
             }
 
-            _startPoints.Sort();
+            _outPoints.Sort();
             bool hasUnconnected = false;
 
-            Debug.Log("total points: " + _startPoints.Count);
+            Debug.Log("total points: " + _outPoints.Count);
 
-            for (int i = 0; i < _startPoints.Count; i++)
+            for (int i = 0; i < _outPoints.Count; i++)
             {
                 Debug.Log("Do we already have unconnected points? " + hasUnconnected);
 
-                OutgoingConnectionPoint p = _startPoints[i];
+                OutgoingConnectionPoint p = _outPoints[i];
                 if (hasUnconnected)
                 {
                     Debug.Log("Previous point was unconnected, Removing next point index[" + i + "] which is connected? : " + p.IsConnected());
-                    _startPoints.Remove(p);
+                    _outPoints.Remove(p);
                     Destroy(p.gameObject);
                     continue;
                 }
@@ -107,19 +107,19 @@ namespace ScenarioEditor
                 hasUnconnected = !p.IsConnected();
             }
 
-            for (int i = 0; i < _startPoints.Count; i++)
+            for (int i = 0; i < _outPoints.Count; i++)
             {
-                _startPoints[i].RecalculateConnection();
+                _outPoints[i].RecalculateConnection();
             }
         }
 
         public void RecalculateAllPoints()
         {
-            _endPoint.RecalculateConnection();
+            _inPoint.RecalculateConnection();
 
-            for (int i = 0; i < _startPoints.Count; i++)
+            for (int i = 0; i < _outPoints.Count; i++)
             {
-                _startPoints[i].RecalculateConnection();
+                _outPoints[i].RecalculateConnection();
             }
         }
 

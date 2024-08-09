@@ -28,7 +28,6 @@ namespace ScenarioEditor
             }
 
             _parentNodes.Add(pParent);
-            //AddStartPoint(pParent.get)
         }
 
         public virtual void LinkChildNode(CHILD pChild)
@@ -40,6 +39,7 @@ namespace ScenarioEditor
             }
 
             _childNodes.Add(pChild);
+            GetLastOutgoingPoint().MakeConnection(pChild.GetIncomingPoint());
         }
 
         public virtual void UnlinkParentNode(PARENT pParent)

@@ -40,14 +40,14 @@ namespace ScenarioEditor
             _connectedEndPoint = pPoint;
             _isConnected = true;
 
-            _connectedEndPoint.AddConnection(this);
+            _connectedEndPoint.MakeConnection(this);
 
             TryDuplicate();
         }
 
         public override void RecalculateConnection()
         {
-            Debug.Log("is linerenderer null? "+ (_lineRender == null));
+            //Debug.Log("is linerenderer null? "+ (_lineRender == null));
 
             if (_connectedEndPoint != null)
             {
@@ -65,7 +65,7 @@ namespace ScenarioEditor
             OutgoingConnectionPoint startPoint = newPointObj.GetComponent<OutgoingConnectionPoint>();
 
             startPoint.ClearConnection();
-            _ownerNode.AddStartPoint(startPoint);
+            _ownerNode.AddOutgoingPoint(startPoint);
         }
 
         public void ClearConnection()

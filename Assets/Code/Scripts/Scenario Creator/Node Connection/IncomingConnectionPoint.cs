@@ -6,31 +6,31 @@ namespace ScenarioEditor
 {
     public class IncomingConnectionPoint : ConnectionPoint
     {
-        private int _maxConnectionPoints = 5;
+        private int _maxConnections = 5;
 
-        private List<OutgoingConnectionPoint> _connectedStartPoints = new List<OutgoingConnectionPoint>();
+        private List<OutgoingConnectionPoint> _connectedOutPoints = new List<OutgoingConnectionPoint>();
 
-        public void AddConnection(OutgoingConnectionPoint pPoint)
+        public void MakeConnection(OutgoingConnectionPoint pPoint)
         {
-            if (_connectedStartPoints.Count >= _maxConnectionPoints || _connectedStartPoints.Contains(pPoint))
+            if (_connectedOutPoints.Count >= _maxConnections || _connectedOutPoints.Contains(pPoint))
                 return;
 
-            _connectedStartPoints.Add(pPoint);
+            _connectedOutPoints.Add(pPoint);
             _isConnected = true;
         }
 
         public void RemoveConnection(OutgoingConnectionPoint pPoint)
         {
-            _connectedStartPoints.Remove(pPoint);
+            _connectedOutPoints.Remove(pPoint);
 
-            if(_connectedStartPoints.Count <= 0)
+            if(_connectedOutPoints.Count <= 0)
                 _isConnected = false;
         }
 
 
         public override void RecalculateConnection()
         {
-            if (_connectedStartPoints.Count > 0)
+            if (_connectedOutPoints.Count > 0)
             {
                 RecalculateAllConnections();
             }
@@ -38,17 +38,17 @@ namespace ScenarioEditor
 
         public void RecalculateAllConnections()
         {
-            for (int i = 0; i < _connectedStartPoints.Count; i++)
+            for (int i = 0; i < _connectedOutPoints.Count; i++)
             {
-                _connectedStartPoints[i].RecalculateConnection();
+                _connectedOutPoints[i].RecalculateConnection();
             }
         }
 
         public void OnDestroy()
         {
-            for (int i = 0; i < _connectedStartPoints.Count; i++)
+            for (int i = 0; i < _connectedOutPoints.Count; i++)
             {
-                _connectedStartPoints[i].ClearConnection();
+                _connectedOutPoints[i].ClearConnection();
             }
         }
     }

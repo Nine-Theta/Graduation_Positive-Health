@@ -22,7 +22,7 @@ namespace ScenarioEditor
             if (_hasEnd && _heldChoice != null)
             {
                 pChoiceGroup.LinkChildNode(_heldChoice);
-                pChoiceGroup.GetLastStartPoint().MakeConnection(_heldChoice.GetEndPoint());
+                _heldChoice.LinkChildNode(_heldResponse);
                 ClearSelections();
             }
             else
@@ -38,7 +38,7 @@ namespace ScenarioEditor
             if (_hasEnd && _heldResponse != null)
             {
                 pChoice.LinkChildNode(_heldResponse);
-                pChoice.GetLastStartPoint().MakeConnection(_heldResponse.GetEndPoint());
+                _heldResponse.LinkParentNode(pChoice);
                 ClearSelections();
             }
             else
@@ -54,7 +54,7 @@ namespace ScenarioEditor
             if (_hasEnd && _heldGroup != null)
             {
                 pResponse.LinkChildNode(_heldGroup);
-                pResponse.GetLastStartPoint().MakeConnection(_heldGroup.GetEndPoint());
+                _heldGroup.LinkParentNode(pResponse);
                 ClearSelections();
             }
             else
@@ -80,7 +80,7 @@ namespace ScenarioEditor
             if (_hasStart && _heldResponse != null)
             {
                 pChoiceGroup.LinkParentNode(_heldResponse);
-                _heldResponse.GetLastStartPoint().MakeConnection(pChoiceGroup.GetEndPoint());
+                _heldResponse.LinkChildNode(pChoiceGroup);
                 ClearSelections();
             }
             else
@@ -96,7 +96,7 @@ namespace ScenarioEditor
             if (_hasStart && _heldGroup != null)
             {
                 pChoice.LinkParentNode(_heldGroup);
-                _heldGroup.GetLastStartPoint().MakeConnection(pChoice.GetEndPoint());
+                _heldGroup.LinkChildNode(pChoice);
                 ClearSelections();
             }
             else
@@ -109,14 +109,17 @@ namespace ScenarioEditor
 
         public void SetEndResponse(NPCResponseNode pResponse)
         {
+            Debug.Log("ER");
             if (_hasStart && _heldChoice != null)
             {
+                Debug.Log("ER T");
                 pResponse.LinkParentNode(_heldChoice);
-                _heldChoice.GetLastStartPoint().MakeConnection(pResponse.GetEndPoint());
+                _heldChoice.LinkChildNode(pResponse);
                 ClearSelections();
             }
             else
             {
+                Debug.Log("ER F");
                 ClearSelections();
                 _heldResponse = pResponse;
                 _hasEnd = true;
