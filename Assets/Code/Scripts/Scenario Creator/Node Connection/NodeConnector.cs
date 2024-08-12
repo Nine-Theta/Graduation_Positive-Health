@@ -22,7 +22,7 @@ namespace ScenarioEditor
             if (_hasEnd && _heldChoice != null)
             {
                 pChoiceGroup.LinkChildNode(_heldChoice);
-                _heldChoice.LinkChildNode(_heldResponse);
+                _heldChoice.LinkParentNode(pChoiceGroup);
                 ClearSelections();
             }
             else

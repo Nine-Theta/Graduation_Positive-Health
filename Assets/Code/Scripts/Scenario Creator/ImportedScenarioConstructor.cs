@@ -57,17 +57,17 @@ namespace ScenarioEditor
         {
             for (int i = 0; i < _scenario.groups.Count; i++)
             {
-                _nodeDictionary.Add(_scenario.groups[i].ID, _groupCreator.CreateGroupNode(new Vector3(300,i*100,0), _scenario.groups[i]));
+                _nodeDictionary.Add(_scenario.groups[i].ID, _groupCreator.CreateGroupNode(new Vector3(300,i*-50,0), _scenario.groups[i]));
             }
 
             for (int i = 0; i < _scenario.choices.Count; i++)
             {
-                _nodeDictionary.Add(_scenario.choices[i].ID, _choiceCreator.CreateChoiceNode(new Vector3(100, i * 100, 0), _scenario.choices[i]));
+                _nodeDictionary.Add(_scenario.choices[i].ID, _choiceCreator.CreateChoiceNode(new Vector3(100, i * -50, 0), _scenario.choices[i]));
             }
 
             for (int i = 0; i < _scenario.responses.Count; i++)
             {
-                _nodeDictionary.Add(_scenario.responses[i].ID, _responseCreator.CreateResponseNode(new Vector3(200, i * 100, 0), _scenario.responses[i]));
+                _nodeDictionary.Add(_scenario.responses[i].ID, _responseCreator.CreateResponseNode(new Vector3(200, i * -50, 0), _scenario.responses[i]));
             }
         }
 
@@ -79,7 +79,6 @@ namespace ScenarioEditor
                 ChoiceGroupNode group = _scenarioStartNode.GetComponent<ChoiceGroupNode>();
                 ChoiceNode choice = _nodeDictionary[_scenario.StarterGroup.ChoiceIDs[i]].GetComponent<ChoiceNode>();
                 group.LinkChildNode(choice);
-                group.GetLastOutgoingPoint().MakeConnection(choice.GetIncomingPoint());
             }
 
             for (int i = 0; i < _scenario.groups.Count; i++)
@@ -89,7 +88,6 @@ namespace ScenarioEditor
                     ChoiceGroupNode group = _nodeDictionary[_scenario.groups[i].ID].GetComponent<ChoiceGroupNode>();
                     ChoiceNode choice = _nodeDictionary[_scenario.groups[i].ChoiceIDs[j]].GetComponent<ChoiceNode>();
                     group.LinkChildNode(choice);
-                    group.GetLastOutgoingPoint().MakeConnection(choice.GetIncomingPoint());
                 }
             }
 
@@ -101,7 +99,6 @@ namespace ScenarioEditor
                     NPCResponseNode response = _nodeDictionary[_scenario.choices[i].ResponseIDs[j]].GetComponent<NPCResponseNode>();
 
                     choice.LinkChildNode(response);
-                    choice.GetLastOutgoingPoint().MakeConnection(response.GetIncomingPoint());
                 }
             }
 
@@ -111,7 +108,6 @@ namespace ScenarioEditor
                 ChoiceGroupNode group = _nodeDictionary[_scenario.responses[i].GroupID].GetComponent<ChoiceGroupNode>();
 
                 response.LinkChildNode(group);
-                response.GetLastOutgoingPoint().MakeConnection(group.GetIncomingPoint());
             }
         }
     }

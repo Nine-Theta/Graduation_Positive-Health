@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace ScenarioEditor
 {
@@ -19,6 +20,8 @@ namespace ScenarioEditor
         protected IncomingConnectionPoint _inPoint = null; //Our point for incoming connections
         [SerializeField]
         protected List<OutgoingConnectionPoint> _outPoints = new List<OutgoingConnectionPoint>(); //Our points for outgoing connections
+
+        public UnityEvent<AbstractNode> OnDisconnectNode = new UnityEvent<AbstractNode>();
 
         public bool HasMaxConnections()
         {
@@ -125,8 +128,20 @@ namespace ScenarioEditor
 
         #endregion ConnectionPoint Management
 
+        public virtual void DisconnectNode()
+        {
+           for(int i = 0; i < _outPoints.Count; i++)
+            {
+                _outPoints[i].ClearConnection();
+            }
+
+            OnDisconnectNode?.Invoke(this);
+            OnDisconnectNode.RemoveAllListeners();
+        }
+
         public virtual void DestroyNode()
         {
+            DisconnectNode();
             Destroy(gameObject);
         }
     }

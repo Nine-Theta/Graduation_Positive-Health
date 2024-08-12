@@ -16,3 +16,4 @@ rework choice conditions
 
 Would be nice:
 Have nodes snap to grid
+Drag select for multiple nodes

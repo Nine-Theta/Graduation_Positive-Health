@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 public enum ChoiceAvailability { ALWAYS, CONDITIONAL }
 public enum NPCEmotionState { NEUTRAL, SHOCKED, UPSET, SAD, IRRITATED, DISMISSIVE, COMFORTED, HAPPY }
 public enum NodeType { GROUP, CHOICE, RESPONSE }
@@ -52,10 +53,13 @@ public struct SerializedChoiceGroup
 
     public NodeID[] ChoiceIDs;
 
-    public SerializedChoiceGroup(NodeType pNodeType, int pNodeNumber, NodeID[] pChoices)
+    public Vector2 NodePos;
+
+    public SerializedChoiceGroup(NodeType pNodeType, int pNodeNumber, NodeID[] pChoices, Vector2 pPosition)
     {
         ID = new NodeID(pNodeType, pNodeNumber);
         ChoiceIDs = pChoices;
+        NodePos = pPosition;
     }
 }
 
@@ -67,14 +71,17 @@ public struct SerializedChoice
     public string Dialogue;
     public NodeID[] ResponseIDs;
 
+    public Vector2 NodePos;
+
     public ChoiceConditions Conditions;
 
 
-    public SerializedChoice(NodeType pNodeType, int pNodeNumber, string pDialogue, NodeID[] pResponses, ChoiceConditions pConditions)
+    public SerializedChoice(NodeType pNodeType, int pNodeNumber, string pDialogue, NodeID[] pResponses, Vector2 pPosition, ChoiceConditions pConditions)
     {
         ID = new NodeID(pNodeType, pNodeNumber);
         Dialogue = pDialogue;
         ResponseIDs = pResponses;
+        NodePos = pPosition;
         Conditions = pConditions;
     }
 
@@ -98,14 +105,17 @@ public struct SerializedResponse
 
     public NodeID GroupID;
 
+    public Vector2 NodePos;
+
     public bool IsEnd;
 
-    public SerializedResponse(NodeType pNodeType, int pNodeNumber, string pDialogue, NPCEmotionState pEmotion, NodeID pGroup, bool pIsEnd = false)
+    public SerializedResponse(NodeType pNodeType, int pNodeNumber, string pDialogue, NPCEmotionState pEmotion, NodeID pGroup, Vector2 pPosition, bool pIsEnd = false)
     {
         ID = new NodeID(pNodeType, pNodeNumber);
         Dialogue = pDialogue;
         EmotionState = pEmotion;
         GroupID = pGroup;
+        NodePos = pPosition;
         IsEnd = pIsEnd;
     }
 }

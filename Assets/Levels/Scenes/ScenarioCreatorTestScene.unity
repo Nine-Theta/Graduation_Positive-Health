@@ -3562,9 +3562,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2102804401}
-        m_TargetAssemblyTypeName: ScenarioEditor.ScenarioExtractor, Assembly-CSharp
-        m_MethodName: GetDialogue
+      - m_Target: {fileID: 322791742}
+        m_TargetAssemblyTypeName: ScenarioEditor.ImportedScenarioConstructor, Assembly-CSharp
+        m_MethodName: JustDoItAll
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3867,11 +3867,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2102804396}
-    - target: {fileID: 1753316952446599006, guid: 1098cbb0f1a772b4284b7bd0198aac0a,
-        type: 3}
-      propertyPath: m_Parameters.alignment
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3788481126884979097, guid: 1098cbb0f1a772b4284b7bd0198aac0a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -3975,26 +3970,6 @@ PrefabInstance:
     - target: {fileID: 4130206583199422392, guid: 1098cbb0f1a772b4284b7bd0198aac0a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5310729374877916121, guid: 1098cbb0f1a772b4284b7bd0198aac0a,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5310729374877916121, guid: 1098cbb0f1a772b4284b7bd0198aac0a,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5310729374877916121, guid: 1098cbb0f1a772b4284b7bd0198aac0a,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5310729374877916121, guid: 1098cbb0f1a772b4284b7bd0198aac0a,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8799854535791946365, guid: 1098cbb0f1a772b4284b7bd0198aac0a,

@@ -14,7 +14,7 @@ namespace ScenarioEditor
         [SerializeField]
         protected Vector3 _instanceOffset;
 
-        private IncomingConnectionPoint _connectedEndPoint;
+        private IncomingConnectionPoint _connectedInPoint;
 
         private LineRenderer _lineRender;
 
@@ -37,10 +37,10 @@ namespace ScenarioEditor
                 ClearConnection();
             }
 
-            _connectedEndPoint = pPoint;
+            _connectedInPoint = pPoint;
             _isConnected = true;
 
-            _connectedEndPoint.MakeConnection(this);
+            _connectedInPoint.MakeConnection(this);
 
             TryDuplicate();
         }
@@ -49,10 +49,10 @@ namespace ScenarioEditor
         {
             //Debug.Log("is linerenderer null? "+ (_lineRender == null));
 
-            if (_connectedEndPoint != null)
+            if (_connectedInPoint != null)
             {
                 _lineRender.positionCount = 2;
-                _lineRender.SetPositions(new Vector3[] { transform.position, _connectedEndPoint.transform.position });
+                _lineRender.SetPositions(new Vector3[] { transform.position, _connectedInPoint.transform.position });
             }
         }
 
@@ -62,10 +62,10 @@ namespace ScenarioEditor
             if (_ownerNode.HasMaxConnections()) return;
 
             GameObject newPointObj = Instantiate(gameObject, (transform.position + _instanceOffset), transform.rotation, transform.parent);
-            OutgoingConnectionPoint startPoint = newPointObj.GetComponent<OutgoingConnectionPoint>();
+            OutgoingConnectionPoint outPoint = newPointObj.GetComponent<OutgoingConnectionPoint>();
 
-            startPoint.ClearConnection();
-            _ownerNode.AddOutgoingPoint(startPoint);
+            outPoint.ClearConnection();
+            _ownerNode.AddOutgoingPoint(outPoint);
         }
 
         public void ClearConnection()
@@ -74,7 +74,7 @@ namespace ScenarioEditor
                 return;
 
             _lineRender.positionCount = 0;
-            _connectedEndPoint.RemoveConnection(this);
+            _connectedInPoint.RemoveConnection(this);
             _isConnected = false;
         }
 

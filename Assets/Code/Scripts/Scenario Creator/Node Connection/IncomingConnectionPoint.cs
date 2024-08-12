@@ -23,8 +23,17 @@ namespace ScenarioEditor
         {
             _connectedOutPoints.Remove(pPoint);
 
-            if(_connectedOutPoints.Count <= 0)
+            if (_connectedOutPoints.Count <= 0)
                 _isConnected = false;
+        }
+
+        public void RemoveAllConnections()
+        {
+            for (int i = 0; i < _connectedOutPoints.Count; i++)
+            {
+                _connectedOutPoints[i].ClearConnection();
+            }
+            _isConnected = false;
         }
 
 

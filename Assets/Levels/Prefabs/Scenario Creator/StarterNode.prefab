@@ -92,7 +92,19 @@ MonoBehaviour:
   _objectToDrag: {fileID: 4130206583199422392}
   OnDragEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8252689639686558958}
+        m_TargetAssemblyTypeName: ScenarioEditor.AbstractNode, Assembly-CSharp
+        m_MethodName: RecalculateAllPoints
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &311131327482385717
 GameObject:
   m_ObjectHideFlags: 0
@@ -2416,6 +2428,9 @@ MonoBehaviour:
   _inPoint: {fileID: 0}
   _outPoints:
   - {fileID: 2170177045902290249}
+  OnDisconnectNode:
+    m_PersistentCalls:
+      m_Calls: []
   _parentNodes: []
   _childNodes: []
   _linkingResponses: []
