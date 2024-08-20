@@ -9,7 +9,7 @@ using UnityEngine.Rendering;
 namespace ScenarioEditor
 {
     [Serializable]
-    public class GenericNode<PARENT, CHILD> : AbstractNode where PARENT : AbstractNode where CHILD : AbstractNode
+    public class GenericNode<PARENT, CHILD> : AbstractNode where PARENT : AbstractNode where CHILD : AbstractNode 
     {
         [Header("Base Class"), Space(5)]
 
@@ -108,6 +108,6 @@ namespace ScenarioEditor
         {
             DisconnectNode();
             base.DestroyNode();
-        }
+        }        
     }
 }

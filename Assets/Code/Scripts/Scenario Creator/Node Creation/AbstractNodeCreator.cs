@@ -7,7 +7,7 @@ using UnityEngine.ResourceManagement.ResourceProviders.Simulation;
 
 namespace ScenarioEditor
 {
-    public abstract class AbstractNodeCreator : MonoBehaviour
+    public abstract class AbstractNodeCreator<NODE, SERIALIZEDNODE> : MonoBehaviour where NODE : AbstractNode where SERIALIZEDNODE : I_SerializedNode
     {
         [SerializeField]
         protected Camera MainCamera;
@@ -15,13 +15,31 @@ namespace ScenarioEditor
         [SerializeField]
         protected Canvas MainCanvas;
 
+        [SerializeField]
+        protected NODE NodeTemplate;
 
         protected GameObject NodeObject;
+
+        protected virtual void Awake()
+        {
+            NodeObject = NodeTemplate.gameObject;
+        }
+
+
+        public virtual GameObject CreateNewNodeAtPosition(SERIALIZEDNODE pNode)
+        {
+            return CreateNewNodeAtPosition(pNode);
+        }
+
+        public virtual GameObject CreateNewNodeAtPosition(SERIALIZEDNODE pNode, Vector3 pPosOffset)
+        {
+            return CreateNewNodeAtPosition((Vector3)pNode.GetNodePos() + pPosOffset);
+        }
 
         //z position will be off due to parenting to canvas, needs a fix
         public virtual GameObject CreateNewNodeAtPosition(Vector3 pPosition)
         {
-            return Instantiate(NodeObject, pPosition, NodeObject.transform.rotation, MainCanvas.transform);
+            return Instantiate(NodeTemplate.gameObject, pPosition, NodeTemplate.transform.rotation, MainCanvas.transform);
         }
 
         public virtual void CreateNewNodeAtCameraView()

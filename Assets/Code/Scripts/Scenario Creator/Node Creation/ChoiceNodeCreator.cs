@@ -5,21 +5,18 @@ using UnityEngine;
 
 namespace ScenarioEditor
 {
-    public class ChoiceNodeCreator : AbstractNodeCreator
+    public class ChoiceNodeCreator : AbstractNodeCreator<ChoiceNode,SerializedChoice>
     {
-        [SerializeField]
-        private ChoiceNode _nodeTemplate;
-
-        private void Awake()
+        public override GameObject CreateNewNodeAtPosition(SerializedChoice pNode)
         {
-            NodeObject = _nodeTemplate.gameObject;
+            return CreateNewNodeAtPosition(pNode, Vector3.zero);
         }
 
-        public GameObject CreateChoiceNode(Vector3 pPosition, SerializedChoice pChoiceData)
+        public override GameObject CreateNewNodeAtPosition(SerializedChoice pNode, Vector3 pPosOffset)
         {
-            GameObject newNode = CreateNewNodeAtPosition(pPosition);
+            GameObject newNode = base.CreateNewNodeAtPosition(pNode, pPosOffset);
 
-            newNode.GetComponent<ChoiceNode>().QuickSetValues(pChoiceData);
+            newNode.GetComponent<ChoiceNode>().QuickSetValues(pNode);
 
             return newNode;
         }

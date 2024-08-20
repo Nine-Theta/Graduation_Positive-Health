@@ -1,25 +1,23 @@
 using ScenarioEditor;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace ScenarioEditor
 {
-    public class ResponseNodeCreator : AbstractNodeCreator
+    public class ResponseNodeCreator : AbstractNodeCreator<NPCResponseNode,SerializedResponse>
     {
-        [SerializeField]
-        private NPCResponseNode _nodeTemplate;
-
-        private void Awake()
+        public override GameObject CreateNewNodeAtPosition(SerializedResponse pNode)
         {
-            NodeObject = _nodeTemplate.gameObject;
+            return CreateNewNodeAtPosition(pNode, Vector3.zero);
         }
 
-        public GameObject CreateResponseNode(Vector3 pPosition, SerializedResponse pResponseData)
+        public override GameObject CreateNewNodeAtPosition(SerializedResponse pNode, Vector3 pPosOffset)
         {
-            GameObject newNode = CreateNewNodeAtPosition(pPosition);
+            GameObject newNode = base.CreateNewNodeAtPosition(pNode,pPosOffset);
 
-            newNode.GetComponent<NPCResponseNode>().QuickSetValues(pResponseData);
+            newNode.GetComponent<NPCResponseNode>().QuickSetValues(pNode);
 
             return newNode;
         }

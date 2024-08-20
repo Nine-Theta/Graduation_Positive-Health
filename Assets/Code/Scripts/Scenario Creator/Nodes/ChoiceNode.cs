@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace ScenarioEditor
 {
-    public class ChoiceNode : GenericNode<ChoiceGroupNode, NPCResponseNode>
+    public class ChoiceNode : GenericNode<ChoiceGroupNode, NPCResponseNode>, I_QuickSetNode<SerializedChoice>
     {
         [HorizontalLine(color: EColor.Yellow)]
 
@@ -71,63 +71,8 @@ namespace ScenarioEditor
 
         public void QuickSetValues(SerializedChoice pSerializedData)
         {
+            Debug.Log("QuickSetValues for ChoiceNode");
             SetDialogue(pSerializedData.Dialogue);
         }
-
-        /*
-        #region Node linking
-        public List<NPCResponseNode> GetResponses()
-        {
-            return _linkedResponses;
-        }
-
-        public void LinkChildNode(NPCResponseNode pResponse)
-        {
-            base.LinkChildNode(pResponse);
-        }
-
-        public void LinkResponse(NPCResponseNode pResponse)
-        {
-            if (_linkedResponses.Contains(pResponse))
-                return;
-
-            _linkedResponses.Add(pResponse);
-            pResponse.LinkChoice(this);
-        }
-
-        public void UnlinkResponse(NPCResponseNode pResponse)
-        {
-            if (!_linkedResponses.Contains(pResponse))
-                return;
-
-            _linkedResponses.Remove(pResponse);
-            pResponse.UnlinkChoice(this);
-        }
-
-
-        public ChoiceGroupNode GetChoiceGroup()
-        {
-            return _choiceGroup;
-        }
-
-        public void SetChoiceGroup(ChoiceGroupNode pChoiceGroup)
-        {
-            if (_choiceGroup == pChoiceGroup) return;
-
-            if (_choiceGroup != null)
-            {
-                _choiceGroup.RemoveChoice(this);
-            }
-
-            _choiceGroup = pChoiceGroup;
-
-            if (pChoiceGroup == null)
-                return;
-
-            _choiceGroup.AddChoice(this);
-
-        }
-        #endregion
-        */
     }
 }

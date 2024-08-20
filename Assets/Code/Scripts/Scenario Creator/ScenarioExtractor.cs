@@ -30,9 +30,7 @@ namespace ScenarioEditor
         {
             if (_description == null) return;
 
-            extract.groups.Clear();
-            extract.choices.Clear();
-            extract.responses.Clear();
+            extract.ClearData();
 
             extract.ScenarioName = _description.ScenarioName;
             extract.ScenarioDescription = _description.Description;
@@ -52,7 +50,7 @@ namespace ScenarioEditor
         private NodeID AddSerializedChoiceGroupRecursive(ChoiceGroupNode pGroup)
         {
             extract.groups.Add(new SerializedChoiceGroup(NodeType.GROUP, extract.groups.Count, AddSerializedChoicesRecursive(pGroup.GetChildNodes()), pGroup.GetNodePosition()));
-            return extract.groups.Last().ID;
+            return extract.groups.Last().GetID();
         }
 
         private NodeID[] AddSerializedChoicesRecursive(ChoiceNode[] pChoices)
@@ -63,9 +61,9 @@ namespace ScenarioEditor
             {
                 ChoiceNode choice = pChoices[i];
 
-                extract.choices.Add(new SerializedChoice(NodeType.CHOICE, extract.choices.Count, choice.GetDialogue(), AddSerializedResponsesRecursive(choice.GetChildNodes()), choice.GetNodePosition(), ChoiceConditions.Empty));
+                extract.choices.Add(new SerializedChoice(NodeType.CHOICE, extract.choices.Count, AddSerializedResponsesRecursive(choice.GetChildNodes()), choice.GetNodePosition(), choice.GetDialogue(), ChoiceConditions.Empty));
 
-                serializedChoices[i] = extract.choices.Last().ID;
+                serializedChoices[i] = extract.choices.Last().GetID();
             }
 
             return serializedChoices;
@@ -83,14 +81,14 @@ namespace ScenarioEditor
 
                 if (group != null)
                 {
-                    extract.responses.Add(new SerializedResponse(NodeType.RESPONSE, extract.responses.Count, response.GetDialogue(), NPCEmotionState.NEUTRAL, AddSerializedChoiceGroupRecursive(group), response.GetNodePosition()));
+                    extract.responses.Add(new SerializedResponse(NodeType.RESPONSE, extract.responses.Count, AddSerializedChoiceGroupRecursive(group), response.GetNodePosition(), response.GetDialogue(), NPCEmotionState.NEUTRAL));
                 }
                 else
                 {
-                    extract.responses.Add(new SerializedResponse(NodeType.RESPONSE, extract.responses.Count, response.GetDialogue(), NPCEmotionState.NEUTRAL, NodeID.Empty, response.GetNodePosition(), true));
+                    extract.responses.Add(new SerializedResponse(NodeType.RESPONSE, extract.responses.Count, NodeID.Empty, response.GetNodePosition(), response.GetDialogue(), NPCEmotionState.NEUTRAL, true));
                 }
 
-                serializedResponses[i] = extract.responses.Last().ID;
+                serializedResponses[i] = extract.responses.Last().GetID();
             }
 
             return serializedResponses;            

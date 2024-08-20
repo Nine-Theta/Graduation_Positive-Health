@@ -20,4 +20,18 @@ public class ScriptableExtractedDialogue : ScriptableObject
     public List<SerializedChoice> choices = new List<SerializedChoice>();
     public List<SerializedResponse> responses = new List<SerializedResponse>();
 
+    public void ClearData()
+    {
+        ScenarioName = "";
+        ScenarioDescription = "";
+        TargetAudience = "";
+
+        ChoiceVariables = new int[0];
+
+        StarterGroup = new SerializedChoiceGroup();
+
+        groups.Clear();
+        choices.Clear();
+        responses.Clear();
+    }
 }

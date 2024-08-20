@@ -5,23 +5,8 @@ using UnityEngine;
 
 namespace ScenarioEditor
 {
-    public class GroupNodeCreator : AbstractNodeCreator
-    {
-        [SerializeField]
-        private ChoiceGroupNode _nodeTemplate;
+    public class GroupNodeCreator : AbstractNodeCreator<ChoiceGroupNode, SerializedChoiceGroup>
+    {    
 
-        private void Awake()
-        {
-            NodeObject = _nodeTemplate.gameObject;
-        }
-
-        public GameObject CreateGroupNode(Vector3 pPosition, SerializedChoiceGroup pGroupData)
-        {
-            GameObject newNode = CreateNewNodeAtPosition(pPosition);
-
-            //newNode.GetComponent<ChoiceGroupNode>();
-
-            return newNode;
-        }
     }
 }

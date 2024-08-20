@@ -22,14 +22,25 @@ namespace ScenarioEditor
         [SerializeField]
         private ResponseNodeCreator _responseCreator;
 
-
+        [ShowNonSerializedField]
         private ScriptableExtractedDialogue _scenario;
 
 
         private Dictionary<NodeID, GameObject> _nodeDictionary = new Dictionary<NodeID, GameObject>();
 
+
+        public void ImportScenarioFromFile(string pFilename)
+        {
+            _scenarioFilename = pFilename;
+            GetExtractedDialogue();
+            FillStartNode();
+            CreateAllNodes();
+            LinkAllNodes();
+        }
+
+
         [Button]
-        public void JustDoItAll()
+        public void LoadSpecifiedScenarioFile()
         {
             GetExtractedDialogue();
             FillStartNode();
@@ -57,46 +68,47 @@ namespace ScenarioEditor
         {
             for (int i = 0; i < _scenario.groups.Count; i++)
             {
-                _nodeDictionary.Add(_scenario.groups[i].ID, _groupCreator.CreateGroupNode(new Vector3(300,i*-50,0), _scenario.groups[i]));
+                Debug.Log("NodeID: " + _scenario.groups[i].GetID().GetIDString());
+                _nodeDictionary.Add(_scenario.groups[i].GetID(), _groupCreator.CreateNewNodeAtPosition(_scenario.groups[i]));
             }
 
             for (int i = 0; i < _scenario.choices.Count; i++)
             {
-                _nodeDictionary.Add(_scenario.choices[i].ID, _choiceCreator.CreateChoiceNode(new Vector3(100, i * -50, 0), _scenario.choices[i]));
+                _nodeDictionary.Add(_scenario.choices[i].GetID(), _choiceCreator.CreateNewNodeAtPosition(_scenario.choices[i]));
             }
 
             for (int i = 0; i < _scenario.responses.Count; i++)
             {
-                _nodeDictionary.Add(_scenario.responses[i].ID, _responseCreator.CreateResponseNode(new Vector3(200, i * -50, 0), _scenario.responses[i]));
+                _nodeDictionary.Add(_scenario.responses[i].GetID(), _responseCreator.CreateNewNodeAtPosition(_scenario.responses[i]));
             }
         }
 
         [Button]
         public void LinkAllNodes()
         {
-            for (int i = 0; i < _scenario.StarterGroup.ChoiceIDs.Length; i++)
+            for (int i = 0; i < _scenario.StarterGroup.GetChildNodeIDs().Length; i++)
             {
                 ChoiceGroupNode group = _scenarioStartNode.GetComponent<ChoiceGroupNode>();
-                ChoiceNode choice = _nodeDictionary[_scenario.StarterGroup.ChoiceIDs[i]].GetComponent<ChoiceNode>();
+                ChoiceNode choice = _nodeDictionary[_scenario.StarterGroup.GetChildNodeIDs()[i]].GetComponent<ChoiceNode>();
                 group.LinkChildNode(choice);
             }
 
             for (int i = 0; i < _scenario.groups.Count; i++)
             {
-                for (int j = 0; j < _scenario.groups[i].ChoiceIDs.Length; j++)
+                for (int j = 0; j < _scenario.groups[i].GetChildNodeIDs().Length; j++)
                 {
-                    ChoiceGroupNode group = _nodeDictionary[_scenario.groups[i].ID].GetComponent<ChoiceGroupNode>();
-                    ChoiceNode choice = _nodeDictionary[_scenario.groups[i].ChoiceIDs[j]].GetComponent<ChoiceNode>();
+                    ChoiceGroupNode group = _nodeDictionary[_scenario.groups[i].GetID()].GetComponent<ChoiceGroupNode>();
+                    ChoiceNode choice = _nodeDictionary[_scenario.groups[i].GetChildNodeIDs()[j]].GetComponent<ChoiceNode>();
                     group.LinkChildNode(choice);
                 }
             }
 
             for (int i = 0; i < _scenario.choices.Count; i++)
             {
-                for (int j = 0; j < _scenario.choices[i].ResponseIDs.Length; j++)
+                for (int j = 0; j < _scenario.choices[i].GetChildNodeIDs().Length; j++)
                 {
-                    ChoiceNode choice = _nodeDictionary[_scenario.choices[i].ID].GetComponent<ChoiceNode>();
-                    NPCResponseNode response = _nodeDictionary[_scenario.choices[i].ResponseIDs[j]].GetComponent<NPCResponseNode>();
+                    ChoiceNode choice = _nodeDictionary[_scenario.choices[i].GetID()].GetComponent<ChoiceNode>();
+                    NPCResponseNode response = _nodeDictionary[_scenario.choices[i].GetChildNodeIDs()[j]].GetComponent<NPCResponseNode>();
 
                     choice.LinkChildNode(response);
                 }
@@ -104,8 +116,10 @@ namespace ScenarioEditor
 
             for (int i = 0; i < _scenario.responses.Count; i++)
             {
-                NPCResponseNode response = _nodeDictionary[_scenario.responses[i].ID].GetComponent<NPCResponseNode>();
-                ChoiceGroupNode group = _nodeDictionary[_scenario.responses[i].GroupID].GetComponent<ChoiceGroupNode>();
+                if (_scenario.responses[i].IsEnd) return;
+
+                NPCResponseNode response = _nodeDictionary[_scenario.responses[i].GetID()].GetComponent<NPCResponseNode>();
+                ChoiceGroupNode group = _nodeDictionary[_scenario.responses[i].GetChildNodeIDs()[0]].GetComponent<ChoiceGroupNode>();
 
                 response.LinkChildNode(group);
             }
