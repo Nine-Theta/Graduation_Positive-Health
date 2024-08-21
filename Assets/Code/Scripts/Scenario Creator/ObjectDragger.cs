@@ -1,4 +1,5 @@
 using NaughtyAttributes;
+using ScenarioEditor;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,8 @@ public class ObjectDragger : MonoBehaviour, IBeginDragHandler, IDragHandler
 
     private Vector2 _oldPos;
 
+    private Vector2 _travelDistance;
+
     public UnityEvent OnDragEvent = new UnityEvent();
     
 
@@ -21,6 +24,7 @@ public class ObjectDragger : MonoBehaviour, IBeginDragHandler, IDragHandler
             return;
 
         _oldPos = Camera.main.ScreenToWorldPoint(eventData.position);
+        _travelDistance = _objectToDrag.position;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -30,9 +34,25 @@ public class ObjectDragger : MonoBehaviour, IBeginDragHandler, IDragHandler
 
         Vector2 newPos = Camera.main.ScreenToWorldPoint(eventData.position);
 
-        Vector3 delta = newPos - _oldPos;
+        Vector2 delta = newPos - _oldPos;
 
-        _objectToDrag.position += delta;
+        _travelDistance += delta;
+
+        Vector2 objPos = _travelDistance;
+
+        if(EditorSceneSettings.Instance.IsNodeSnapEnabled)
+        {
+            float snapSize = EditorSceneSettings.Instance.NodeSnapSize;
+            float half = snapSize * 0.5f;
+
+            float modx = _travelDistance.x % snapSize;
+            float mody = _travelDistance.y % snapSize;
+
+            objPos.x -= modx < half ? modx : (modx-snapSize);
+            objPos.y -= mody < half ? mody : (mody-snapSize);
+        }
+
+        _objectToDrag.position = objPos;
 
         _oldPos = newPos;
 
