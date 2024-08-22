@@ -6,56 +6,70 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class ObjectDragger : MonoBehaviour, IBeginDragHandler, IDragHandler
+
+namespace ScenarioEditor
 {
-    [SerializeField,Required]
-    private Transform _objectToDrag;
-
-    private Vector2 _oldPos;
-
-    private Vector2 _travelDistance;
-
-    public UnityEvent OnDragEvent = new UnityEvent();
-    
-
-    public void OnBeginDrag(PointerEventData eventData)
+    public class ObjectDragger : MonoBehaviour, IBeginDragHandler, IDragHandler
     {
-        if (eventData.button != PointerEventData.InputButton.Left)
-            return;
+        [SerializeField, Required]
+        private RectTransform _objectToDrag;
 
-        _oldPos = Camera.main.ScreenToWorldPoint(eventData.position);
-        _travelDistance = _objectToDrag.position;
-    }
+        private Vector2 _oldPos;
 
-    public void OnDrag(PointerEventData eventData)
-    {
-        if (eventData.button != PointerEventData.InputButton.Left)
-            return;
+        private Vector2 _travelDistance;
 
-        Vector2 newPos = Camera.main.ScreenToWorldPoint(eventData.position);
+        public UnityEvent OnDragEvent = new UnityEvent();
 
-        Vector2 delta = newPos - _oldPos;
 
-        _travelDistance += delta;
-
-        Vector2 objPos = _travelDistance;
-
-        if(EditorSceneSettings.Instance.IsNodeSnapEnabled)
+        public void OnBeginDrag(PointerEventData eventData)
         {
-            float snapSize = EditorSceneSettings.Instance.NodeSnapSize;
-            float half = snapSize * 0.5f;
+            if (eventData.button != PointerEventData.InputButton.Left)
+                return;
 
-            float modx = _travelDistance.x % snapSize;
-            float mody = _travelDistance.y % snapSize;
-
-            objPos.x -= modx < half ? modx : (modx-snapSize);
-            objPos.y -= mody < half ? mody : (mody-snapSize);
+            _oldPos = Camera.main.ScreenToWorldPoint(eventData.position);
+            _travelDistance = _objectToDrag.position;
         }
 
-        _objectToDrag.position = objPos;
+        public void OnDrag(PointerEventData eventData)
+        {
+            if (eventData.button != PointerEventData.InputButton.Left)
+                return;
 
-        _oldPos = newPos;
+            Vector2 newPos = Camera.main.ScreenToWorldPoint(eventData.position);
 
-        OnDragEvent.Invoke();
+            Vector2 delta = newPos - _oldPos;
+
+            Debug.Log("travelDistance : " + _travelDistance);
+
+            _travelDistance += delta;
+
+            Vector2 objPos = _travelDistance;
+
+
+            Debug.Log("objPos : " + objPos);
+
+
+            if (EditorSceneSettings.Instance.IsNodeSnapEnabled)
+            {
+                float snapSize = EditorSceneSettings.Instance.NodeSnapSize;
+                float half = snapSize * 0.5f;
+
+                float modx = _travelDistance.x % snapSize;
+                float mody = _travelDistance.y % snapSize;
+
+                objPos.x -= modx < half ? modx : (modx - snapSize);
+                objPos.y -= mody < half ? mody : (mody - snapSize);
+            }
+
+            _objectToDrag.anchoredPosition = objPos;
+
+
+            Debug.Log("Drag Pos : " + objPos);
+            Debug.Log("Actual Pos: " + _objectToDrag.position);
+
+            _oldPos = newPos;
+
+            OnDragEvent.Invoke();
+        }
     }
 }
