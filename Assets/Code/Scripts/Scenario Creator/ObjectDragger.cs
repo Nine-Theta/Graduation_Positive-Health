@@ -39,14 +39,9 @@ namespace ScenarioEditor
 
             Vector2 delta = newPos - _oldPos;
 
-            Debug.Log("travelDistance : " + _travelDistance);
-
             _travelDistance += delta;
 
             Vector2 objPos = _travelDistance;
-
-
-            Debug.Log("objPos : " + objPos);
 
 
             if (EditorSceneSettings.Instance.IsNodeSnapEnabled)
@@ -62,10 +57,6 @@ namespace ScenarioEditor
             }
 
             _objectToDrag.anchoredPosition = objPos;
-
-
-            Debug.Log("Drag Pos : " + objPos);
-            Debug.Log("Actual Pos: " + _objectToDrag.position);
 
             _oldPos = newPos;
 
