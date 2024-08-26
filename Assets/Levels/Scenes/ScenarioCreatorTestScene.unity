@@ -721,7 +721,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 7953345101431483919}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 372806569}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 205c1d4175f99814ebcfd6b8f5a46424, type: 3}
@@ -749,6 +749,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NPCResponseNode
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858362256294905195, guid: de9a03fdd23245d49ac5707a2c5d0093,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858362256294905195, guid: de9a03fdd23245d49ac5707a2c5d0093,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858362256294905195, guid: de9a03fdd23245d49ac5707a2c5d0093,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858362256294905195, guid: de9a03fdd23245d49ac5707a2c5d0093,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8217519266858363386, guid: de9a03fdd23245d49ac5707a2c5d0093,
         type: 3}
@@ -861,6 +881,26 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 339118027}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &372806569 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6630608164185659146, guid: 08efd839f07d6db41a8aaded5d9e1096,
+    type: 3}
+  m_PrefabInstance: {fileID: 7953345101431483919}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &372806572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372806569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8ecf5dbeb864ca40bcf8d5e8aeeb53d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScenarioOverwriteFile: {fileID: 11400000, guid: 3e1793e883722ad4682bf086c66977aa,
+    type: 2}
 --- !u!1 &384581076
 GameObject:
   m_ObjectHideFlags: 0
@@ -3071,26 +3111,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2102804396}
-    - target: {fileID: 3702332135942343938, guid: a3b7521e8c0015c41a374f7b95719cb3,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3702332135942343938, guid: a3b7521e8c0015c41a374f7b95719cb3,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3702332135942343938, guid: a3b7521e8c0015c41a374f7b95719cb3,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3702332135942343938, guid: a3b7521e8c0015c41a374f7b95719cb3,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7469554909848645319, guid: a3b7521e8c0015c41a374f7b95719cb3,
         type: 3}
       propertyPath: m_Name
@@ -6045,26 +6065,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2102804401}
-    - target: {fileID: 6165067639098646236, guid: f8d1171171496da47b0ab2f8bc827533,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6165067639098646236, guid: f8d1171171496da47b0ab2f8bc827533,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6165067639098646236, guid: f8d1171171496da47b0ab2f8bc827533,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6165067639098646236, guid: f8d1171171496da47b0ab2f8bc827533,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9138055366115381885, guid: f8d1171171496da47b0ab2f8bc827533,
         type: 3}
       propertyPath: m_Name
@@ -6091,6 +6091,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4062175892471087221, guid: 08efd839f07d6db41a8aaded5d9e1096,
         type: 3}
+      propertyPath: _importer
+      value: 
+      objectReference: {fileID: 372806572}
+    - target: {fileID: 4062175892471087221, guid: 08efd839f07d6db41a8aaded5d9e1096,
+        type: 3}
       propertyPath: _groupCreator
       value: 
       objectReference: {fileID: 2061446686}
@@ -6104,6 +6109,11 @@ PrefabInstance:
       propertyPath: _responseCreator
       value: 
       objectReference: {fileID: 2061446684}
+    - target: {fileID: 4062175892471087221, guid: 08efd839f07d6db41a8aaded5d9e1096,
+        type: 3}
+      propertyPath: _scenarioFilename
+      value: Orthopedic_Surgeon_AI
+      objectReference: {fileID: 0}
     - target: {fileID: 4062175892471087221, guid: 08efd839f07d6db41a8aaded5d9e1096,
         type: 3}
       propertyPath: _scenarioStartNode
@@ -6167,7 +6177,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6630608164185659146, guid: 08efd839f07d6db41a8aaded5d9e1096,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 372806572}
   m_SourcePrefab: {fileID: 100100000, guid: 08efd839f07d6db41a8aaded5d9e1096, type: 3}
 --- !u!224 &8734444695297580825 stripped
 RectTransform:

@@ -114,14 +114,17 @@ namespace ScenarioEditor
                 }
             }
 
+            Debug.Log("responses Count: "+_scenario.responses.Count);
+
             for (int i = 0; i < _scenario.responses.Count; i++)
             {
-                if (_scenario.responses[i].IsEnd) return;
+                if (_scenario.responses[i].IsEnd) continue;
 
                 NPCResponseNode response = _nodeDictionary[_scenario.responses[i].GetID()].GetComponent<NPCResponseNode>();
                 ChoiceGroupNode group = _nodeDictionary[_scenario.responses[i].GetChildNodeIDs()[0]].GetComponent<ChoiceGroupNode>();
 
                 response.LinkChildNode(group);
+                Debug.Log("Linking: "+ _scenario.responses[i].GetID().GetIDString() + " to: " + _scenario.responses[i].GetChildNodeIDs()[0].GetIDString());
             }
         }
     }
