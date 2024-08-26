@@ -42,6 +42,11 @@ namespace ScenarioEditor
             _emotionState = pEmotionState;
         }
 
+        public void SetEmotionState(int pEmotionState)
+        {
+            _emotionState = (NPCEmotionState)pEmotionState;
+        }
+
         public void QuickSetValues(SerializedResponse pSerializedData)
         {
             Debug.Log("QuickSetValues for ResponseNode");

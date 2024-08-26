@@ -28,7 +28,7 @@ namespace ScenarioEditor
 
         public virtual GameObject CreateNewNodeAtPosition(SERIALIZEDNODE pNode)
         {
-            return CreateNewNodeAtPosition(pNode);
+            return CreateNewNodeAtPosition(pNode, Vector3.zero);
         }
 
         public virtual GameObject CreateNewNodeAtPosition(SERIALIZEDNODE pNode, Vector3 pPosOffset)
