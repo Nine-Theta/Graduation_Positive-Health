@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4499265345044206313}
   - component: {fileID: 4062175892471087221}
   - component: {fileID: 1720589870311496145}
+  - component: {fileID: 1578702398499988220}
   m_Layer: 0
   m_Name: ScenarioImporter
   m_TagString: Untagged
@@ -46,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _importer: {fileID: 1720589870311496145}
-  _scenarioFilename: TestScenario.json
+  _scenarioFilename: TestScenario
   _scenarioStartNode: {fileID: 0}
   _groupCreator: {fileID: 0}
   _choiceCreator: {fileID: 0}
@@ -65,3 +66,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScenarioOverwriteFile: {fileID: 11400000, guid: 3e1793e883722ad4682bf086c66977aa,
     type: 2}
+--- !u!114 &1578702398499988220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6630608164185659146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8ecf5dbeb864ca40bcf8d5e8aeeb53d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScenarioOverwriteFile: {fileID: 11400000, guid: 3e1793e883722ad4682bf086c66977aa,
+    type: 2}
+  _nodeSpacing: {x: 140, y: 100}

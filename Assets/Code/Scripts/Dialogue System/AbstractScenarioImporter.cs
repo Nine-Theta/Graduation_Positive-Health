@@ -13,7 +13,11 @@ public abstract class AbstractScenarioImporter : MonoBehaviour
 
     public virtual ScriptableExtractedDialogue ImportScenarioFilePersistentDataPath(string pFilename)
     {
-        return ImportScenarioFromFile(Application.persistentDataPath + _folder + pFilename + _extension);
+        //Just assuming if it does contain a dot the extension is valid
+        if (!pFilename.Contains('.'))
+            pFilename += _extension;
+
+        return ImportScenarioFromFile(Application.persistentDataPath + _folder + pFilename);
     }
 
     public abstract ScriptableExtractedDialogue ImportScenarioFromFile(string pFilepath);

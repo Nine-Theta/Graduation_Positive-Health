@@ -27,9 +27,14 @@ namespace ScenarioEditor
             _lineRender.positionCount = 0;
         }
 
+        public IncomingConnectionPoint GetConnectedPoint()
+        {
+            return _connectedInPoint;
+        }
+
         public void MakeConnection(IncomingConnectionPoint pPoint)
         {
-            Debug.Log("Attempting to Connected: " + this + " to: " + pPoint);
+            //Debug.Log("Attempting to Connected: " + this + " to: " + pPoint);
 
             if (_isConnected)
             {
@@ -75,6 +80,7 @@ namespace ScenarioEditor
 
             _lineRender.positionCount = 0;
             _connectedInPoint.RemoveConnection(this);
+            _connectedInPoint = null;
             _isConnected = false;
         }
 

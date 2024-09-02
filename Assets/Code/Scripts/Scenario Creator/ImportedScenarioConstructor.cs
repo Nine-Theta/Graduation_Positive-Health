@@ -38,6 +38,10 @@ namespace ScenarioEditor
             LinkAllNodes();
         }
 
+        public void SwitchImporter(AbstractScenarioImporter pImporter)
+        {
+            _importer = pImporter;
+        }
 
         [Button]
         public void LoadSpecifiedScenarioFile()
@@ -51,6 +55,7 @@ namespace ScenarioEditor
         [Button]
         public void GetExtractedDialogue()
         {
+            _nodeDictionary.Clear();
             _scenario = _importer.ImportScenarioFilePersistentDataPath(_scenarioFilename);
         }
 
@@ -68,7 +73,7 @@ namespace ScenarioEditor
         {
             for (int i = 0; i < _scenario.groups.Count; i++)
             {
-                Debug.Log("NodeID: " + _scenario.groups[i].GetID().GetIDString());
+                //Debug.Log("NodeID: " + _scenario.groups[i].GetID().GetIDString());
                 _nodeDictionary.Add(_scenario.groups[i].GetID(), _groupCreator.CreateNewNodeAtPosition(_scenario.groups[i]));
             }
 
@@ -124,7 +129,7 @@ namespace ScenarioEditor
                 ChoiceGroupNode group = _nodeDictionary[_scenario.responses[i].GetChildNodeIDs()[0]].GetComponent<ChoiceGroupNode>();
 
                 response.LinkChildNode(group);
-                Debug.Log("Linking: "+ _scenario.responses[i].GetID().GetIDString() + " to: " + _scenario.responses[i].GetChildNodeIDs()[0].GetIDString());
+                //Debug.Log("Linking: "+ _scenario.responses[i].GetID().GetIDString() + " to: " + _scenario.responses[i].GetChildNodeIDs()[0].GetIDString());
             }
         }
     }

@@ -42,7 +42,7 @@ namespace ScenarioEditor
             _childNodes.Add(pChild);
             GetLastOutgoingPoint().MakeConnection(pChild.GetIncomingPoint());
 
-            pChild.OnDisconnectNode.AddListener(UnlinkChildNode);
+            pChild.OnDisconnectNode.AddListener(UnlinkChildNode);            
         }
 
         private void UnlinkParentNode(AbstractNode pNode)
@@ -72,6 +72,7 @@ namespace ScenarioEditor
             {
                 Debug.Log("removed Child[" + pChild.name + "] from Node[" + name + "]");
                 _childNodes.Remove(pChild);
+                ClearConnectionToInPoint(pChild.GetIncomingPoint());
             }
         }
 
@@ -93,11 +94,13 @@ namespace ScenarioEditor
         {
             for (int i = 0; i < _parentNodes.Count; i++)
             {
+                Debug.Log("Disconnecting parent: " + _parentNodes[i]);
                 UnlinkParentNode(_parentNodes[i]);
             }
 
             for (int i = 0; i < _childNodes.Count; i++)
             {
+                Debug.Log("Disconnecting child: " + _childNodes[i]);
                 UnlinkChildNode(_childNodes[i]);
             }
 

@@ -62,6 +62,19 @@ namespace ScenarioEditor
             ReorderOutgoingPoints();
         }
 
+        public void ClearConnectionToInPoint(IncomingConnectionPoint pPoint)
+        {
+            for (int i = 0; i < _outPoints.Count; i++)
+            {
+                if (_outPoints[i].GetConnectedPoint() == pPoint)
+                {
+                    _outPoints[i].ClearConnection();
+                    ReorderOutgoingPoints();
+                    return;
+                }
+            }
+        }
+
         public List<OutgoingConnectionPoint> GetOutgoingPoints()
         {
             return _outPoints;
@@ -88,24 +101,15 @@ namespace ScenarioEditor
             _outPoints.Sort();
             bool hasUnconnected = false;
 
-            Debug.Log("total points: " + _outPoints.Count);
-
             for (int i = 0; i < _outPoints.Count; i++)
             {
-                Debug.Log("Do we already have unconnected points? " + hasUnconnected);
-
                 OutgoingConnectionPoint p = _outPoints[i];
                 if (hasUnconnected)
                 {
-                    Debug.Log("Previous point was unconnected, Removing next point index[" + i + "] which is connected? : " + p.IsConnected());
                     _outPoints.Remove(p);
                     Destroy(p.gameObject);
                     continue;
                 }
-
-
-                if (!p.IsConnected())
-                    Debug.Log("Current point is Unconnected, found at index: " + i);
 
                 hasUnconnected = !p.IsConnected();
             }
@@ -118,7 +122,8 @@ namespace ScenarioEditor
 
         public void RecalculateAllPoints()
         {
-            _inPoint.RecalculateConnection();
+            if(_inPoint != null)
+                _inPoint.RecalculateConnection();
 
             for (int i = 0; i < _outPoints.Count; i++)
             {

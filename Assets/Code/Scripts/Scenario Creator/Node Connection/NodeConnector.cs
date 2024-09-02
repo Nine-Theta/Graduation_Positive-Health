@@ -109,20 +109,29 @@ namespace ScenarioEditor
 
         public void SetEndResponse(NPCResponseNode pResponse)
         {
-            Debug.Log("ER");
             if (_hasStart && _heldChoice != null)
             {
-                Debug.Log("ER T");
                 pResponse.LinkParentNode(_heldChoice);
                 _heldChoice.LinkChildNode(pResponse);
                 ClearSelections();
             }
             else
             {
-                Debug.Log("ER F");
                 ClearSelections();
                 _heldResponse = pResponse;
                 _hasEnd = true;
+            }
+        }
+
+        //Should probably be done in a better way
+        public void DestroyAllNodes()
+        {
+            foreach(AbstractNode node in FindObjectsOfType(typeof(AbstractNode)))
+            {
+                if (node.name.Contains("(Clone)"))
+                {
+                    Destroy(node.gameObject);
+                }
             }
         }
 

@@ -389,7 +389,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7665184321215541518}
   m_TextViewport: {fileID: 1464093267860233398}
   m_TextComponent: {fileID: 4554897338119616608}
-  m_Placeholder: {fileID: 0}
+  m_Placeholder: {fileID: 3381807795601195147}
   m_VerticalScrollbar: {fileID: 0}
   m_VerticalScrollbarEventHandler: {fileID: 0}
   m_LayoutGroup: {fileID: 0}
@@ -1795,7 +1795,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6463669349819015432}
   m_TextViewport: {fileID: 1010838128016693208}
   m_TextComponent: {fileID: 5141152526084178299}
-  m_Placeholder: {fileID: 0}
+  m_Placeholder: {fileID: 3281896238098628110}
   m_VerticalScrollbar: {fileID: 0}
   m_VerticalScrollbarEventHandler: {fileID: 0}
   m_LayoutGroup: {fileID: 0}
@@ -2738,6 +2738,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: OutConnectionPoints
+      objectReference: {fileID: 0}
+    - target: {fileID: 1967275548893678939, guid: 9a89c9ec1bf0a074fb5c6ec95af83396,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.m_ColorSpace
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2091401187681574732, guid: 9a89c9ec1bf0a074fb5c6ec95af83396,
         type: 3}
