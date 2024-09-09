@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 public enum ChoiceAvailability { ALWAYS, CONDITIONAL }
 public enum NPCEmotionState { NEUTRAL, SHOCKED, UPSET, SAD, IRRITATED, DISMISSIVE, COMFORTED, HAPPY }
@@ -45,38 +43,54 @@ public struct ChoiceConditions
     }
 }
 
-[Serializable]
-public struct SerializedChoiceGroup
+public interface I_SerializedNode
 {
-    public NodeID ID;
-
-    public NodeID[] ChoiceIDs;
-
-    public SerializedChoiceGroup(NodeType pNodeType, int pNodeNumber, NodeID[] pChoices)
-    {
-        ID = new NodeID(pNodeType, pNodeNumber);
-        ChoiceIDs = pChoices;
-    }
+    public NodeID GetID();
+    public NodeID[] GetChildNodeIDs();
+    public Vector2 GetNodePos();
 }
 
 [Serializable]
-public struct SerializedChoice
+public struct SerializedChoiceGroup : I_SerializedNode
 {
     public NodeID ID;
+    public NodeID[] ChoiceIDs;
+    public Vector2 NodePos;
+
+    public SerializedChoiceGroup(NodeType pNodeType, int pNodeNumber, NodeID[] pChoices, Vector2 pPosition)
+    {
+        ID = new NodeID(pNodeType, pNodeNumber);
+        ChoiceIDs = pChoices;
+        NodePos = pPosition;
+    }
+
+    public NodeID GetID() { return ID; }
+    public NodeID[] GetChildNodeIDs() { return ChoiceIDs; }
+    public Vector2 GetNodePos() { return NodePos; }
+}
+
+[Serializable]
+public struct SerializedChoice : I_SerializedNode
+{
+    public NodeID ID;
+    public NodeID[] ResponseIDs;
+    public Vector2 NodePos;
 
     public string Dialogue;
-    public NodeID[] ResponseIDs;
-
     public ChoiceConditions Conditions;
 
 
-    public SerializedChoice(NodeType pNodeType, int pNodeNumber, string pDialogue, NodeID[] pResponses, ChoiceConditions pConditions)
+    public SerializedChoice(NodeType pNodeType, int pNodeNumber, NodeID[] pResponses, Vector2 pPosition, string pDialogue, ChoiceConditions pConditions)
     {
         ID = new NodeID(pNodeType, pNodeNumber);
         Dialogue = pDialogue;
         ResponseIDs = pResponses;
+        NodePos = pPosition;
         Conditions = pConditions;
     }
+    public NodeID GetID() { return ID; }
+    public NodeID[] GetChildNodeIDs() { return ResponseIDs; }
+    public Vector2 GetNodePos() { return NodePos; }
 
     public ChoiceAvailability GetChoiceAvailability()
     {
@@ -88,24 +102,27 @@ public struct SerializedChoice
 }
 
 [Serializable]
-public struct SerializedResponse
+public struct SerializedResponse : I_SerializedNode
 {
     public NodeID ID;
+    public NodeID GroupID;
+    public Vector2 NodePos;
 
     public string Dialogue;
-
     public NPCEmotionState EmotionState;
-
-    public NodeID GroupID;
-
     public bool IsEnd;
 
-    public SerializedResponse(NodeType pNodeType, int pNodeNumber, string pDialogue, NPCEmotionState pEmotion, NodeID pGroup, bool pIsEnd = false)
+    public SerializedResponse(NodeType pNodeType, int pNodeNumber, NodeID pGroup, Vector2 pPosition, string pDialogue, NPCEmotionState pEmotion, bool pIsEnd = false)
     {
         ID = new NodeID(pNodeType, pNodeNumber);
+        GroupID = pGroup;
+        NodePos = pPosition;
+
         Dialogue = pDialogue;
         EmotionState = pEmotion;
-        GroupID = pGroup;
         IsEnd = pIsEnd;
     }
+    public NodeID GetID() { return ID; }
+    public NodeID[] GetChildNodeIDs() { return new NodeID[] { GroupID }; }
+    public Vector2 GetNodePos() { return NodePos; }
 }

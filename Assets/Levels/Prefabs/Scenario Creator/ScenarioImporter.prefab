@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6630608164185659146
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4499265345044206313}
+  - component: {fileID: 4062175892471087221}
+  - component: {fileID: 1720589870311496145}
+  - component: {fileID: 1578702398499988220}
+  m_Layer: 0
+  m_Name: ScenarioImporter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4499265345044206313
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6630608164185659146}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4062175892471087221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6630608164185659146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 205c1d4175f99814ebcfd6b8f5a46424, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _importer: {fileID: 1720589870311496145}
+  _scenarioFilename: TestScenario
+  _scenarioStartNode: {fileID: 0}
+  _groupCreator: {fileID: 0}
+  _choiceCreator: {fileID: 0}
+  _responseCreator: {fileID: 0}
+--- !u!114 &1720589870311496145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6630608164185659146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8360254a68e3c8c4da8d5c951d05a651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScenarioOverwriteFile: {fileID: 11400000, guid: 3e1793e883722ad4682bf086c66977aa,
+    type: 2}
+--- !u!114 &1578702398499988220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6630608164185659146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8ecf5dbeb864ca40bcf8d5e8aeeb53d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScenarioOverwriteFile: {fileID: 11400000, guid: 3e1793e883722ad4682bf086c66977aa,
+    type: 2}
+  _nodeSpacing: {x: 140, y: 100}

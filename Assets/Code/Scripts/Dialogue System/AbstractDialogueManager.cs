@@ -15,7 +15,6 @@ public abstract class AbstractDialogueManager : MonoBehaviour
 
     protected int _currentChoiceCount;
 
-
     public virtual string GetScenarioName()
     {
         return _scenario.ScenarioName;
@@ -33,7 +32,7 @@ public abstract class AbstractDialogueManager : MonoBehaviour
 
     public virtual string[] GetStartChoices()
     {
-        _currentNode = GetStartGroup().ID;
+        _currentNode = GetStartGroup().GetID();
         return GetNextChoices();
 
     }
@@ -59,12 +58,12 @@ public abstract class AbstractDialogueManager : MonoBehaviour
         if (pChoiceMade >= _recentChoices.Length)
             return null;
 
-        SerializedResponse[] possibleResponses = GetFollowingResponses(_recentChoices[pChoiceMade].ID);
+        SerializedResponse[] possibleResponses = GetFollowingResponses(_recentChoices[pChoiceMade].GetID());
 
         Debug.LogWarning("TODO: Get Proper NPC response instead of first one in array");
 
         //Should probably be done properly
-        _currentNode = GetFollowingGroup(possibleResponses[0].ID).ID;
+        _currentNode = GetFollowingGroup(possibleResponses[0].GetID()).GetID();
 
         return possibleResponses[0].Dialogue;
     }
@@ -82,7 +81,7 @@ public abstract class AbstractDialogueManager : MonoBehaviour
             throw new KeyNotFoundException("Response ID not found in _responses Dictionary");
         }
 
-        NodeID groupID =  _responses[pResponseNode].GroupID;
+        NodeID groupID =  _responses[pResponseNode].GetChildNodeIDs()[0];
 
         if (!_groups.ContainsKey(groupID))
         {
@@ -101,7 +100,7 @@ public abstract class AbstractDialogueManager : MonoBehaviour
             throw new KeyNotFoundException("Group ID not found in _groups Dictionary");
         }
 
-        NodeID[] choiceIDs = _groups[pGroupNode].ChoiceIDs;
+        NodeID[] choiceIDs = _groups[pGroupNode].GetChildNodeIDs();
 
         SerializedChoice[] choices = new SerializedChoice[choiceIDs.Length];
 
@@ -127,7 +126,7 @@ public abstract class AbstractDialogueManager : MonoBehaviour
             throw new KeyNotFoundException("Choice ID not found in _choices Dictionary");
         }
 
-        NodeID[] responseIDs = _choices[pChoiceNode].ResponseIDs;
+        NodeID[] responseIDs = _choices[pChoiceNode].GetChildNodeIDs();
 
         SerializedResponse[] responses = new SerializedResponse[responseIDs.Length];
 

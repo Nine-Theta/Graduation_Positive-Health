@@ -30,93 +30,27 @@ namespace ScenarioEditor
         {
             if (_description == null) return;
 
-            /*
-            _nodeIDs.Clear();
-            _groupChoices.Clear();
-            _choiceResponses.Clear();
-            _responseGroups.Clear();
-
-            _nodeIDs.Add(_description.StartingNode.GetNodeID());
-
-            //ChoiceNode[] choices = _description.StartingNode.GetChoices().ToArray();
-
-            _groupChoices.Add(_description.StartingNode, choices);*/
-
-            extract.groups.Clear();
-            extract.choices.Clear();
-            extract.responses.Clear();
+            extract.ClearData();
 
             extract.ScenarioName = _description.ScenarioName;
             extract.ScenarioDescription = _description.Description;
             extract.TargetAudience = _description.TargetAudience;
 
             SerializeNodesRecursively(_description.StartingNode);
-            
-            /*foreach (ChoiceNode choice in choices)
-            {
-                extract.choices.Add(choice);
-                AddResponsesRecursive(choice);
-            }*/
 
             Debug.Log("All Nodes Processed!");
             ExportAsJSON();
         }
 
-        private void AddChoicesRecursive(ChoiceGroupNode pGroup)
-        {
-            ChoiceNode[] choices = pGroup.GetChoices().ToArray();
-
-            if (_groupChoices.ContainsKey(pGroup))
-                Debug.LogError("Duplicate Group Detected!");
-
-            _groupChoices.Add(pGroup, choices);
-
-            foreach (ChoiceNode choice in choices)
-            {
-                //extract.choices.Add(choice);
-                AddResponsesRecursive(choice);
-            }
-        }
-
-        private void AddResponsesRecursive(ChoiceNode pChoice)
-        {
-            NPCResponseNode[] responses = pChoice.GetResponses().ToArray();
-
-            if (_choiceResponses.ContainsKey(pChoice))
-                Debug.LogError("Duplicate Choice Detected!");
-
-            _choiceResponses.Add(pChoice, responses);
-
-            foreach (NPCResponseNode response in responses)
-            {
-                AddChoiceGroupRecursive(response);
-            }
-        }
-
-        private void AddChoiceGroupRecursive(NPCResponseNode pResponse)
-        {
-            ChoiceGroupNode group = pResponse.GetChoiceGroup();
-
-            if (_responseGroups.ContainsKey(pResponse))
-                Debug.LogError("Duplicate Response Detected!");
-
-            if (group != null)
-            {
-                _responseGroups.Add(pResponse, group);
-
-                AddChoicesRecursive(group);
-            }
-        }
-
         private void SerializeNodesRecursively(ChoiceGroupNode pGroup)
         {
-            extract.StarterGroup = new SerializedChoiceGroup(NodeType.GROUP, extract.groups.Count, AddSerializedChoicesRecursive(pGroup.GetChoices().ToArray()));
+            extract.StarterGroup = new SerializedChoiceGroup(NodeType.GROUP, extract.groups.Count, AddSerializedChoicesRecursive(pGroup.GetChildNodes()), new Vector2(0,0));
         }
 
         private NodeID AddSerializedChoiceGroupRecursive(ChoiceGroupNode pGroup)
         {
-            extract.groups.Add(new SerializedChoiceGroup(NodeType.GROUP, extract.groups.Count, AddSerializedChoicesRecursive(pGroup.GetChoices().ToArray())));
-            return extract.groups.Last().ID;
+            extract.groups.Add(new SerializedChoiceGroup(NodeType.GROUP, extract.groups.Count, AddSerializedChoicesRecursive(pGroup.GetChildNodes()), pGroup.GetNodePosition()));
+            return extract.groups.Last().GetID();
         }
 
         private NodeID[] AddSerializedChoicesRecursive(ChoiceNode[] pChoices)
@@ -125,9 +59,11 @@ namespace ScenarioEditor
 
             for (int i = 0; i < pChoices.Length; i++)
             {
-                extract.choices.Add(new SerializedChoice(NodeType.CHOICE, extract.choices.Count, pChoices[i].GetDialogue(), AddSerializedResponsesRecursive(pChoices[i].GetResponses().ToArray()),ChoiceConditions.Empty));
+                ChoiceNode choice = pChoices[i];
 
-                serializedChoices[i] = extract.choices.Last().ID;
+                extract.choices.Add(new SerializedChoice(NodeType.CHOICE, extract.choices.Count, AddSerializedResponsesRecursive(choice.GetChildNodes()), choice.GetNodePosition(), choice.GetDialogue(), ChoiceConditions.Empty));
+
+                serializedChoices[i] = extract.choices.Last().GetID();
             }
 
             return serializedChoices;
@@ -139,18 +75,20 @@ namespace ScenarioEditor
 
             for (int i = 0; i < pResponses.Length; i++)
             {
-                ChoiceGroupNode group = pResponses[i].GetChoiceGroup();
+
+                NPCResponseNode response = pResponses[i];
+                ChoiceGroupNode group = response.GetChildNodes().Length == 0 ? null : response.GetChildNodes()[0];
 
                 if (group != null)
                 {
-                    extract.responses.Add(new SerializedResponse(NodeType.RESPONSE, extract.responses.Count, pResponses[i].GetDialogue(), NPCEmotionState.NEUTRAL, AddSerializedChoiceGroupRecursive(group)));
+                    extract.responses.Add(new SerializedResponse(NodeType.RESPONSE, extract.responses.Count, AddSerializedChoiceGroupRecursive(group), response.GetNodePosition(), response.GetDialogue(), NPCEmotionState.NEUTRAL));
                 }
                 else
                 {
-                    extract.responses.Add(new SerializedResponse(NodeType.RESPONSE, extract.responses.Count, pResponses[i].GetDialogue(), NPCEmotionState.NEUTRAL, NodeID.Empty, true));
+                    extract.responses.Add(new SerializedResponse(NodeType.RESPONSE, extract.responses.Count, NodeID.Empty, response.GetNodePosition(), response.GetDialogue(), NPCEmotionState.NEUTRAL, true));
                 }
 
-                serializedResponses[i] = extract.responses.Last().ID;
+                serializedResponses[i] = extract.responses.Last().GetID();
             }
 
             return serializedResponses;            
@@ -159,13 +97,13 @@ namespace ScenarioEditor
 
         private void ExportAsJSON()
         {
+            System.IO.Directory.CreateDirectory(Application.persistentDataPath + _savePath);
             FileStream fileStream = new FileStream(Application.persistentDataPath + _savePath + extract.ScenarioName + ".json", FileMode.Create);
 
             using (StreamWriter writer = new StreamWriter(fileStream))
             {
                 writer.Write(JsonUtility.ToJson(extract, true));
             }
-
         }
     }
 }
