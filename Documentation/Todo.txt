@@ -1,13 +1,15 @@
 Critical:
-Import back into scenario editor
-Import into game
-Import support for AI Generated
+Import back into scenario editor (done)
+Import into game (need a game for that, but the support exists)
+Import support for AI Generated (kinda done, not my fault the currently generated AI dialogue doesn't conform  properly to the format that was established)
 Import support for Fin Generated
 
 Important:
 Unlink linked nodes
-ensure unlinking of deleted nodes
-fix that weird bug where line between response and group doesn't render initially
+ensure unlinking of deleted nodes (done)
+fix that weird bug where line between response and group doesn't render initially (done)
+Improve UI
+Ask for confirmation when saving scenarios, probably rework the saving UI as a whole
 
 Preferred:
 Sprite Changes
@@ -15,5 +17,5 @@ Variables
 rework choice conditions
 
 Would be nice:
-Have nodes snap to grid
+Have nodes snap to grid (done)
 Drag select for multiple nodes

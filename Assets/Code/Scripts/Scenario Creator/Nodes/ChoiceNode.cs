@@ -11,18 +11,12 @@ namespace ScenarioEditor
         [HorizontalLine(color: EColor.Yellow)]
 
         [SerializeField]
-        private ChoiceGroupNode _choiceGroup;
-
-        [SerializeField]
         private string _choiceDialogue;
         [SerializeField]
         private TMP_InputField _dialogueField;
 
         [SerializeField]
         private ChoiceAvailability _availability = ChoiceAvailability.ALWAYS;
-
-        [SerializeField]
-        private List<NPCResponseNode> _linkedResponses = new List<NPCResponseNode>();
 
         [SerializeField, Foldout("Modifiable Variables")]
         private int _unlockIndex = -1;

@@ -7,13 +7,7 @@ namespace ScenarioEditor
 {
     public class ChoiceGroupNode : GenericNode<NPCResponseNode,ChoiceNode>, I_QuickSetNode<SerializedChoiceGroup>
     {
-        [HorizontalLine(color: EColor.Green)]
-
-        [SerializeField]
-        private List<NPCResponseNode> _linkingResponses = new List<NPCResponseNode>();
-
-        [SerializeField]
-        private List<ChoiceNode> _choicesNodes = new List<ChoiceNode>();
+        //[HorizontalLine(color: EColor.Green)] //Sadly no parameters, no so colorbar anymore (-_-)
 
         public void QuickSetValues(SerializedChoiceGroup pSerializedNode)
         {

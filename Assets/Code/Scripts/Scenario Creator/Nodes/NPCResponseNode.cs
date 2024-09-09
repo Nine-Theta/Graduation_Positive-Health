@@ -15,12 +15,7 @@ namespace ScenarioEditor
         private TMP_InputField _dialogueField;
 
         [SerializeField]
-        private NPCEmotionState _emotionState;
-
-        [SerializeField]
-        private List<ChoiceNode> _linkingChoices = new List<ChoiceNode>();
-        [SerializeField]
-        private ChoiceGroupNode _linkedChoiceGroup;
+        private NPCEmotionState _emotionState = NPCEmotionState.NEUTRAL;
 
         public string GetDialogue()
         {

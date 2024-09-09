@@ -94,13 +94,13 @@ namespace ScenarioEditor
         {
             for (int i = 0; i < _parentNodes.Count; i++)
             {
-                Debug.Log("Disconnecting parent: " + _parentNodes[i]);
+                //Debug.Log("Disconnecting parent: " + _parentNodes[i]);
                 UnlinkParentNode(_parentNodes[i]);
             }
 
             for (int i = 0; i < _childNodes.Count; i++)
             {
-                Debug.Log("Disconnecting child: " + _childNodes[i]);
+                //Debug.Log("Disconnecting child: " + _childNodes[i]);
                 UnlinkChildNode(_childNodes[i]);
             }
 
