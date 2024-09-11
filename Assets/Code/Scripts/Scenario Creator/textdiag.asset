@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a136e33251b012e4a882c4c01cb5ba27, type: 3}
+  m_Name: textdiag
+  m_EditorClassIdentifier: 
+  ScenarioName: TestScenario
+  ScenarioDescription: test desc
+  TargetAudience: yeee
+  ChoiceVariables: 
+  StarterGroup:
+    ID:
+      Type: 0
+      NodeNumber: 0
+    ChoiceIDs:
+    - Type: 1
+      NodeNumber: 0
+    - Type: 1
+      NodeNumber: 1
+    - Type: 1
+      NodeNumber: 2
+    NodePos: {x: 0, y: 0}
+  groups:
+  - ID:
+      Type: 0
+      NodeNumber: 1
+    ChoiceIDs: []
+    NodePos: {x: 0, y: 0}
+  - ID:
+      Type: 0
+      NodeNumber: 2
+    ChoiceIDs: []
+    NodePos: {x: 0, y: 0}
+  - ID:
+      Type: 0
+      NodeNumber: 3
+    ChoiceIDs: []
+    NodePos: {x: 0, y: 0}
+  choices:
+  - ID:
+      Type: 1
+      NodeNumber: 0
+    ResponseIDs:
+    - Type: 2
+      NodeNumber: 0
+    NodePos: {x: 0, y: 0}
+    Dialogue: 
+  - ID:
+      Type: 1
+      NodeNumber: 1
+    ResponseIDs: []
+    NodePos: {x: 0, y: 0}
+    Dialogue: 
+  - ID:
+      Type: 1
+      NodeNumber: 2
+    ResponseIDs:
+    - Type: 2
+      NodeNumber: 1
+    - Type: 2
+      NodeNumber: 2
+    NodePos: {x: 0, y: 0}
+    Dialogue: 
+  responses:
+  - ID:
+      Type: 2
+      NodeNumber: 0
+    GroupID:
+      Type: 0
+      NodeNumber: 1
+    NodePos: {x: 0, y: 0}
+    Dialogue: test
+    EmotionState: 0
+    IsEnd: 0
+  - ID:
+      Type: 2
+      NodeNumber: 1
+    GroupID:
+      Type: 0
+      NodeNumber: 2
+    NodePos: {x: 0, y: 0}
+    Dialogue: test
+    EmotionState: 0
+    IsEnd: 0
+  - ID:
+      Type: 2
+      NodeNumber: 2
+    GroupID:
+      Type: 0
+      NodeNumber: 3
+    NodePos: {x: 0, y: 0}
+    Dialogue: test
+    EmotionState: 0
+    IsEnd: 0

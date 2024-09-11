@@ -1,0 +1,13 @@
+The current plan basically consists of 3 main elements: Choices, Choice Groups, and NPC Responses.
+
+A Choice group should be viewed as the player's dialogue. It contains multiple "Choices" which the player can select one of.
+
+A Choice is the player's actual input. It can either be always available, or only be chosen when a specific condition is met.
+A variable might be incremented/decreased when the player selects a Choice.
+This serves as the aforementioned condition, but can also influence NPC Responses.
+Each Choice has a link to one or more NPC response that follow from it.
+
+An NPC Response is the dialogue a player will receive from the patient once a Choice is made.
+Because multiple Responses can be linked from a single Choice, there will be a priority system that determines which Response is the most appropriate to show right now.
+This is determined by the previous Choices the player has made through the changes in variables.
+A Response links to a *single* Choice group, but a Choice group can have multiple Responses linking to it.
