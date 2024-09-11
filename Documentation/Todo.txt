@@ -3,6 +3,7 @@ Import back into scenario editor
 Import into game
 Import support for AI Generated
 Import support for Fin Generated
+Visual prototype to showcase dialogue in use
 
 Important:
 Unlink linked nodes
