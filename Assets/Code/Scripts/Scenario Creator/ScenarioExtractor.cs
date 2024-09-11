@@ -49,7 +49,7 @@ namespace ScenarioEditor
 
         private NodeID AddSerializedChoiceGroupRecursive(ChoiceGroupNode pGroup)
         {
-            extract.groups.Add(new SerializedChoiceGroup(NodeType.GROUP, extract.groups.Count, AddSerializedChoicesRecursive(pGroup.GetChildNodes()), pGroup.GetNodePosition()));
+            extract.groups.Add(new SerializedChoiceGroup(NodeType.GROUP, extract.groups.Count+1, AddSerializedChoicesRecursive(pGroup.GetChildNodes()), pGroup.GetNodePosition()));
             return extract.groups.Last().GetID();
         }
 
