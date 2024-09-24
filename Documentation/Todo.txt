@@ -3,6 +3,7 @@ Import back into scenario editor (done)
 Import into game (need a game for that, but the support exists)
 Import support for AI Generated (kinda done, not my fault the currently generated AI dialogue doesn't conform  properly to the format that was established)
 Import support for Fin Generated
+Visual prototype to showcase dialogue in use
 
 Important:
 Unlink linked nodes

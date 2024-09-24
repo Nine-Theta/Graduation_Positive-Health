@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,39 @@ public abstract class AbstractDialogueManager : MonoBehaviour
     protected SerializedChoice[] _recentChoices;
 
     protected int _currentChoiceCount;
+
+    [SerializeField, Required]
+    protected AbstractScenarioImporter _scenarioImporter;
+
+    public virtual void ImportScenario(string pFilename)
+    {
+        _scenario = _scenarioImporter.ImportScenarioFilePersistentDataPath(pFilename);
+        PopulateDictionaries();
+    }
+
+    protected virtual void PopulateDictionaries()
+    {
+        _groups.Clear();
+        _choices.Clear();
+        _responses.Clear();
+
+        _groups.Add(new NodeID(NodeType.GROUP, 0), _scenario.StarterGroup);
+
+        for (int i = 0; i < _scenario.groups.Count; i++)
+        {
+            _groups.Add(_scenario.groups[i].ID, _scenario.groups[i]);
+        }
+
+        for (int i = 0; i < _scenario.choices.Count; i++)
+        {
+            _choices.Add(_scenario.choices[i].ID, _scenario.choices[i]);
+        }
+
+        for (int i = 0; i < _scenario.responses.Count; i++)
+        {
+            _responses.Add(_scenario.responses[i].ID, _scenario.responses[i]);
+        }
+    }
 
     public virtual string GetScenarioName()
     {

@@ -65,12 +65,12 @@ public class AIScenarioImporter : AbstractScenarioImporter
             {
                 ScenarioOverwriteFile.choices.Add(new SerializedChoice(NodeType.CHOICE, i, new NodeID[] { new NodeID(NodeType.RESPONSE, i) }, new Vector2(x, y), aiDialogue[i], new ChoiceConditions(-1, 0, -1, 0)));
                 ScenarioOverwriteFile.responses.Add(new SerializedResponse(NodeType.RESPONSE, i, NodeID.Empty, new Vector2(x+thirdHoriSpace*2, y), aiDialogue[i+1] + aiDialogue[i+2], NPCEmotionState.NEUTRAL, true));
-                ScenarioOverwriteFile.groups.Add(new SerializedChoiceGroup(NodeType.GROUP, i/10, new NodeID[] { new NodeID(NodeType.CHOICE, (i/5) + 2), new NodeID(NodeType.CHOICE, (i/5) + 12), new NodeID(NodeType.CHOICE, (i / 5) + 22) }, new Vector2(((i/5+1)*_nodeSpacing.x)+thirdHoriSpace, 0)));
+                ScenarioOverwriteFile.groups.Add(new SerializedChoiceGroup(NodeType.GROUP, i/10+1, new NodeID[] { new NodeID(NodeType.CHOICE, (i/5) + 2), new NodeID(NodeType.CHOICE, (i/5) + 12), new NodeID(NodeType.CHOICE, (i / 5) + 22) }, new Vector2(((i/5+1)*_nodeSpacing.x)+thirdHoriSpace, 0)));
                 continue;
             }
 
             ScenarioOverwriteFile.choices.Add(new SerializedChoice(NodeType.CHOICE, i, new NodeID[] { new NodeID(NodeType.RESPONSE, i) }, new Vector2(x, y), aiDialogue[i], new ChoiceConditions(-1, 0, -1, 0)));
-            ScenarioOverwriteFile.responses.Add(new SerializedResponse(NodeType.RESPONSE, i, new NodeID(NodeType.GROUP, ((i%10)/2)), new Vector2(x + thirdHoriSpace*2, y), aiDialogue[i + 1], NPCEmotionState.NEUTRAL));
+            ScenarioOverwriteFile.responses.Add(new SerializedResponse(NodeType.RESPONSE, i, new NodeID(NodeType.GROUP, ((i%10)/2)+1), new Vector2(x + thirdHoriSpace*2, y), aiDialogue[i + 1], NPCEmotionState.NEUTRAL));
         }
 
         return ScenarioOverwriteFile;
