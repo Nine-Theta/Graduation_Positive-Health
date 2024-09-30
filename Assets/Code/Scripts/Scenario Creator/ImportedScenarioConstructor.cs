@@ -119,7 +119,7 @@ namespace ScenarioEditor
                 }
             }
 
-            Debug.Log("responses Count: "+_scenario.responses.Count);
+            //Debug.Log("responses Count: "+_scenario.responses.Count);
 
             for (int i = 0; i < _scenario.responses.Count; i++)
             {

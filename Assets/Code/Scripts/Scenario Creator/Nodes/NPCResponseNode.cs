@@ -44,7 +44,6 @@ namespace ScenarioEditor
 
         public void QuickSetValues(SerializedResponse pSerializedData)
         {
-            Debug.Log("QuickSetValues for ResponseNode");
             SetDialogue(pSerializedData.Dialogue);
             SetEmotionState(pSerializedData.EmotionState);
         }

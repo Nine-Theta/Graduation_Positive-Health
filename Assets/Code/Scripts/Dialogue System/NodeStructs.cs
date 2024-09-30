@@ -22,6 +22,16 @@ public struct NodeID
     {
         return Type.ToString() + NodeNumber.ToString();
     }
+
+    public static bool operator ==(NodeID left, NodeID right)
+    {
+        return (left.Type == right.Type) && (left.NodeNumber == right.NodeNumber);
+    }
+
+    public static bool operator !=(NodeID left, NodeID right)
+    {
+        return (left.Type != right.Type) || (left.NodeNumber != right.NodeNumber);
+    }
 }
 
 public struct ChoiceConditions
@@ -58,8 +68,11 @@ public struct SerializedChoiceGroup : I_SerializedNode
     public Vector2 NodePos;
 
     public SerializedChoiceGroup(NodeType pNodeType, int pNodeNumber, NodeID[] pChoices, Vector2 pPosition)
+        : this(new NodeID(pNodeType, pNodeNumber), pChoices, pPosition)
+    { }
+    public SerializedChoiceGroup(NodeID pID, NodeID[] pChoices, Vector2 pPosition)
     {
-        ID = new NodeID(pNodeType, pNodeNumber);
+        ID = pID;
         ChoiceIDs = pChoices;
         NodePos = pPosition;
     }
@@ -81,13 +94,19 @@ public struct SerializedChoice : I_SerializedNode
 
 
     public SerializedChoice(NodeType pNodeType, int pNodeNumber, NodeID[] pResponses, Vector2 pPosition, string pDialogue, ChoiceConditions pConditions)
+        : this(new NodeID(pNodeType, pNodeNumber), pResponses, pPosition, pDialogue, pConditions)
+    { }
+
+    public SerializedChoice(NodeID pID, NodeID[] pResponses, Vector2 pPosition, string pDialogue, ChoiceConditions pConditions)
     {
-        ID = new NodeID(pNodeType, pNodeNumber);
-        Dialogue = pDialogue;
+        ID = pID;
         ResponseIDs = pResponses;
         NodePos = pPosition;
+        Dialogue = pDialogue;
         Conditions = pConditions;
     }
+
+
     public NodeID GetID() { return ID; }
     public NodeID[] GetChildNodeIDs() { return ResponseIDs; }
     public Vector2 GetNodePos() { return NodePos; }
@@ -113,8 +132,12 @@ public struct SerializedResponse : I_SerializedNode
     public bool IsEnd;
 
     public SerializedResponse(NodeType pNodeType, int pNodeNumber, NodeID pGroup, Vector2 pPosition, string pDialogue, NPCEmotionState pEmotion, bool pIsEnd = false)
+        : this(new NodeID(pNodeType, pNodeNumber), pGroup, pPosition, pDialogue, pEmotion, pIsEnd)
+    { }
+
+    public SerializedResponse(NodeID pID, NodeID pGroup, Vector2 pPosition, string pDialogue, NPCEmotionState pEmotion, bool pIsEnd = false)
     {
-        ID = new NodeID(pNodeType, pNodeNumber);
+        ID = pID;
         GroupID = pGroup;
         NodePos = pPosition;
 
@@ -122,6 +145,7 @@ public struct SerializedResponse : I_SerializedNode
         EmotionState = pEmotion;
         IsEnd = pIsEnd;
     }
+
     public NodeID GetID() { return ID; }
     public NodeID[] GetChildNodeIDs() { return new NodeID[] { GroupID }; }
     public Vector2 GetNodePos() { return NodePos; }

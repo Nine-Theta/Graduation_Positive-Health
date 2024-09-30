@@ -34,4 +34,45 @@ public class ScriptableExtractedDialogue : ScriptableObject
         choices.Clear();
         responses.Clear();
     }
+    public bool SearchGroupByID(NodeID pID, out SerializedChoiceGroup outGroup)
+    {
+        for (int i = 0; i < groups.Count; i++)
+        {
+            if (groups[i].ID == pID)
+            {
+                outGroup = groups[i];
+                return true;
+            }
+        }
+        outGroup = new SerializedChoiceGroup();
+        return false;
+    }
+
+
+    public bool SearchChoiceByID(NodeID pID, out SerializedChoice outChoice)
+    {
+        for (int i = 0; i < choices.Count; i++)
+        {
+            if (choices[i].ID == pID)
+            {
+                outChoice = choices[i];
+                return true;
+            }
+        }
+        outChoice = new SerializedChoice();
+        return false;
+    }
+    public bool SearchResponseByID(NodeID pID, out SerializedResponse outResponse)
+    {
+        for (int i = 0; i < responses.Count; i++)
+        {
+            if (responses[i].ID == pID)
+            {
+                outResponse = responses[i];
+                return true;
+            }
+        }
+        outResponse = new SerializedResponse();
+        return false;
+    }
 }
