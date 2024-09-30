@@ -86,8 +86,19 @@ public abstract class AbstractDialogueManager : MonoBehaviour
 
         return dialogues;
     }
+    public virtual SerializedResponse GetNextResponse(int pChoiceMade)
+    {
+        SerializedResponse[] possibleResponses = GetFollowingResponses(_recentChoices[pChoiceMade].GetID());
 
-    public virtual string GetNextResponse(int pChoiceMade)
+        Debug.LogWarning("TODO: Get Proper NPC response instead of first one in array");
+
+        //Should probably be done properly
+        _currentNode = GetFollowingGroup(possibleResponses[0].GetID()).GetID();
+
+        return possibleResponses[0];
+    }
+
+    public virtual string GetNextResponseDialogue(int pChoiceMade)
     {
         if (pChoiceMade >= _recentChoices.Length)
             return null;

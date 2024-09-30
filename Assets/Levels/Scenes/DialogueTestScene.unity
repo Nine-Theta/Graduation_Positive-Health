@@ -123,6 +123,71 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &51348060
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 51348062}
+  - component: {fileID: 51348061}
+  m_Layer: 0
+  m_Name: SpriteManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &51348061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51348060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3125dd3ead326de44a8e3ae4044d28c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _npcSprite: {fileID: 0}
+  _sprites:
+  - _emotion: 0
+    _sprite: {fileID: 21300000, guid: 73cbe7e0751f2ef44bfcd70e4aebf005, type: 3}
+  - _emotion: 1
+    _sprite: {fileID: 21300000, guid: 454926387c8f5bb42be2e94ed378c8dc, type: 3}
+  - _emotion: 2
+    _sprite: {fileID: 21300000, guid: 6d67411cea360e245995b2ddf23e8bb0, type: 3}
+  - _emotion: 3
+    _sprite: {fileID: 21300000, guid: 7e5ea7cd0f9f8b94589a862d94a25490, type: 3}
+  - _emotion: 4
+    _sprite: {fileID: 21300000, guid: 462495e6881a59b4e83bba73d9a24079, type: 3}
+  - _emotion: 5
+    _sprite: {fileID: 21300000, guid: 1b9e9ce721da258449c46c9c26c0f4ff, type: 3}
+  - _emotion: 6
+    _sprite: {fileID: 21300000, guid: 87f63e20f099f114286ea8c0cda7ec9e, type: 3}
+  - _emotion: 7
+    _sprite: {fileID: 21300000, guid: 5df42626d5b17fe48a8f9bc94df82098, type: 3}
+  _npcEmotionSprites:
+    m_Keys: 
+    m_Values: []
+--- !u!4 &51348062
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51348060}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &86007426
 GameObject:
   m_ObjectHideFlags: 0
@@ -1626,8 +1691,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f663e0d9557f8498fce1cab0fdd938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scenarioImporter: {fileID: 1080678383}
-  _scenarioFilename: Orthopedic_Surgeon_AI
+  _scenarioImporter: {fileID: 1080678381}
+  _scenarioFilename: Orthopedic_Surgeon_AI_Modified
+  _testNPCSpriteSwitcher: {fileID: 51348061}
   _buttonTextOne: {fileID: 639341932}
   _buttonTextTwo: {fileID: 961780758}
   _buttonTextThree: {fileID: 2115282800}
@@ -2579,3 +2645,4 @@ SceneRoots:
   - {fileID: 1366755462}
   - {fileID: 1080678380}
   - {fileID: 86007428}
+  - {fileID: 51348062}
