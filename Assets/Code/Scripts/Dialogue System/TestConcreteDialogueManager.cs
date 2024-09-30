@@ -9,6 +9,9 @@ public class TestConcreteDialogueManager : AbstractDialogueManager
     private string _scenarioFilename;
 
     [SerializeField]
+    private TestNPCSpriteSwitcher _testNPCSpriteSwitcher;
+
+    [SerializeField]
     private TextMeshProUGUI _buttonTextOne;
     [SerializeField]
     private TextMeshProUGUI _buttonTextTwo;
@@ -37,7 +40,9 @@ public class TestConcreteDialogueManager : AbstractDialogueManager
 
     public void populatePatientText(int pChoiceMade)
     {
-        _patientText.text = GetNextResponse(pChoiceMade);
+        SerializedResponse response = GetNextResponse(pChoiceMade);
+        _patientText.text = response.Dialogue;
+        _testNPCSpriteSwitcher.SwitchSprite(response.EmotionState);
     }
 
     public override void ImportScenario(string pFilename)

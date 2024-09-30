@@ -34,7 +34,7 @@ public class AIScenarioImporter : AbstractScenarioImporter
 
         ScenarioOverwriteFile.ClearData();
 
-        ScenarioOverwriteFile.ScenarioName = Path.GetFileName(pFilepath);
+        ScenarioOverwriteFile.ScenarioName = Path.GetFileName(pFilepath.Split('.')[0]);
         ScenarioOverwriteFile.TargetAudience = aiScenario[0];
         ScenarioOverwriteFile.ScenarioDescription = aiScenario[1];
         ScenarioOverwriteFile.StarterGroup = new SerializedChoiceGroup(

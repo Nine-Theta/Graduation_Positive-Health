@@ -22,8 +22,6 @@ public class JSONScenarioImporter : AbstractScenarioImporter
     {
         Debug.Log("Import Filepath: " + pFilepath);
 
-        //ScriptableExtractedDialogue dialogue = new ScriptableExtractedDialogue();
-
         string jsonFile = File.ReadAllText(pFilepath);
         ScenarioOverwriteFile.ClearData();
         JsonUtility.FromJsonOverwrite(jsonFile, ScenarioOverwriteFile);
