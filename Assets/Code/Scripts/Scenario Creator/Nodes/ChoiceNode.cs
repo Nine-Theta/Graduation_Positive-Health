@@ -65,7 +65,6 @@ namespace ScenarioEditor
 
         public void QuickSetValues(SerializedChoice pSerializedData)
         {
-            Debug.Log("QuickSetValues for ChoiceNode");
             SetDialogue(pSerializedData.Dialogue);
         }
     }
