@@ -23,19 +23,30 @@ namespace ScenarioEditor
         [SerializeField]
         private SavedScenarioUIManager _uiManager;
 
+        private Dictionary<string,SavedScenarioUITile> _tiles = new Dictionary<string,SavedScenarioUITile>();
+
         private void Start()
         {
-            DirectoryInfo DirInfo = new DirectoryInfo(GetFullSavePath());
+           RefreshDirectory();
+        }
 
+        public void RefreshDirectory()
+        {
+            DirectoryInfo DirInfo = new DirectoryInfo(GetFullSavePath());
             IEnumerable<FileInfo> files = DirInfo.EnumerateFiles();
 
             foreach (FileInfo file in files)
             {
                 Debug.Log("Existing savefile found: " + file.Name + " : " + file.FullName);
+                if (_tiles.ContainsKey(file.Name))
+                    continue;
+
                 SavedScenarioUITile uiTile = Instantiate(_tilePrefab, transform).GetComponent<SavedScenarioUITile>();
                 uiTile.SetFilename(file.Name);
                 uiTile.Filepath = file.FullName;
                 uiTile.SetTileManager(this);
+
+                _tiles.Add(file.Name, uiTile);
             }
         }
 

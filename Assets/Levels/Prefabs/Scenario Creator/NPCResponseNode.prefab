@@ -1733,7 +1733,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 80}
+  m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3228791161631674298
 CanvasRenderer:
@@ -1798,8 +1798,6 @@ MonoBehaviour:
   _responseDialogue: test
   _dialogueField: {fileID: 7283059086208360122}
   _emotionState: 0
-  _linkingChoices: []
-  _linkedChoiceGroup: {fileID: 0}
 --- !u!1 &7928487067753777269
 GameObject:
   m_ObjectHideFlags: 0

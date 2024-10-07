@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3125dd3ead326de44a8e3ae4044d28c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _npcSprite: {fileID: 0}
+  _npcSprite: {fileID: 197873984}
   _sprites:
   - _emotion: 0
     _sprite: {fileID: 21300000, guid: 73cbe7e0751f2ef44bfcd70e4aebf005, type: 3}

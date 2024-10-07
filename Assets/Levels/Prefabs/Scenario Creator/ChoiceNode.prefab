@@ -1714,7 +1714,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 140, y: 146}
+  m_SizeDelta: {x: 40, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3228791161631674298
 CanvasRenderer:
@@ -1776,11 +1776,9 @@ MonoBehaviour:
       m_Calls: []
   _parentNodes: []
   _childNodes: []
-  _choiceGroup: {fileID: 0}
   _choiceDialogue: 
   _dialogueField: {fileID: 7283059086208360122}
   _availability: 0
-  _linkedResponses: []
   _unlockIndex: -1
   _unlockTreshold: 0
   _conditionIndex: -1

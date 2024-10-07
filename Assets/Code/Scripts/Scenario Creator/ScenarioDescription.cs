@@ -28,16 +28,6 @@ namespace ScenarioEditor
         [SerializeField]
         private ChoiceGroupNode _startingNode;
 
-        public string TargetAudience
-        {
-            get { return _targetAudience; }
-            set
-            {
-                _targetAudience = value;
-                _targetAudienceField.text = value;
-            }
-        }
-
         public string ScenarioName
         {
             get { return _name; }
@@ -45,6 +35,16 @@ namespace ScenarioEditor
             {
                 _name = value;
                 _nameField.text = value;
+            }
+        }
+
+        public string TargetAudience
+        {
+            get { return _targetAudience; }
+            set
+            {
+                _targetAudience = value;
+                _targetAudienceField.text = value;
             }
         }
 
@@ -62,6 +62,13 @@ namespace ScenarioEditor
         {
             get { return _startingNode; }
             set { _startingNode = value; }
+        }
+
+        public void ResetFields()
+        {
+            ScenarioName = "";
+            TargetAudience = "";
+            Description = "";
         }
     }
 }
