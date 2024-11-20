@@ -75,7 +75,7 @@ namespace ScenarioEditor
 
         public void ClearConnection()
         {
-            if (!_isConnected)
+            if (!_isConnected && _connectedInPoint == null)
                 return;
 
             _lineRender.positionCount = 0;

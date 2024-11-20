@@ -139,6 +139,7 @@ namespace ScenarioEditor
             {
                 _outPoints[i].ClearConnection();
             }
+           ReorderOutgoingPoints();
 
             OnDisconnectNode?.Invoke(this);
             OnDisconnectNode.RemoveAllListeners();

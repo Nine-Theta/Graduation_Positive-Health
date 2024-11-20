@@ -9,7 +9,7 @@ using UnityEngine.Rendering;
 namespace ScenarioEditor
 {
     [Serializable]
-    public class GenericNode<PARENT, CHILD> : AbstractNode where PARENT : AbstractNode where CHILD : AbstractNode 
+    public class GenericNode<PARENT, CHILD> : AbstractNode where PARENT : AbstractNode where CHILD : AbstractNode
     {
         [Header("Base Class"), Space(5)]
 
@@ -42,7 +42,7 @@ namespace ScenarioEditor
             _childNodes.Add(pChild);
             GetLastOutgoingPoint().MakeConnection(pChild.GetIncomingPoint());
 
-            pChild.OnDisconnectNode.AddListener(UnlinkChildNode);            
+            pChild.OnDisconnectNode.AddListener(UnlinkChildNode);
         }
 
         private void UnlinkParentNode(AbstractNode pNode)
@@ -68,7 +68,7 @@ namespace ScenarioEditor
 
         public virtual void UnlinkChildNode(CHILD pChild)
         {
-            if (_childNodes.Contains(pChild))
+            if (pChild != null && _childNodes.Contains(pChild))
             {
                 Debug.Log("removed Child[" + pChild.name + "] from Node[" + name + "]");
                 _childNodes.Remove(pChild);
@@ -101,9 +101,11 @@ namespace ScenarioEditor
             for (int i = 0; i < _childNodes.Count; i++)
             {
                 //Debug.Log("Disconnecting child: " + _childNodes[i]);
-                UnlinkChildNode(_childNodes[i]);
+                    UnlinkChildNode(_childNodes[i]);
             }
 
+            _parentNodes.Clear();
+            _childNodes.Clear();
             base.DisconnectNode();
         }
 
@@ -111,6 +113,6 @@ namespace ScenarioEditor
         {
             DisconnectNode();
             base.DestroyNode();
-        }        
+        }
     }
 }
